@@ -1,0 +1,82 @@
+html {
+  height: 100%;
+}
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+
+text-align: center;
+
+}
+//exemple div sur une autre div
+/*#div1{
+    width: 100px;
+    height: 100px;
+    position: fixed;
+    top:100px;
+    left:100px;
+    z-index:1;
+    background-color: red;
+}
+#div2{
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    top:120px;
+    left:120px;
+    z-index:2;
+     background-color: yellow;
+}*/
+
+
+#canvas{
+     // background-image: url("../img/fondLight.jpg");
+     position: fixed;
+     top:10%;
+     left:10%;
+     z-index:1;
+     background-color: blueviolet;
+   
+margin: 0;
+     
+      display:inline-block;
+  vertical-align:middle;
+  line-height:normal;
+  z-index:1;
+     
+}
+#canvasManometer{
+    position:fixed;
+    top:600px;
+    left:1400px;
+    z-index:2;
+   
+   
+margin: 0;
+     
+      display:inline-block;
+  vertical-align:middle;
+  line-height:normal;
+     
+}
+
+
+
+
+button{
+    line-height:normal;
+    font-family: Calibri;
+    font-size: 16pt;
+}
+
+
+#title{
+    display:inline-block;
+}
+
+
+
+h1{
+    text-align: center;
+}
