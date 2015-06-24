@@ -6,25 +6,72 @@ setInterval(draw, 30);
 
 ///////////////////////////////////////////////// 
 ////    events  ///////////////////////////////// 
-///////////////////////////////////////////////// 
+/////////////////////////////////////////////////
+
+$("#webS").on("click", function () {
+
+    $.get("http://localhost:3000/api/parties")
+            .done(function (data) {
+                console.log(data);
+                $.each(data, function (key, value) {
+                   
+                    $.get("http://localhost:3000/api/images/" + value.image_id) //fonctionne pas, il renvoit toutes les mimages et pas seulement celle dont l'id corrspond
+                            .done(function (data) {
+                        
+                                var img = new Image();
+                                img.src = data.dataUrl;
+                               console.log(data.dataUrl.length);
+                                $("#screenshot").append(img);
+
+//var u32 = new Uint32Array([data.dataUrl]);
+//var b64encoded = btoa(String.fromCharCode.apply(null, u32));
+//img.src="data:image/png;base64,"+b64encoded;
+                                
+
+
+
+                            });
+                })
+
+
+            });
+
+});
 
 $("#capture").on("click", function () {
+
+//    img = dessin.toDataURL();
+    //img = dessin.toDataURL("image/jpeg", 0.5);
+    img = dessin.toDataURL("image/jpeg", 1.0);
+    img = dessin.toDataURL("image/png", 0.5);
    
- img= dessin.toDataURL();
- console.log(img);
+    console.log(img.length);
 
- //fonctionne
-// var imgElement = $("<img>");
-// imgElement.attr('src', img);
-//$("#screenshot").append(imgElement);
+    var kmLmax = 0,
+            kmLmoy = 0,
+            kmRmax = 0,
+            kmRmoy = 0,
+            point = 0
 
-$.post( "http://localhost:3000/api/parties", { image: img})
-  .done(function( data ) {
-    alert( "Data Loaded: " + data );
-  });
-    
-    
+    $.post("http://localhost:3000/api/images", {dataUrl: img})//renvoi l'id
+            .done(function (data) {
+                console.log(data);
+                $.post("http://localhost:3000/api/parties", {
+                    image_id: data,
+                    kmLmax: kmLmax,
+                    kmLmoy: kmLmoy,
+                    kmRmax: kmRmax,
+                    kmRmoy: kmRmoy,
+                    point: point
+                })
+                        .done(function (data) {
+                            alert("Data Loaded: " + data);
+                        });
+
+            });
+
 });
+
 $("#stopDebri").on("click", function () {
     console.log("Stop Debri");
     TREE.stopDebri();
@@ -35,7 +82,7 @@ $("#newDebri").on("click", function () {
 });
 $("#runDebri").on("click", function () {
     console.log("Start Debri");
-    
+
 });
 
 $("#length").on("click", function () {
@@ -49,8 +96,8 @@ $("#stopWind").on("click", function () {
 });
 $("#changeWind").on("click", function () {
     myWind += 0.01;
-    console.log("Mon vent                     "+myWind);
-    
+    console.log("Mon vent                     " + myWind);
+
 });
 
 $("#grow").on("click", function () {
@@ -151,33 +198,45 @@ $("#testMoveArrowBack").on("click", function () {
 $("#j1FAIBLE").on("click", function () {
     console.log("j1 FAIBLE");
 //$( document ).trigger( "WindIncoming", kmh1 );
-       setInterval(function(){simWindoo("left", "faible")}, 1000);
+    setInterval(function () {
+        simWindoo("left", "faible")
+    }, 1000);
 });
 
 
 $("#j2FAIBLE").on("click", function () {
     console.log("j2 FAIBLE");
-    setInterval(function(){simWindoo("right", "faible")}, 1000);
+    setInterval(function () {
+        simWindoo("right", "faible")
+    }, 1000);
 
 
 });
 $("#j1JUSTE").on("click", function () {
     console.log("j1 JUSTE");
-   setInterval(function(){simWindoo("left", "juste")}, 1000);
+    setInterval(function () {
+        simWindoo("left", "juste")
+    }, 1000);
 
 });
 $("#j2JUSTE").on("click", function () {
     console.log("j2 JUSTE");
-    setInterval(function(){simWindoo("right", "juste")}, 1000);
-    
+    setInterval(function () {
+        simWindoo("right", "juste")
+    }, 1000);
+
 });
 $("#j1FORT").on("click", function () {
     console.log("j1 FORT");
-    setInterval(function(){simWindoo("left", "fort")}, 1000);
+    setInterval(function () {
+        simWindoo("left", "fort")
+    }, 1000);
 });
 $("#j2FORT").on("click", function () {
     console.log("j2 FORT");
-   setInterval(function(){simWindoo("right", "fort")}, 1000);
+    setInterval(function () {
+        simWindoo("right", "fort")
+    }, 1000);
 });
 
 $("#warning").on("click", function () {
@@ -224,15 +283,16 @@ function simWindoo(player, force) {
     } else if (force == "juste") {
         kmh1 = Math.floor((Math.random() * 40) + 30);
     }
-    
-    if(player=="left"){
+
+    if (player == "left") {
         kmL = kmh1;
-    }else{
+    } else {
         kmR = kmh1;
     }
-    
+
     convertKMtobar(kmL, kmR);
-};
+}
+;
 function convertKMtobar(kmL, kmR) {
     var num1 = myBar;
     myBar = Math.round((kmL + kmR) * 0.016 * 10) / 10;
@@ -243,4 +303,5 @@ function convertKMtobar(kmL, kmR) {
         myWarning = true;
     }
 
-};
+}
+;

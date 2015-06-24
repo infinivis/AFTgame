@@ -1,3 +1,4 @@
+//stat
 var kmR = 0.5;
 var kmL = 0.5;
 var kmh1;

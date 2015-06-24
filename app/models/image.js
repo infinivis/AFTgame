@@ -4,13 +4,9 @@ var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
 var ScoreSchema = new Schema({
-    
-  kmLmax: Number,
-  kmLmoy: Number,
-  kmRmax: Number,
-  kmRmoy: Number,
-  point: Number,
-  image_id: { type: Schema.Types.ObjectId, ref: 'Image' }
+//    data: Buffer,
+//    contentType: String
+      dataUrl: String
 });
 
 ScoreSchema.virtual('date')
@@ -18,4 +14,4 @@ ScoreSchema.virtual('date')
     return this._id.getTimestamp();
   });
 
-mongoose.model('Partie', ScoreSchema);
+mongoose.model('Image', ScoreSchema);
