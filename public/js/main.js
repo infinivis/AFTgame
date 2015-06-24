@@ -39,6 +39,8 @@ $("#webS").on("click", function () {
 });
 
 $("#capture").on("click", function () {
+for(i=0;i<500;i++){
+    
 
 //    img = dessin.toDataURL();
     //img = dessin.toDataURL("image/jpeg", 0.5);
@@ -65,11 +67,11 @@ $("#capture").on("click", function () {
                     point: point
                 })
                         .done(function (data) {
-                            alert("Data Loaded: " + data);
+                            console.log("Data Loaded: " + data);
                         });
 
             });
-
+}
 });
 
 $("#stopDebri").on("click", function () {
