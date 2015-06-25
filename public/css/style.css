@@ -66,9 +66,39 @@ margin: 0;
 
 button{
     line-height:normal;
-    font-family: Calibri;
-    font-size: 16pt;
+/*    font-family: Calibri;
+    font-size: 16pt;*/
+   
+	
+	background-color:#768d87;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Courier New;
+	font-size:16px;
+	padding:11px 23px;
+	text-decoration:none;
 }
+button:hover {
+	
+	background-color:#6c7c7c;
+}
+button:active {
+	position:relative;
+	top:1px;
+}
+
+
+
+/*button:hover {
+  background: #45bf84;
+  background-image: -webkit-linear-gradient(top, #45bf84, #0e700e);
+  background-image: -moz-linear-gradient(top, #45bf84, #0e700e);
+  background-image: -ms-linear-gradient(top, #45bf84, #0e700e);
+  background-image: -o-linear-gradient(top, #45bf84, #0e700e);
+  background-image: linear-gradient(to bottom, #45bf84, #0e700e);
+  text-decoration: none;
+}*/
 
 
 #title{

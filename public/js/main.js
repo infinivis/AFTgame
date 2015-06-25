@@ -3,10 +3,35 @@ initManometer();
 initTree();
 setInterval(draw, 30);
 
+/// variable à déplacer mais pas tout de suite
+
+
+
 
 ///////////////////////////////////////////////// 
 ////    events  ///////////////////////////////// 
 /////////////////////////////////////////////////
+
+$("#calcul").on("click", function () {
+
+
+   console.log("------- Calcul zone ---------");
+    
+    console.log("------- test get max in array ---------");
+var arr = [20.4,40.1,80.2,-400.3];
+var maxValue = Math.max.apply(null, arr);
+console.log("maxValue");
+console.log(maxValue);
+    
+    $.each(myArray,function(){sum+=parseFloat(this) || 0;});
+    console.log("La somme du tableau");
+    console.log(sum);
+    console.log("La moyenne du tableau");
+    moyenne = sum/myArray.length;
+    
+    console.log(moyenne);
+
+});
 
 $("#webS").on("click", function () {
 
@@ -22,7 +47,7 @@ $("#webS").on("click", function () {
                                 img.src = data.dataUrl;
                                console.log(data.dataUrl.length);
                                 $("#screenshot").append(img);
-
+//intéresant pour la sécurité
 //var u32 = new Uint32Array([data.dataUrl]);
 //var b64encoded = btoa(String.fromCharCode.apply(null, u32));
 //img.src="data:image/png;base64,"+b64encoded;
@@ -67,7 +92,7 @@ $("#capture").on("click", function () {
                     point: point
                 })
                         .done(function (data) {
-                            console.log("Data Loaded: " + data);
+                            //console.log("Data Loaded: " + data);
                         });
 
             });
@@ -118,27 +143,47 @@ $("#unGrow").on("click", function () {
 $("#start").on("click", function () {
     console.log("Start");
 
-    startWS();
-
-
+    //startWS();
+    
+    //joueur left
+    each5secArrayL = [];
+    sumEachL = 0;
+    aveEachL = 0;
+    
+    fullArrayL = [];
+    sumFullL = 0;
+    aveFullL = 0;
+    
+    //joueur right
+    each5secArrayR = [];
+    sumEachR = 0;
+    aveEachR = 0;
+    fullArrayR = [];
+    sumFullR = 0;
+    aveFullR = 0;
+    
+    
     var counter = setInterval(timer, 1000); //1000 will  run it every 1 second
-
+    var manageGameTimer = setInterval(manageGame, 5000);
     function timer()
     {
         count = count - 1;
         if (count <= 0)
         {
             clearInterval(counter);
+            clearInterval(manageGameTimer);
             //counter ended, do something here
             console.log("Timer finish");
             count = 30;
-            //connection.close();
+            gameCompletion();
             return;
         }
 
         //Do code for showing the number of seconds here
-        console.log(count);
+        console.log(""+count);
+        
     }
+    
 
 
 
@@ -263,15 +308,6 @@ $(document).on("WindIncoming", function (event, arg1) {
 ///////////// functions ////////////////////////
 ////////////////////////////////////////////////
 
-function timer()
-{
-    count = count - 1;
-
-    console.log(count);
-
-    //Do code for showing the number of seconds here
-}
-
 function fluidRotate(num1, num2) {
 
 
@@ -288,8 +324,12 @@ function simWindoo(player, force) {
 
     if (player == "left") {
         kmL = kmh1;
+         each5secArrayL.push(kmL);
+         fullArrayL.push(kmL);
     } else {
         kmR = kmh1;
+        each5secArrayR.push(kmR);
+        fullArrayR.push(kmR);
     }
 
     convertKMtobar(kmL, kmR);
