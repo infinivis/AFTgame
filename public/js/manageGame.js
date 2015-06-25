@@ -1,4 +1,34 @@
-var count2=0;
+function determineImpact(sumEachL,sumEachR){
+    
+//    if (Math.abs(kmL - kmR) !== 0 && kmL > kmR) {
+//            tempWind = kmL / kmR / Math.abs(kmL - kmR) / 10;
+//            myWind = tempWind * -1;
+//        } else if ((Math.abs(kmL - kmR) !== 0 && kmR > kmL)) {
+//            tempWind = kmR / kmL / Math.abs(kmL - kmR) / 10
+//            myWind = tempWind;
+//        }
+
+var toljuste = 5;
+var tolMoyen = 10;
+
+    if (Math.abs(kmL - kmR) <= toljuste) {
+            console.log("souffle harmonieux");
+            console.log(Math.abs(kmL - kmR));
+            //si le tronc est plus petit que X alors pousse
+            //si le tronc est plus grand que X alors feuille
+            //si le tronc est plus grand que X et feuille plus grand que X alors fruits
+        } else if ((Math.abs(kmL - kmR) > toljuste && Math.abs(kmL - kmR)<= tolMoyen)) {
+            console.log("souffle faux légères conséquences");
+            console.log(Math.abs(kmL - kmR));
+        } else if (Math.abs(kmL - kmR) > tolMoyen){
+            console.log("souffle faux graves conséquences");
+            console.log(Math.abs(kmL - kmR));
+        }
+
+
+    
+    
+};
 function manageGame() {
     
     console.log("><><><><><><><><><   Manage Game ><><><><><><><><><");
@@ -26,11 +56,14 @@ function manageGame() {
     console.log("La moyenne Right");
     aveEachR = sumEachR/each5secArrayR.length;
     console.log(aveEachR);
-    
+    determineImpact(sumEachL,sumEachR);
     //reset du tableau joueur Gauche
     each5secArrayR = [];
     sumEachR = 0;
     aveEachR = 0;
+    
+    //fonction qui impacte l'écart des souffles
+    
 }
 
 function gameCompletion(){
@@ -75,3 +108,4 @@ function gameCompletion(){
    
     
 }
+

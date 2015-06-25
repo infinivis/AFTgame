@@ -161,10 +161,9 @@ $("#start").on("click", function () {
     fullArrayR = [];
     sumFullR = 0;
     aveFullR = 0;
-    
-    
+    var count = gameDuration;
     var counter = setInterval(timer, 1000); //1000 will  run it every 1 second
-    var manageGameTimer = setInterval(manageGame, 5000);
+    var manageGameTimer = setInterval(manageGame, calculInterval);
     function timer()
     {
         count = count - 1;
@@ -174,7 +173,7 @@ $("#start").on("click", function () {
             clearInterval(manageGameTimer);
             //counter ended, do something here
             console.log("Timer finish");
-            count = 30;
+            count = gameDuration;
             gameCompletion();
             return;
         }

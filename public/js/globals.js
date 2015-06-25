@@ -6,7 +6,8 @@ var kmh2;
 var howLength;
 
 //manageGame and player stat
-var count=30;
+var calculInterval= 5000; //en milliseconde
+var gameDuration= 30; // en seconde
 //dev variable
 var myArray = [];
 var sum = 0;

@@ -11,7 +11,13 @@ function draw() {
     dessin.context.translate(-200, -270);
     dessin.context.scale(1.5, 1.5);
     dessin.context.translate(0, -60);
-    for (x = 2; x < TREE.tronc.length; x++) {
+    
+    
+   
+      for (x = 2; x < TREE.tronc.length; x++) {
+          
+          
+     
         dessin.context.beginPath();
         dessin.context.moveTo(TREE.tronc[x].x, TREE.tronc[x].y);
         dessin.context.quadraticCurveTo(TREE.tronc[x].parent.x, TREE.tronc[x].parent.y, TREE.tronc[x].parent.parent.x, TREE.tronc[x].parent.parent.y);
@@ -20,8 +26,11 @@ function draw() {
         dessin.context.lineWidth = Math.sqrt(TREE.tronc[x].length) * 0.12;
         dessin.context.lineCap = "square";
         dessin.context.stroke();
-    }
-    // feuille
+        
+      
+    }  
+    
+     // feuille
     dessin.context.fillStyle = "green";
     for (x in TREE.tronc) {
         if (TREE.tronc[x].length < 10) {
@@ -57,5 +66,10 @@ function draw() {
         }//end if
     }
     //end debri
+    
+    
+   
+   
+   
     dessin.context.restore();
 }

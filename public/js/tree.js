@@ -61,17 +61,13 @@ function Tree(framerate) {
         this.recalculate();
     };
     this.unGrow = function () {
-
-        for (i in this.tronc) {
-
-            if (this.tronc[i].left == null && Math.random() < 0.07) {
+        for (i in this.tronc && this.tronc.length<0 ) {
+            if (this.tronc[i].left !== null && Math.random() < 0.07) {
                 this.substract(Math.random() * 3, this.tronc[i]);
                 //console.log(this.tronc.length);
             }
         }
         this.recalculate();
-
-
     };
 
 
@@ -89,7 +85,10 @@ function Tree(framerate) {
             noeud.length -= x;
             noeud = noeud.parent;
         }
-        noeud.length -= x;
+       
+            noeud.length -= x;
+     
+        
     };
 
     this.recalculate = function () {
