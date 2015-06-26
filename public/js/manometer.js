@@ -151,7 +151,7 @@
       ctx.save();
       ctx.font = "35.0px 'Digital-7'";
       ctx.fillStyle = "rgb(108, 102, 173)";
-      ctx.fillText(kmR, 244.7, 230.8);
+      ctx.fillText(kmR1, 244.7, 230.8);
       ctx.restore();
     }
     
@@ -163,6 +163,6 @@
       ctx.save();
       ctx.font = "35.0px 'Digital-7'";
       ctx.fillStyle = "rgb(108, 102, 173)";
-      ctx.fillText(kmL, 245.3, 172.6);
+      ctx.fillText(kmL1, 245.3, 172.6);
       ctx.restore();
     }

@@ -10,6 +10,7 @@ var ScoreSchema = new Schema({
   kmRmax: Number,
   kmRmoy: Number,
   point: Number,
+  jour: Number,
   image_id: { type: Schema.Types.ObjectId, ref: 'Image' }
 });
 
@@ -19,3 +20,4 @@ ScoreSchema.virtual('date')
   });
 
 mongoose.model('Partie', ScoreSchema);
+

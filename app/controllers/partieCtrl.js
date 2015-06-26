@@ -25,7 +25,13 @@ router.route("/")
              if(!req.body.image_id) return res.status(422).json({message: "need an image id !"});//check le s no  
              var newPartie = new Partie();
              
-             newPartie.image_id = req.body.image_id;
+            newPartie.image_id = req.body.image_id;
+            newPartie.kmLmax = req.body.kmLmax;
+            newPartie.kmLmoy = req.body.kmLmoy;
+            newPartie.kmRmax = req.body.kmRmax;
+            newPartie.kmRmoy = req.body.kmRmoy;
+            newPartie.point = req.body.point;
+            newPartie.jour = req.body.jour;
              
              var callback = function(err, partieSaved){
                  if(err) return next(err);

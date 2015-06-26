@@ -2,16 +2,21 @@
 initManometer();
 initTree();
 setInterval(draw, 30);
-
-/// variable à déplacer mais pas tout de suite
-
-
+console.log(widthFull);
+console.log(heightFull);
 
 
 ///////////////////////////////////////////////// 
 ////    events  ///////////////////////////////// 
 /////////////////////////////////////////////////
 
+$("#date").on("click", function () {
+
+var d = new Date();
+var jour = d.getDay();
+console.log(jour);
+
+});
 $("#calcul").on("click", function () {
 
 
@@ -69,16 +74,17 @@ $("#capture").on("click", function () {
 
 //    img = dessin.toDataURL();
     //img = dessin.toDataURL("image/jpeg", 0.5);
-    img = dessin.toDataURL("image/jpeg", 1.0);
+    //img = dessin.toDataURL("image/jpeg", 1.0);
     img = dessin.toDataURL("image/png", 0.5);
    
     console.log(img.length);
-
-    var kmLmax = 0,
-            kmLmoy = 0,
-            kmRmax = 0,
-            kmRmoy = 0,
-            point = 0
+// à coller dans gameCompletion en assignant les bonnes valeurs
+    var kmLmax = 1,
+        kmLmoy = 1,
+        kmRmax = 1,
+        kmRmoy = 1,
+        point = 1,
+        jour = 1
 
     $.post("http://localhost:3000/api/images", {dataUrl: img})//renvoi l'id
             .done(function (data) {
@@ -89,7 +95,8 @@ $("#capture").on("click", function () {
                     kmLmoy: kmLmoy,
                     kmRmax: kmRmax,
                     kmRmoy: kmRmoy,
-                    point: point
+                    point: point,
+                    jour: jour
                 })
                         .done(function (data) {
                             //console.log("Data Loaded: " + data);
@@ -99,17 +106,24 @@ $("#capture").on("click", function () {
 
 });
 
-$("#stopDebri").on("click", function () {
-    console.log("Stop Debri");
-    TREE.stopDebri();
+$("#countAbricot").on("click", function () {
+    console.log(TREE.abricotArray.length);
 });
-$("#newDebri").on("click", function () {
-    console.log("New Debri");
-    TREE.startDebri();
+$("#stopAbricot").on("click", function () {
+    console.log("Stop Abricot");
+    TREE.stopAbricot();
 });
-$("#runDebri").on("click", function () {
-    console.log("Start Debri");
-
+$("#newAbricot").on("click", function () {
+    console.log("New Abricot");
+    TREE.createAbricot();
+});
+$("#wakeAbricot").on("click", function () {
+    console.log("Wake Abricot");
+TREE.wakeAbricot();
+});
+$("#stopWake").on("click", function () {
+    console.log("Stop Wake");
+TREE.stopWakeAbricot();
 });
 
 $("#length").on("click", function () {
@@ -144,7 +158,7 @@ $("#start").on("click", function () {
     console.log("Start");
 
     //startWS();
-    
+    initTree();
     //joueur left
     each5secArrayL = [];
     sumEachL = 0;
@@ -161,6 +175,8 @@ $("#start").on("click", function () {
     fullArrayR = [];
     sumFullR = 0;
     aveFullR = 0;
+    TREE.startWind();
+    growTREEwithtimer();
     var count = gameDuration;
     var counter = setInterval(timer, 1000); //1000 will  run it every 1 second
     var manageGameTimer = setInterval(manageGame, calculInterval);
@@ -307,11 +323,29 @@ $(document).on("WindIncoming", function (event, arg1) {
 ///////////// functions ////////////////////////
 ////////////////////////////////////////////////
 
-function fluidRotate(num1, num2) {
+function fluidValueL() {
 
-
+var fluid = setInterval(function(){
+           
+        kmL-=0.5
+        kmL = Math.round(kmL *10)/10;
+      
+}, 60);
 
 }
+function fluidValueR() {
+
+var fluid = setInterval(function(){
+   
+         
+        kmR-=0.5
+        kmR = Math.round(kmR *10)/10;
+        
+}, 60);
+
+}
+
+
 function simWindoo(player, force) {
     if (force == "faible") {
         kmh1 = Math.floor((Math.random() * 15) + 1);
@@ -322,16 +356,29 @@ function simWindoo(player, force) {
     }
 
     if (player == "left") {
-        kmL = kmh1;
-         each5secArrayL.push(kmL);
-         fullArrayL.push(kmL);
+        each5secArrayL.push(kmh1);
+         fullArrayL.push(kmh1);
+         //if(kmh1>0){
+             kmL = kmh1;
+             //fluidValueL();
+         //}
+         kmL1 = kmh1;
+      
+         
     } else {
-        kmR = kmh1;
-        each5secArrayR.push(kmR);
-        fullArrayR.push(kmR);
+        each5secArrayR.push(kmh1);
+        fullArrayR.push(kmh1);
+        
+         //if(kmh1>0){
+             kmR = kmh1;
+             //fluidValueR();
+         //}
+         kmR1 = kmh1;
+         
+        
     }
 
-    convertKMtobar(kmL, kmR);
+    convertKMtobar(kmL1, kmR1);
 }
 ;
 function convertKMtobar(kmL, kmR) {

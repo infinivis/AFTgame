@@ -6,13 +6,14 @@ function initTree() {
 }
 
 function Tree(framerate) {
-    this.debriArray = new Array;
+    this.abricotArray = new Array;
     this.maxNode = 2000;
     this.wind = 0;
     this.windMomentum = 0;
     this.timer = null;
     this.timerWind = null;
-    this.timerDebri = null;
+    this.timerAbricot = null;
+    this.timerAbricotWake = null;
     this.frameRate = framerate;
     this.gamma = 0.86;
     this.tronc = new Array();
@@ -24,12 +25,20 @@ function Tree(framerate) {
     this.tronc[1].x = arbrePositionX;
     this.tronc[1].y = arbrePositionY - 10;
 
-    this.startDebri = function () {
-        this.timerDebri = setInterval($.proxy(this.newDebri, this), 2);
+    this.createAbricot = function () {
+        this.timerAbricot = setInterval($.proxy(this.newAbricot, this), 2);
     };
 
-    this.stopDebri = function () {
-        clearInterval(this.timerDebri);
+    this.stopAbricot = function () {
+        clearInterval(this.timerAbricot);
+       
+    };
+     this.wakeAbricot = function () {
+        this.timerAbricotWake = setInterval($.proxy(this.runAbricot, this), 2);
+    };
+     this.stopWakeAbricot = function () {
+        clearInterval(this.timerAbricotWake);
+       
     };
 
     this.startWind = function () {
@@ -54,14 +63,17 @@ function Tree(framerate) {
     this.grow = function () {
 
         for (i in this.tronc) {
+            
             if (this.tronc[i].left == null && Math.random() < 0.07) {
+                
                 this.add(Math.random() * 3, this.tronc[i]);
+               
             }
         }
         this.recalculate();
     };
     this.unGrow = function () {
-        for (i in this.tronc && this.tronc.length<0 ) {
+        for (i in this.tronc) {
             if (this.tronc[i].left !== null && Math.random() < 0.07) {
                 this.substract(Math.random() * 3, this.tronc[i]);
                 //console.log(this.tronc.length);
@@ -93,7 +105,7 @@ function Tree(framerate) {
 
     this.recalculate = function () {
         //do not add node if tree is allready at full size
-        // if (this.tronc.length < this.maxNode) {
+        if (this.tronc.length < this.maxNode) {
         for (x in this.tronc) {
             if (this.tronc[x].parent != null && this.tronc[x].length > 10 && this.tronc[x].left == null) {
                 this.tronc[x].left = new NOEUD;
@@ -106,7 +118,7 @@ function Tree(framerate) {
                 this.tronc.push(this.tronc[x].right);
             }
         }
-        //}
+        }
         var stack = new Array;
         stack.push(this.tronc[1]);
         while (stack.length > 0) {
@@ -149,7 +161,7 @@ function Tree(framerate) {
             myWind = tempWind;
         }
         
-            this.wind = myWind;
+            this.wind = myWind/10;
             
             
         
@@ -172,19 +184,30 @@ function Tree(framerate) {
 //        this.windMomentum *= 0.997;
 //        console.log(this.wind);
 //    };
-    this.runDebri = function () {
-        for (i in this.debriArray) {
-            this.debriArray[i].momx += -this.wind * 3 * Math.random();
-            this.debriArray[i].momy += (Math.random() - 6 / 13) * 40 * Math.abs(this.wind);
-            this.debriArray[i].x += this.debriArray[i].momx - this.wind * 30 * (Math.random() + 1);
-            this.debriArray[i].y += this.debriArray[i].momy;
-            if (this.debriArray[i].y > 600) {
-                this.debriArray.splice(i, 1);
+    this.runAbricot = function () {
+        for (i in this.abricotArray) {
+            this.abricotArray[i].momx += -this.wind * 3;
+            this.abricotArray[i].momy += (- 6 / 13) * 40 * Math.abs(this.wind);
+            this.abricotArray[i].x += this.abricotArray[i].momx - this.wind * 30;
+            this.abricotArray[i].y += this.abricotArray[i].momy;
+            if (this.abricotArray[i].y > 600) {
+                this.abricotArray.splice(i, 1);
             }
         }
     };
+//    this.runAbricot = function () {
+//        for (i in this.abricotArray) {
+//            this.abricotArray[i].momx += -this.wind * 3 * Math.random();
+//            this.abricotArray[i].momy += (Math.random() - 6 / 13) * 40 * Math.abs(this.wind);
+//            this.abricotArray[i].x += this.abricotArray[i].momx - this.wind * 30 * (Math.random() + 1);
+//            this.abricotArray[i].y += this.abricotArray[i].momy;
+//            if (this.abricotArray[i].y > 600) {
+//                this.abricotArray.splice(i, 1);
+//            }
+//        }
+//    };
 
-    this.newDebri = function () {
+    this.newAbricot = function () {
         
         if (Math.random() > 0.5) {
             var random = Math.floor(Math.random() * this.tronc.length)
@@ -196,7 +219,7 @@ function Tree(framerate) {
             leaf.size = Math.random() * 10;
             leaf.x = temp.x;
             leaf.y = temp.y;
-            this.debriArray.push(leaf);
+            this.abricotArray.push(leaf);
         //}
         }
     };
