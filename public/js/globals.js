@@ -9,7 +9,7 @@ var howLength;
 
 //manageGame and player stat/////////
 var calculInterval= 5000; //en milliseconde
-var gameDuration= 30;
+var gameDuration= 10;
 
 var pointPartiePrécédente;
 var recordJour;
