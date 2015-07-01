@@ -1,10 +1,12 @@
 function draw() {
+    
     var img = document.getElementById("fondImg");
     var pat = dessin.context.createPattern(img, "repeat");
     dessin.context.fillStyle = pat;
-    
+    //widthFull
+    //heightFull
     dessin.context.fill();
-    dessin.context.fillRect(0, 0, widthFull, heightFull);
+    dessin.context.fillRect(0, 0, 1920 , 1080);
     TREE.recalculate();
     dessin.context.strokeStyle = troncColor;
     dessin.context.save();
@@ -12,12 +14,11 @@ function draw() {
     dessin.context.scale(1.5, 1.5);
     dessin.context.translate(0, -60);
     
+  
     
-   
+    
+   //dessin de l'arbre
       for (x = 2; x < TREE.tronc.length; x++) {
-          
-          
-     
         dessin.context.beginPath();
         dessin.context.moveTo(TREE.tronc[x].x, TREE.tronc[x].y);
         dessin.context.quadraticCurveTo(TREE.tronc[x].parent.x, TREE.tronc[x].parent.y, TREE.tronc[x].parent.parent.x, TREE.tronc[x].parent.parent.y);
@@ -26,8 +27,6 @@ function draw() {
         dessin.context.lineWidth = Math.sqrt(TREE.tronc[x].length) * 0.12;
         dessin.context.lineCap = "square";
         dessin.context.stroke();
-        
-      
     }  
     
      // feuille
@@ -35,15 +34,14 @@ function draw() {
     for (x in TREE.tronc) {
         if (TREE.tronc[x].length < 10) {
             dessin.context.beginPath();
-
             
-            dessin.context.arc(TREE.tronc[x].x, TREE.tronc[x].y, TREE.tronc[x].length/2, 0, Math.PI, true);
+            //                    OU                                      Quelle taille
+            dessin.context.arc(TREE.tronc[x].x, TREE.tronc[x].y, TREE.tronc[x].length/2, 0, Math.PI, false);
             //dessin.context.arc(TREE.tronc[x].x,TREE.tronc[x].y, TREE.tronc[x].length/5, 0, Math.PI*2, true);
 //            dessin.context.lineWidth = 1;
             // line color
             dessin.context.strokeStyle = 'black';
             dessin.context.stroke();
-             
             dessin.context.closePath();
             dessin.context.fill();
         }
@@ -58,7 +56,7 @@ function draw() {
          if (TREE.tronc[i].length < 10) {
         dessin.context.beginPath();
         // context.drawImage(img,sx,sy,swidth,sheight,x,y,width,height);
-        dessin.context.drawImage(document.getElementById("abricot"), TREE.tronc[i].x, TREE.tronc[i].y, TREE.abricotArray[i].size*2, TREE.abricotArray[i].size*2);
+        dessin.context.drawImage(document.getElementById("abricot"), TREE.abricotArray[i].x, TREE.abricotArray[i].y, TREE.abricotArray[i].size*2, TREE.abricotArray[i].size*2);
         //dessin.context.arc(TREE.abricotArray[i].x, TREE.abricotArray[i].y, TREE.abricotArray[i].size, 0, Math.PI * 2, true);
         //dessin.context.arc(TREE.abricotArray[i].x, TREE.abricotArray[i].y, TREE.abricotArray[i].size / 5, 0, Math.PI * 2, true);
         dessin.context.closePath();

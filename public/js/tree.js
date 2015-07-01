@@ -26,7 +26,7 @@ function Tree(framerate) {
     this.tronc[1].y = arbrePositionY - 10;
 
     this.createAbricot = function () {
-        this.timerAbricot = setInterval($.proxy(this.newAbricot, this), 2);
+        this.timerAbricot = setInterval($.proxy(this.newAbricot, this), 1);
     };
 
     this.stopAbricot = function () {
@@ -34,7 +34,7 @@ function Tree(framerate) {
        
     };
      this.wakeAbricot = function () {
-        this.timerAbricotWake = setInterval($.proxy(this.runAbricot, this), 2);
+        this.timerAbricotWake = setInterval($.proxy(this.runAbricot, this), 1);
     };
      this.stopWakeAbricot = function () {
         clearInterval(this.timerAbricotWake);
@@ -43,20 +43,20 @@ function Tree(framerate) {
 
     this.startWind = function () {
         console.log("Start Wind");
-        this.timerWind = setInterval($.proxy(this.armonicWind, this), 2);
+        this.timerWind = setInterval($.proxy(this.armonicWind, this), 1);
     };
     this.stopWind = function () {
         clearInterval(this.timerWind);
     };
     this.startAutoGrow = function () {
-        this.timer = setInterval($.proxy(this.grow, this), 2);
+        this.timer = setInterval($.proxy(this.grow, this), 1);
     };
 
     this.stopAutoGrow = function () {
         clearInterval(this.timer);
     };
     this.startUnGrow = function () {
-        this.timer = setInterval($.proxy(this.unGrow, this), 2);
+        this.timer = setInterval($.proxy(this.unGrow, this), 1);
     };
 
 
@@ -70,7 +70,7 @@ function Tree(framerate) {
                
             }
         }
-        this.recalculate();
+        this.recalculate(true);
     };
     this.unGrow = function () {
         for (i in this.tronc) {
@@ -79,7 +79,7 @@ function Tree(framerate) {
                 //console.log(this.tronc.length);
             }
         }
-        this.recalculate();
+        this.recalculate(true);
     };
 
 
@@ -96,29 +96,27 @@ function Tree(framerate) {
         while (noeud.parent != null) {
             noeud.length -= x;
             noeud = noeud.parent;
-        }
-       
-            noeud.length -= x;
-     
-        
+        }       
+        noeud.length -= x;             
     };
 
-    this.recalculate = function () {
+    this.recalculate = function (grow) {
         //do not add node if tree is allready at full size
-        if (this.tronc.length < this.maxNode) {
-        for (x in this.tronc) {
-            if (this.tronc[x].parent != null && this.tronc[x].length > 10 && this.tronc[x].left == null) {
-                this.tronc[x].left = new NOEUD;
-                this.tronc[x].right = new NOEUD;
-                this.tronc[x].left.length = Math.floor(Math.random() * (this.tronc[x].length - 2)) + 1;
-                this.tronc[x].right.length = this.tronc[x].length - this.tronc[x].left.length;
-                this.tronc[x].left.parent = this.tronc[x];
-                this.tronc[x].right.parent = this.tronc[x];
-                this.tronc.push(this.tronc[x].left);
-                this.tronc.push(this.tronc[x].right);
+        if (grow && this.tronc.length < this.maxNode) {
+            for (x in this.tronc) {
+                if (this.tronc[x].parent != null && this.tronc[x].length > 10 && this.tronc[x].left == null) {
+                    this.tronc[x].left = new NOEUD;
+                    this.tronc[x].right = new NOEUD;
+                    this.tronc[x].left.length = Math.floor(Math.random() * (this.tronc[x].length - 2)) + 1;
+                    this.tronc[x].right.length = this.tronc[x].length - this.tronc[x].left.length;
+                    this.tronc[x].left.parent = this.tronc[x];
+                    this.tronc[x].right.parent = this.tronc[x];
+                    this.tronc.push(this.tronc[x].left);
+                    this.tronc.push(this.tronc[x].right);
+                }
             }
         }
-        }
+        
         var stack = new Array;
         stack.push(this.tronc[1]);
         while (stack.length > 0) {
@@ -149,28 +147,41 @@ function Tree(framerate) {
         }
         child.x = current.x + len * Math.cos(angle);
         child.y = current.y - len * Math.sin(angle);
+        //si pas un abricot détaché, bouger x et y de l'abricot au x,y de l'abre
     };
 // kmR kmL
     this.armonicWind = function () {
         var tempWind;
-        if (Math.abs(kmL - kmR) !== 0 && kmL > kmR) {
-            tempWind = kmL / kmR / Math.abs(kmL - kmR) / 10;
-            myWind = tempWind * -1;
-        } else if ((Math.abs(kmL - kmR) !== 0 && kmR > kmL)) {
-            tempWind = kmR / kmL / Math.abs(kmL - kmR) / 10
-            myWind = tempWind;
+        
+        if (Math.abs(oldKmL - oldKmR) == 0) {
+            oldWind = 0;
+        } else {
+            oldWind = (oldKmL / oldKmR / Math.abs(oldKmL - oldKmR) / 10);        
         }
+        if (Math.abs(kmL - kmR) == 0) {
+            newWind = 0;
+        } else {
+            newWind = (kmL / kmR / Math.abs(kmL - kmR) / 10);          
+        }        
+        tempWind = (kmL / kmR / Math.abs(kmL - kmR) / 10);        
+        //tempWind = Math.abs(newWind - oldWind)/10;
+        //console.log(tempWind);
         
-            this.wind = myWind/10;
-            
-            
-        
-        
-        
+        if (Math.abs(kmL - kmR) !== 0 && kmL > kmR) {                        
+            myWind = -tempWind;
+        } else if ((Math.abs(kmL - kmR) !== 0 && kmR > kmL)) {           
+            myWind = tempWind;
+        }      
+        //myWind /= 5;
+        //myWind -= (myWind - (Math.random() - 1 / 2)) * 0.0008 * Math.random();
+        //this.windMomentum -= (myWind - (Math.random() - 1 / 2)) * 0.0008 * Math.random();
+        //myWind += this.windMomentum;
+        //this.windMomentum *= 0.997;
+
+        this.wind = myWind;                                                
+        this.recalculate(false);
 //        this.windMomentum -= (this.wind - (Math.random() - 1 / 2)) * 0.0008 * Math.random();
-//        this.wind += this.windMomentum;
-        
-        
+//        this.wind += this.windMomentum;                
     };
 //    this.armonicWind = function () {
 //        this.windMomentum -= (this.wind - (myWind - 1 / 2)) * 0.0008 *myWind;
@@ -184,13 +195,15 @@ function Tree(framerate) {
 //        this.windMomentum *= 0.997;
 //        console.log(this.wind);
 //    };
-    this.runAbricot = function () {
+    this.runAbricot = function () {        
         for (i in this.abricotArray) {
             this.abricotArray[i].momx += -this.wind * 3;
             this.abricotArray[i].momy += (- 6 / 13) * 40 * Math.abs(this.wind);
             this.abricotArray[i].x += this.abricotArray[i].momx - this.wind * 30;
             this.abricotArray[i].y += this.abricotArray[i].momy;
-            if (this.abricotArray[i].y > 600) {
+//            this.abricotArray[i].x += 1;
+//            this.abricotArray[i].y += 0.01;
+            if (this.abricotArray[i].y > widthFull) {
                 this.abricotArray.splice(i, 1);
             }
         }

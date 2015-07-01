@@ -1,6 +1,8 @@
 //instant stat
 var kmR = 2; //pour le vent
 var kmL = 2; //pour le vent
+var oldKmR = 2; 
+var oldKmL = 2;
 var kmR1=2; // pour l'affichage dans le manomètre et calcul
 var kmL1=2; // pour l'affichage dans le manomètre et calcul
 var kmh1; // pour les calculs en attendant le windoo
@@ -9,7 +11,7 @@ var howLength;
 
 //manageGame and player stat/////////
 var calculInterval= 5000; //en milliseconde
-var gameDuration= 10;
+var gameDuration= 40;
 
 var pointPartiePrécédente;
 var recordJour;
@@ -45,7 +47,7 @@ var arbrePositionX = 550;
 var arbrePositionY = 800;
 var troncColor = "#6B4226";
 var TREE;
-var growDuration= 2; //en seconde
+var growDuration= 3; //en seconde
 var unGrowDuration = 1; // en seconde
 var TREEsizeMax= 4000;
 

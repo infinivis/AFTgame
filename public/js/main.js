@@ -1,7 +1,8 @@
-
+//$("#canvas").attr("width", widthFull);
+//$("#canvas").attr("height", heightFull);
 initManometer();
 initTree();
-setInterval(draw, 30);
+setInterval(draw, 10);
 console.log(widthFull);
 console.log(heightFull);
 
@@ -10,6 +11,12 @@ console.log(heightFull);
 ////    events  ///////////////////////////////// 
 /////////////////////////////////////////////////
 
+$("#testReso").on("click", function () {
+
+$("#canvas").attr("width", widthFull);
+$("#canvas").attr("height", heightFull);
+
+});
 $("#date").on("click", function () {
 
 var d = new Date();
@@ -349,13 +356,16 @@ var fluid = setInterval(function(){
 function simWindoo(player, force) {
     if (force == "faible") {
         kmh1 = Math.floor((Math.random() * 15) + 1);
+        kmh1 = 10;
     } else if (force == "fort") {
         kmh1 = Math.floor((Math.random() * 50) + 35);
     } else if (force == "juste") {
         kmh1 = Math.floor((Math.random() * 40) + 30);
     }
-
+    
+    
     if (player == "left") {
+        oldKmL = kmL;
         each5secArrayL.push(kmh1);
          fullArrayL.push(kmh1);
          //if(kmh1>0){
@@ -366,6 +376,7 @@ function simWindoo(player, force) {
       
          
     } else {
+        oldKmR = kmR;
         each5secArrayR.push(kmh1);
         fullArrayR.push(kmh1);
         

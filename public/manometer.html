@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Air Force Tree</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" 
+      type="image/png" 
+      href="favicon.ico">
+        <link rel="stylesheet" href="css/style.css"/>
+
+
+    </head>
+    <body>
+       
+        
+        <div id="boutonsMano">
+            <button id="j1FAIBLE">j1 FAIBLE</button>
+            <button id="j2FAIBLE">j2 FAIBLE</button>
+            <button id="j1JUSTE">j1 JUSTE</button>
+            <button id="j2JUSTE">j2 JUSTE</button>
+            <button id="j1FORT">j1 FORT</button>
+            <button id="j2FORT">j2 FORT</button>
+            <button id="testMoveArrowFor">testMoveArrow +</button>
+            <button id="testMoveArrowBack">testMoveArrow -</button>
+            <button id="warning">Warning</button>
+        </div>
+       
+           
+      
+        <img alt="couronne" id="image1" style="display: none" src="img/manometer/couronne.png" />
+        <img alt="leds" id="image2" style="display: none" src="img/manometer/leds.png" />
+        <img alt="ombrage" id="image3" style="display: none" src="img/manometer/ombre.png" />
+        <img alt="fond" id="image4" style="display: none" src="img/manometer/features.png" />
+        <img alt="warning" id="image5" style="display: none" src="img/manometer/warning.png" />
+     
+           
+            <canvas id="canvasManometer" width="800" height="600"></canvas>
+            <!--<canvas id="canvasTest"></canvas>-->
+       
+        <script src="js/lib/jquery-2.1.4.js"></script>
+        <!--<script src="js/grid.js"></script>-->
+     
+        <script src="js/globals.js"></script>
+        <script src="js/wsClient.js"></script>
+        
+
+        <!-- load object -->
+        <script src="js/object/noeud.js"></script>
+        <script src="js/object/feuille.js"></script>
+
+        <script src="js/tree.js"></script>
+        <script src="js/manometer.js"></script>
+        
+
+
+        <script src="js/draw.js"></script>
+        <script src="js/breath.js"></script>
+        <script src="js/manageGame.js"></script>
+        <!--<script src="js/canvasTest.js"></script>-->
+        <script src="js/main.js"></script>
+        <script src="js/ready.js"></script>
+
+
+
+
+
+</html>
