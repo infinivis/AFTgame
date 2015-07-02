@@ -169,10 +169,29 @@ function Tree(framerate) {
            
                 if(current.fleurs != null){
         if(current.fleurs.accroche){
+            if(current.fleurs.dureeVie>200){
+              
+            current.abricot = new ABRICOT;
+            current.abricot.x = current.fleurs.x
+            current.abricot.y = current.fleurs.y
+            current.abricot.size = current.fleurs.size
+            current.fleurs = null;
+        }else{
+            current.fleurs.dureeVie += 1;
             current.fleurs.x =current.x;
             current.fleurs.y =current.y;
+            } 
         }
        }
+       
+      
+         if(current.abricot != null){
+        if(current.abricot.accroche){
+            current.abricot.x =current.x;
+            current.abricot.y =current.y;
+            } 
+        }
+       
            
 //            else if (current.left == null && current.feuille == null && this.tronc.length > this.maxNode) { //fonctionne bien mais on doit attendre que l'arbre ne crée plus de noeud
 //                current.feuille = new FEUILLE;
@@ -203,9 +222,6 @@ function Tree(framerate) {
         }
         child.x = current.x + len * Math.cos(angle);
         child.y = current.y - len * Math.sin(angle);
-        
-        //si pas un abricot détaché, bouger x et y de l'abricot au x,y de l'abre
-        //car actuellement ils ne suivent pas la croissance
     };
 // kmR kmL
     this.armonicWind = function () {
@@ -282,7 +298,7 @@ function Tree(framerate) {
     };
       this.newFleurs = function () {
           
-          if (Math.random() > 0.5) {
+          if (Math.random() > 0.7) {
             var random = Math.floor(Math.random() * this.tronc.length)
          if(this.tronc[random].fleurs == null){
             var temp = this.tronc[random];

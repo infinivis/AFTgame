@@ -54,7 +54,7 @@ function draw() {
             dessin.context.fill();
         }
         }
-}
+
     
 ///end feuille
 
@@ -73,24 +73,22 @@ function draw() {
 
 // abricots
 
-    
-
-    dessin.context.fillStyle = "orange";
     for (i in TREE.tronc) {
-         if(TREE.tronc[i].abricot != null){
-        dessin.context.beginPath();
-        // context.drawImage(img,sx,sy,swidth,sheight,x,y,width,height);
-        dessin.context.drawImage(document.getElementById("abricot"), TREE.tronc[i].abricot.x, TREE.tronc[i].abricot.y, TREE.tronc[i].abricot.size*2, TREE.tronc[i].abricot.size*2);
-        //dessin.context.arc(TREE.abricotArray[i].x, TREE.abricotArray[i].y, TREE.abricotArray[i].size, 0, Math.PI * 2, true);
-        //dessin.context.arc(TREE.abricotArray[i].x, TREE.abricotArray[i].y, TREE.abricotArray[i].size / 5, 0, Math.PI * 2, true);
-        dessin.context.closePath();
-//        dessin.context.fill();
         
+         if(TREE.tronc[i].abricot != null){
+          
+        dessin.context.beginPath();
+        dessin.context.drawImage(document.getElementById("abricot"), TREE.tronc[i].abricot.x, TREE.tronc[i].abricot.y, TREE.tronc[i].abricot.size*2, TREE.tronc[i].abricot.size*2);
+        dessin.context.closePath();
+
+        
+    }else{
+       
     }
     }
     
     //end abricots
-    
+    }
     
 //// abricots
 //    dessin.context.fillStyle = "orange";

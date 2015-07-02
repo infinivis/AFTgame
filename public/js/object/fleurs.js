@@ -5,4 +5,5 @@ var FLEURS = function (){
 			this.momx=0;
 			this.momy=0;
 			this.accroche=true;
+			this.dureeVie=0;
 		}
