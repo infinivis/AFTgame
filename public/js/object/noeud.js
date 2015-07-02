@@ -8,5 +8,8 @@ var NOEUD = function (){
 			this.left = null;
 			this.right = null;
                         this.feuille = null;
+                        this.abricot = null;
+                        this.fleurs = null;
+                        
 			
 		}

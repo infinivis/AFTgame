@@ -34,7 +34,7 @@ function Tree(framerate) {
         this.timerFleurs = setInterval($.proxy(this.runFleurs, this), 1);
     };
     this.createFleurs = function () {
-        this.timerFleurs = setInterval($.proxy(this.newFleurs, this), 1);
+        this.timerFleurs = setInterval($.proxy(this.newFleurs, this), 25);
     };
 
     this.stopFleurs = function () {
@@ -114,6 +114,7 @@ function Tree(framerate) {
 
 
     this.add = function (x, noeud) {
+        
         while (noeud.parent != null) {
             noeud.length += x; // 
             noeud = noeud.parent;
@@ -130,6 +131,7 @@ function Tree(framerate) {
     };
 
     this.recalculate = function (grow) {
+        
         //do not add node if tree is allready at full size
         if (grow && this.tronc.length < this.maxNode) {
             for (x in this.tronc) {
@@ -164,6 +166,14 @@ function Tree(framerate) {
 //                        current.feuille.y =  current.y;
                        
             }
+           
+                if(current.fleurs != null){
+        if(current.fleurs.accroche){
+            current.fleurs.x =current.x;
+            current.fleurs.y =current.y;
+        }
+       }
+           
 //            else if (current.left == null && current.feuille == null && this.tronc.length > this.maxNode) { //fonctionne bien mais on doit attendre que l'arbre ne crée plus de noeud
 //                current.feuille = new FEUILLE;
 //                        current.feuille.size = current.length/2;
@@ -172,7 +182,8 @@ function Tree(framerate) {
 //                       
 //            }
         }
-        //console.log(TREE.tronc[3]);
+       
+
     };
 
 
@@ -192,6 +203,7 @@ function Tree(framerate) {
         }
         child.x = current.x + len * Math.cos(angle);
         child.y = current.y - len * Math.sin(angle);
+        
         //si pas un abricot détaché, bouger x et y de l'abricot au x,y de l'abre
         //car actuellement ils ne suivent pas la croissance
     };
@@ -243,24 +255,23 @@ function Tree(framerate) {
 //    };
     this.runFleurs = function () {        
         for (i in this.tronc) {
-            if(this.tronc[i].feuille != null && !this.tronc[i].feuille.accroche ){
-            this.tronc[i].feuille.momx += -this.wind * 3;
-            this.tronc[i].feuille.momy += (- 6 / 13) * 40 * Math.abs(this.wind);
-            this.tronc[i].feuille.x += this.tronc[i].feuille.momx - this.wind * 30;
-            this.tronc[i].feuille.y += this.tronc[i].feuille.momy;
+            if(this.tronc[i].fleurs != null && !this.tronc[i].fleurs.accroche ){
+            this.tronc[i].fleurs.momx += -this.wind * 3;
+            this.tronc[i].fleurs.momy += (- 6 / 13) * 40 * Math.abs(this.wind);
+            this.tronc[i].fleurs.x += this.tronc[i].fleurs.momx - this.wind * 30;
+            this.tronc[i].fleurs.y += this.tronc[i].fleurs.momy;
          
-            if (this.tronc[i].feuille.y > widthFull) {
-                this.tronc[i].feuille = null;
+            if (this.tronc[i].fleurs.y > widthFull) {
+                this.tronc[i].fleurs = null;
             }
         }
         }
     };
     this.decrocheFleurs = function () {        
         for (i in this.tronc) {
-            if(this.tronc[i].feuille != null){
+            if(this.tronc[i].fleurs != null){
                 if(Math.random()<proportion ){
-                console.log("yo000000000000000000000000");
-            this.tronc[i].feuille.accroche = false;
+            this.tronc[i].fleurs.accroche = false;
         }
         //ci-desosus trop symétrique et une fois que c'est fait il ne le fait plus les mêmes
 //                if(i%fraction==0 ){
@@ -270,26 +281,23 @@ function Tree(framerate) {
         }
     };
       this.newFleurs = function () {
-        for (x in this.tronc) {
-        if (this.tronc[x].left == null && !this.tronc[0]){
-                       
-                        this.tronc[x].feuille =  new FEUILLE;
-                        this.tronc[x].feuille.size = this.tronc[x].length/30
-                        this.tronc[x].feuille.x =  this.tronc[x].x;
-                        this.tronc[x].feuille.y =  this.tronc[x].y;
-                        
-                        
-//                        var feuille = new FEUILLE;
-//                        feuille.size = this.tronc[x].length/3
-//                        feuille.x =  this.tronc[x].x;
-//                        feuille.y =  this.tronc[x].y;
-//                        this.tronc[x].feuille = feuille;
-                    }
-                           }
-                           this.recalculate(true);
-
-       
+          
+          if (Math.random() > 0.5) {
+            var random = Math.floor(Math.random() * this.tronc.length)
+         if(this.tronc[random].fleurs == null){
+            var temp = this.tronc[random];
+            temp.fleurs = new FLEURS;
+            temp.fleurs.size = Math.random() * 10;
+            temp.fleurs.x = temp.x;
+            temp.fleurs.y = temp.y;
+            temp.fleurs.accroche = true;
+            this.tronc[random] = temp;
+            
+         }
+        }
+       //this.recalculate(false);
     };
+    
     this.runFeuille = function () {        
         for (i in this.tronc) {
             if(this.tronc[i].feuille != null && !this.tronc[i].feuille.accroche ){
@@ -306,6 +314,7 @@ function Tree(framerate) {
     };
     this.decrocheFeuille = function () {        
         for (i in this.tronc) {
+           
             if(this.tronc[i].feuille != null){
                 if(Math.random()<proportion ){
                 
@@ -321,6 +330,7 @@ function Tree(framerate) {
     };
       this.newFeuille = function () {
           for (x in this.tronc) {
+             
         if (this.tronc[x].left == null && this.tronc[x]!=this.tronc[0]){
                        this.tronc[x].feuille = null;
                         this.tronc[x].feuille =  new FEUILLE;
@@ -371,16 +381,32 @@ function Tree(framerate) {
             var random = Math.floor(Math.random() * this.tronc.length)
             //if (this.tronc[random].length > 10 && this.tronc[random].length < 30) {
             //if (this.tronc[random].length > 10) {
-                
             var temp = this.tronc[random];
-            var abricot = new ABRICOT;
-            abricot.size = Math.random() * 10;
-            abricot.x = temp.x;
-            abricot.y = temp.y;
-            this.abricotArray.push(abricot);
+            temp.abricot = new ABRICOT;
+            temp.abricot.size = Math.random() * 10;
+            temp.abricot.x = temp.x;
+            temp.abricot.y = temp.y;
+            this.tronc[random] = temp;
+            
         //}
         }
     };
+//    this.newAbricot = function () {
+//        
+//        if (Math.random() > 0.5) {
+//            var random = Math.floor(Math.random() * this.tronc.length)
+//            //if (this.tronc[random].length > 10 && this.tronc[random].length < 30) {
+//            //if (this.tronc[random].length > 10) {
+//                
+//            var temp = this.tronc[random];
+//            var abricot = new ABRICOT;
+//            abricot.size = Math.random() * 10;
+//            abricot.x = temp.x;
+//            abricot.y = temp.y;
+//            this.abricotArray.push(abricot);
+//        //}
+//        }
+//    };
   
 
 }

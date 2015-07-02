@@ -4,5 +4,5 @@ var ABRICOT = function (){
 			this.size=0;
 			this.momx=0;
 			this.momy=0;
-                        this.accroche=false;
+                        this.accroche=true;
 		}

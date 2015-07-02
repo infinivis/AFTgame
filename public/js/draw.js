@@ -7,7 +7,7 @@ function draw() {
     //heightFull
     dessin.context.fill();
     dessin.context.fillRect(0, 0, 1920 , 1080);
-    TREE.recalculate();
+   
     dessin.context.strokeStyle = troncColor;
     dessin.context.save();
     dessin.context.translate(-200, -270);
@@ -29,27 +29,8 @@ function draw() {
         dessin.context.stroke();
     }  
     
-     // feuille
-//    dessin.context.fillStyle = '#175732';
-//    for (x in TREE.tronc) {
-//        if (TREE.tronc[x].length < 10) {
-//            dessin.context.beginPath();
-//            
-//            //                    OU                                      Quelle taille
-//            dessin.context.arc(TREE.tronc[x].x, TREE.tronc[x].y, TREE.tronc[x].length/2, 0, Math.PI, false);
-//            //dessin.context.arc(TREE.tronc[x].x,TREE.tronc[x].y, TREE.tronc[x].length/5, 0, Math.PI*2, true);
-////            dessin.context.lineWidth = 1;
-//            // line color
-//            dessin.context.strokeStyle = 'black';
-//            dessin.context.stroke();
-//            dessin.context.closePath();
-//            dessin.context.fill();
-//        }
-//
-//    }
-///end feuille
-//
-     // feuille test draw object
+   
+     // feuille test draw object = fonctionnel!!!
      if(TREE.tronc.length > 2){ // protection bug
     for (x in TREE.tronc) {
       if(TREE.tronc[x].feuille != null){
@@ -77,21 +58,54 @@ function draw() {
     
 ///end feuille
 
+// fleurs
+    for (i in TREE.tronc) {
+         if(TREE.tronc[i].fleurs != null){
+        dessin.context.beginPath();
+      
+        dessin.context.drawImage(document.getElementById("fleurs"), TREE.tronc[i].fleurs.x, TREE.tronc[i].fleurs.y, TREE.tronc[i].fleurs.size*2, TREE.tronc[i].fleurs.size*2);
+   
+        dessin.context.closePath();
+    }
+    }
+    //end fleurs
+
 
 // abricots
+
+    
+
     dessin.context.fillStyle = "orange";
-    for (i in TREE.abricotArray) {
-         if (TREE.tronc[i].length < 10) {
+    for (i in TREE.tronc) {
+         if(TREE.tronc[i].abricot != null){
         dessin.context.beginPath();
         // context.drawImage(img,sx,sy,swidth,sheight,x,y,width,height);
-        dessin.context.drawImage(document.getElementById("abricot"), TREE.abricotArray[i].x, TREE.abricotArray[i].y, TREE.abricotArray[i].size*2, TREE.abricotArray[i].size*2);
+        dessin.context.drawImage(document.getElementById("abricot"), TREE.tronc[i].abricot.x, TREE.tronc[i].abricot.y, TREE.tronc[i].abricot.size*2, TREE.tronc[i].abricot.size*2);
         //dessin.context.arc(TREE.abricotArray[i].x, TREE.abricotArray[i].y, TREE.abricotArray[i].size, 0, Math.PI * 2, true);
         //dessin.context.arc(TREE.abricotArray[i].x, TREE.abricotArray[i].y, TREE.abricotArray[i].size / 5, 0, Math.PI * 2, true);
         dessin.context.closePath();
 //        dessin.context.fill();
-        }//end if
+        
     }
-    //end debri
+    }
+    
+    //end abricots
+    
+    
+//// abricots
+//    dessin.context.fillStyle = "orange";
+//    for (i in TREE.abricotArray) {
+//         if (TREE.tronc[i].length < 10) {
+//        dessin.context.beginPath();
+//        // context.drawImage(img,sx,sy,swidth,sheight,x,y,width,height);
+//        dessin.context.drawImage(document.getElementById("abricot"), TREE.abricotArray[i].x, TREE.abricotArray[i].y, TREE.abricotArray[i].size*2, TREE.abricotArray[i].size*2);
+//        //dessin.context.arc(TREE.abricotArray[i].x, TREE.abricotArray[i].y, TREE.abricotArray[i].size, 0, Math.PI * 2, true);
+//        //dessin.context.arc(TREE.abricotArray[i].x, TREE.abricotArray[i].y, TREE.abricotArray[i].size / 5, 0, Math.PI * 2, true);
+//        dessin.context.closePath();
+////        dessin.context.fill();
+//        }//end if
+//    }
+//    //end abricots
     
     
    

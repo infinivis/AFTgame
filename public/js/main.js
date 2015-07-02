@@ -28,24 +28,32 @@ $("#calcul").on("click", function () {
 
 
    console.log("------- Calcul zone ---------");
-    
-    console.log("------- test get max in array ---------");
-var arr = [20.4,40.1,80.2,-400.3];
-var maxValue = Math.max.apply(null, arr);
-console.log("maxValue");
-console.log(maxValue);
-    
-    $.each(myArray,function(){sum+=parseFloat(this) || 0;});
-    console.log("La somme du tableau");
-    console.log(sum);
-    console.log("La moyenne du tableau");
-    moyenne = sum/myArray.length;
-    
-    console.log(moyenne);
-    console.log("------- test math Random ---------");
-console.log(Math.random());
-console.log(Math.random()*10);
-console.log(Math.floor(Math.random()*10));
+//    
+//    console.log("------- test get max in array ---------");
+//var arr = [20.4,40.1,80.2,-400.3];
+//var maxValue = Math.max.apply(null, arr);
+//console.log("maxValue");
+//console.log(maxValue);
+//    
+//    $.each(myArray,function(){sum+=parseFloat(this) || 0;});
+//    console.log("La somme du tableau");
+//    console.log(sum);
+//    console.log("La moyenne du tableau");
+//    moyenne = sum/myArray.length;
+//    
+//    console.log(moyenne);
+//    console.log("------- test math Random ---------");
+//console.log(Math.random());
+//console.log(Math.random()*10);
+//console.log(Math.floor(Math.random()*10));
+
+ console.log("------- test Fleurs ---------");
+ 
+ for(i in TREE.tronc){
+     if(TREE.tronc[i].fleurs != null){
+         console.log(TREE.tronc[i].fleurs);
+     }
+ };
 
 });
 
