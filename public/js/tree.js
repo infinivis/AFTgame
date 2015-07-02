@@ -17,6 +17,8 @@ function Tree(framerate) {
     this.timerAbricotWake = null;
     this.timerFeuille = null;
     this.timerFeuilleWake = null;
+    this.timerFleurs = null;
+    this.timerFleursWake = null;
     this.frameRate = framerate;
     this.gamma = 0.86;
     this.tronc = new Array();
@@ -28,8 +30,19 @@ function Tree(framerate) {
     this.tronc[1].x = arbrePositionX;
     this.tronc[1].y = arbrePositionY - 10;
 
+    this.wakeFleurs = function () {
+        this.timerFleurs = setInterval($.proxy(this.runFleurs, this), 1);
+    };
+    this.createFleurs = function () {
+        this.timerFleurs = setInterval($.proxy(this.newFleurs, this), 1);
+    };
+
+    this.stopFleurs = function () {
+        clearInterval(this.timerFleurs);
+       
+    };
     this.wakeFeuille = function () {
-        this.timerFeuille = setInterval($.proxy(this.runFeuille, this), 1);
+        this.timerFeuilleWake = setInterval($.proxy(this.runFeuille, this), 1);
     };
     this.createFeuille = function () {
         this.timerFeuille = setInterval($.proxy(this.newFeuille, this), 1);
@@ -37,8 +50,10 @@ function Tree(framerate) {
 
     this.stopFeuille = function () {
         clearInterval(this.timerFeuille);
+        clearInterval(this.timerFeuilleWake);
        
     };
+  
     this.createAbricot = function () {
         this.timerAbricot = setInterval($.proxy(this.newAbricot, this), 1);
     };
@@ -68,12 +83,7 @@ function Tree(framerate) {
 
     this.stopAutoGrow = function () {
         clearInterval(this.timer);
-        console.log(TREE.tronc[TREE.tronc.length-1]);
-        console.log(TREE.tronc[0]);
-        console.log(TREE.tronc[1]);
-        console.log(TREE.tronc[2]);
-        console.log(TREE.tronc[3]);
-    };
+        };
     this.startUnGrow = function () {
         this.timer = setInterval($.proxy(this.unGrow, this), 1);
     };
@@ -231,6 +241,55 @@ function Tree(framerate) {
 //        this.windMomentum *= 0.997;
 //        console.log(this.wind);
 //    };
+    this.runFleurs = function () {        
+        for (i in this.tronc) {
+            if(this.tronc[i].feuille != null && !this.tronc[i].feuille.accroche ){
+            this.tronc[i].feuille.momx += -this.wind * 3;
+            this.tronc[i].feuille.momy += (- 6 / 13) * 40 * Math.abs(this.wind);
+            this.tronc[i].feuille.x += this.tronc[i].feuille.momx - this.wind * 30;
+            this.tronc[i].feuille.y += this.tronc[i].feuille.momy;
+         
+            if (this.tronc[i].feuille.y > widthFull) {
+                this.tronc[i].feuille = null;
+            }
+        }
+        }
+    };
+    this.decrocheFleurs = function () {        
+        for (i in this.tronc) {
+            if(this.tronc[i].feuille != null){
+                if(Math.random()<proportion ){
+                console.log("yo000000000000000000000000");
+            this.tronc[i].feuille.accroche = false;
+        }
+        //ci-desosus trop symétrique et une fois que c'est fait il ne le fait plus les mêmes
+//                if(i%fraction==0 ){
+//            this.tronc[i].feuille.accroche = false;
+//        }
+        }
+        }
+    };
+      this.newFleurs = function () {
+        for (x in this.tronc) {
+        if (this.tronc[x].left == null && !this.tronc[0]){
+                       
+                        this.tronc[x].feuille =  new FEUILLE;
+                        this.tronc[x].feuille.size = this.tronc[x].length/30
+                        this.tronc[x].feuille.x =  this.tronc[x].x;
+                        this.tronc[x].feuille.y =  this.tronc[x].y;
+                        
+                        
+//                        var feuille = new FEUILLE;
+//                        feuille.size = this.tronc[x].length/3
+//                        feuille.x =  this.tronc[x].x;
+//                        feuille.y =  this.tronc[x].y;
+//                        this.tronc[x].feuille = feuille;
+                    }
+                           }
+                           this.recalculate(true);
+
+       
+    };
     this.runFeuille = function () {        
         for (i in this.tronc) {
             if(this.tronc[i].feuille != null && !this.tronc[i].feuille.accroche ){
@@ -249,8 +308,9 @@ function Tree(framerate) {
         for (i in this.tronc) {
             if(this.tronc[i].feuille != null){
                 if(Math.random()<proportion ){
-                console.log("yo000000000000000000000000");
+                
             this.tronc[i].feuille.accroche = false;
+            //this.tronc[i].feuille = null;
         }
         //ci-desosus trop symétrique et une fois que c'est fait il ne le fait plus les mêmes
 //                if(i%fraction==0 ){
@@ -258,6 +318,27 @@ function Tree(framerate) {
 //        }
         }
         }
+    };
+      this.newFeuille = function () {
+          for (x in this.tronc) {
+        if (this.tronc[x].left == null && this.tronc[x]!=this.tronc[0]){
+                       this.tronc[x].feuille = null;
+                        this.tronc[x].feuille =  new FEUILLE;
+                        this.tronc[x].feuille.size = this.tronc[x].length/3
+                        this.tronc[x].feuille.x =  this.tronc[x].x;
+                        this.tronc[x].feuille.y =  this.tronc[x].y;
+                        
+                        
+//                        var feuille = new FEUILLE;
+//                        feuille.size = this.tronc[x].length/3
+//                        feuille.x =  this.tronc[x].x;
+//                        feuille.y =  this.tronc[x].y;
+//                        this.tronc[x].feuille = feuille;
+                    }
+                           }
+                           this.recalculate(true);
+
+       
     };
     this.runAbricot = function () {        
         for (i in this.abricotArray) {
@@ -300,22 +381,7 @@ function Tree(framerate) {
         //}
         }
     };
-    this.newFeuille = function () {
-        for (x in this.tronc) {
-            
-        if (this.tronc[x].left == null && this.tronc[x].parent != null){
-                        console.log(this.feuilleArray.length);
-                        var feuille = new FEUILLE;
-                        feuille.size = this.tronc[x].length/3
-                        feuille.x =  this.tronc[x].x;
-                        feuille.y =  this.tronc[x].y;
-                        this.feuilleArray.push(feuille);
-                   
-                    }
-                           }
-
-       
-    };
+  
 
 }
 //                var debri_gen=null;

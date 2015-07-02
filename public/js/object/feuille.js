@@ -5,4 +5,6 @@ var FEUILLE = function (){
 			this.momx=0;
 			this.momy=0;
 			this.accroche=true;
+			this.color='#175732';
+			this.borderColor='#000000';
 		}

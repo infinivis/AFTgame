@@ -117,6 +117,18 @@ $("#capture").on("click", function () {
 
 });
 
+$("#decrocheFleurs").on("click", function () {
+   TREE.decrocheFleurs();
+});
+$("#wakeFleurs").on("click", function () {
+   TREE.wakeFleurs();
+});
+$("#stopFleurs").on("click", function () {
+   TREE.stopFleurs();
+});
+$("#newFleurs").on("click", function () {
+   TREE.createFleurs();
+});
 $("#decrocheFeuille").on("click", function () {
    TREE.decrocheFeuille();
 });

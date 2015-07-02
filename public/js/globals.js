@@ -53,7 +53,7 @@ var TREEsizeMax= 4000;
 
 //feuille
 var fraction = 2;// modifie le nombre de feuille qui se décroche
-var proportion = 0.7;// modifie le nombre de feuille qui se décroche
+var proportion = 0.9;// modifie le nombre de feuille qui se décroche
 
 //mano
 var myAngle = 0;
