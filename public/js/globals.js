@@ -51,6 +51,10 @@ var growDuration= 3; //en seconde
 var unGrowDuration = 1; // en seconde
 var TREEsizeMax= 4000;
 
+//feuille
+var fraction = 2;// modifie le nombre de feuille qui se décroche
+var proportion = 0.7;// modifie le nombre de feuille qui se décroche
+
 //mano
 var myAngle = 0;
 var myWarning = false;

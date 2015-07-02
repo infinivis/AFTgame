@@ -42,6 +42,10 @@ console.log(maxValue);
     moyenne = sum/myArray.length;
     
     console.log(moyenne);
+    console.log("------- test math Random ---------");
+console.log(Math.random());
+console.log(Math.random()*10);
+console.log(Math.floor(Math.random()*10));
 
 });
 
@@ -113,6 +117,19 @@ $("#capture").on("click", function () {
 
 });
 
+$("#decrocheFeuille").on("click", function () {
+   TREE.decrocheFeuille();
+});
+$("#wakeFeuille").on("click", function () {
+    
+   TREE.wakeFeuille();
+});
+$("#stopFeuille").on("click", function () {
+   TREE.stopFeuille();
+});
+$("#newFeuille").on("click", function () {
+   TREE.createFeuille();
+});
 $("#countAbricot").on("click", function () {
     console.log(TREE.abricotArray.length);
 });

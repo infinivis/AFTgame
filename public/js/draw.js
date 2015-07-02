@@ -30,13 +30,43 @@ function draw() {
     }  
     
      // feuille
+//    dessin.context.fillStyle = '#175732';
+//    for (x in TREE.tronc) {
+//        if (TREE.tronc[x].length < 10) {
+//            dessin.context.beginPath();
+//            
+//            //                    OU                                      Quelle taille
+//            dessin.context.arc(TREE.tronc[x].x, TREE.tronc[x].y, TREE.tronc[x].length/2, 0, Math.PI, false);
+//            //dessin.context.arc(TREE.tronc[x].x,TREE.tronc[x].y, TREE.tronc[x].length/5, 0, Math.PI*2, true);
+////            dessin.context.lineWidth = 1;
+//            // line color
+//            dessin.context.strokeStyle = 'black';
+//            dessin.context.stroke();
+//            dessin.context.closePath();
+//            dessin.context.fill();
+//        }
+//
+//    }
+///end feuille
+//
+     // feuille test draw object
+     if(TREE.tronc.length > 2){ // protection bug
+         
+     
     dessin.context.fillStyle = '#175732';
     for (x in TREE.tronc) {
-        if (TREE.tronc[x].length < 10) {
+      if(TREE.tronc[x].feuille != null){
+          
+          if(TREE.tronc[x].feuille.accroche){
+            TREE.tronc[x].feuille.x = TREE.tronc[x].x;
+            TREE.tronc[x].feuille.y = TREE.tronc[x].y;
+            }
+                
             dessin.context.beginPath();
             
             //                    OU                                      Quelle taille
-            dessin.context.arc(TREE.tronc[x].x, TREE.tronc[x].y, TREE.tronc[x].length/2, 0, Math.PI, false);
+            dessin.context.arc(TREE.tronc[x].feuille.x, TREE.tronc[x].feuille.y, TREE.tronc[x].feuille.size, 0, Math.PI, true); //juste
+            //dessin.context.arc(TREE.tronc[x].x, TREE.tronc[x].y, TREE.tronc[x].length/100, 0, Math.PI, true);
             //dessin.context.arc(TREE.tronc[x].x,TREE.tronc[x].y, TREE.tronc[x].length/5, 0, Math.PI*2, true);
 //            dessin.context.lineWidth = 1;
             // line color
@@ -45,12 +75,13 @@ function draw() {
             dessin.context.closePath();
             dessin.context.fill();
         }
-
-    }
+        }
+}
+    
 ///end feuille
 
 
-// debri
+// abricots
     dessin.context.fillStyle = "orange";
     for (i in TREE.abricotArray) {
          if (TREE.tronc[i].length < 10) {

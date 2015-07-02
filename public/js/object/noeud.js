@@ -7,5 +7,6 @@ var NOEUD = function (){
 			this.parent = null;
 			this.left = null;
 			this.right = null;
+                        this.feuille = null;
 			
 		}

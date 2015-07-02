@@ -7,6 +7,7 @@ function initTree() {
 
 function Tree(framerate) {
     this.abricotArray = new Array;
+    this.feuilleArray = new Array;
     this.maxNode = 2000;
     this.wind = 0;
     this.windMomentum = 0;
@@ -14,6 +15,8 @@ function Tree(framerate) {
     this.timerWind = null;
     this.timerAbricot = null;
     this.timerAbricotWake = null;
+    this.timerFeuille = null;
+    this.timerFeuilleWake = null;
     this.frameRate = framerate;
     this.gamma = 0.86;
     this.tronc = new Array();
@@ -25,6 +28,17 @@ function Tree(framerate) {
     this.tronc[1].x = arbrePositionX;
     this.tronc[1].y = arbrePositionY - 10;
 
+    this.wakeFeuille = function () {
+        this.timerFeuille = setInterval($.proxy(this.runFeuille, this), 1);
+    };
+    this.createFeuille = function () {
+        this.timerFeuille = setInterval($.proxy(this.newFeuille, this), 1);
+    };
+
+    this.stopFeuille = function () {
+        clearInterval(this.timerFeuille);
+       
+    };
     this.createAbricot = function () {
         this.timerAbricot = setInterval($.proxy(this.newAbricot, this), 1);
     };
@@ -54,6 +68,11 @@ function Tree(framerate) {
 
     this.stopAutoGrow = function () {
         clearInterval(this.timer);
+        console.log(TREE.tronc[TREE.tronc.length-1]);
+        console.log(TREE.tronc[0]);
+        console.log(TREE.tronc[1]);
+        console.log(TREE.tronc[2]);
+        console.log(TREE.tronc[3]);
     };
     this.startUnGrow = function () {
         this.timer = setInterval($.proxy(this.unGrow, this), 1);
@@ -121,13 +140,29 @@ function Tree(framerate) {
         stack.push(this.tronc[1]);
         while (stack.length > 0) {
             var current = stack.pop();
+            
             if (current.left != null) {
+                current.feuille = null;
                 this.recalculateNode(current, current.left, true);
                 stack.push(current.left);
                 this.recalculateNode(current, current.right, false);
                 stack.push(current.right);
+           }else if (current.feuille == null) {
+                current.feuille = new FEUILLE;
+                        current.feuille.size = current.length/2;
+//                        current.feuille.x =  current.x;
+//                        current.feuille.y =  current.y;
+                       
             }
+//            else if (current.left == null && current.feuille == null && this.tronc.length > this.maxNode) { //fonctionne bien mais on doit attendre que l'arbre ne crée plus de noeud
+//                current.feuille = new FEUILLE;
+//                        current.feuille.size = current.length/2;
+////                        current.feuille.x =  current.x;
+////                        current.feuille.y =  current.y;
+//                       
+//            }
         }
+        //console.log(TREE.tronc[3]);
     };
 
 
@@ -148,6 +183,7 @@ function Tree(framerate) {
         child.x = current.x + len * Math.cos(angle);
         child.y = current.y - len * Math.sin(angle);
         //si pas un abricot détaché, bouger x et y de l'abricot au x,y de l'abre
+        //car actuellement ils ne suivent pas la croissance
     };
 // kmR kmL
     this.armonicWind = function () {
@@ -195,6 +231,34 @@ function Tree(framerate) {
 //        this.windMomentum *= 0.997;
 //        console.log(this.wind);
 //    };
+    this.runFeuille = function () {        
+        for (i in this.tronc) {
+            if(this.tronc[i].feuille != null && !this.tronc[i].feuille.accroche ){
+            this.tronc[i].feuille.momx += -this.wind * 3;
+            this.tronc[i].feuille.momy += (- 6 / 13) * 40 * Math.abs(this.wind);
+            this.tronc[i].feuille.x += this.tronc[i].feuille.momx - this.wind * 30;
+            this.tronc[i].feuille.y += this.tronc[i].feuille.momy;
+         
+            if (this.tronc[i].feuille.y > widthFull) {
+                this.tronc[i].feuille = null;
+            }
+        }
+        }
+    };
+    this.decrocheFeuille = function () {        
+        for (i in this.tronc) {
+            if(this.tronc[i].feuille != null){
+                if(Math.random()<proportion ){
+                console.log("yo000000000000000000000000");
+            this.tronc[i].feuille.accroche = false;
+        }
+        //ci-desosus trop symétrique et une fois que c'est fait il ne le fait plus les mêmes
+//                if(i%fraction==0 ){
+//            this.tronc[i].feuille.accroche = false;
+//        }
+        }
+        }
+    };
     this.runAbricot = function () {        
         for (i in this.abricotArray) {
             this.abricotArray[i].momx += -this.wind * 3;
@@ -228,13 +292,29 @@ function Tree(framerate) {
             //if (this.tronc[random].length > 10) {
                 
             var temp = this.tronc[random];
-            var leaf = new FEUILLE;
-            leaf.size = Math.random() * 10;
-            leaf.x = temp.x;
-            leaf.y = temp.y;
-            this.abricotArray.push(leaf);
+            var abricot = new ABRICOT;
+            abricot.size = Math.random() * 10;
+            abricot.x = temp.x;
+            abricot.y = temp.y;
+            this.abricotArray.push(abricot);
         //}
         }
+    };
+    this.newFeuille = function () {
+        for (x in this.tronc) {
+            
+        if (this.tronc[x].left == null && this.tronc[x].parent != null){
+                        console.log(this.feuilleArray.length);
+                        var feuille = new FEUILLE;
+                        feuille.size = this.tronc[x].length/3
+                        feuille.x =  this.tronc[x].x;
+                        feuille.y =  this.tronc[x].y;
+                        this.feuilleArray.push(feuille);
+                   
+                    }
+                           }
+
+       
     };
 
 }
