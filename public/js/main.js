@@ -153,7 +153,7 @@ $("#newFeuille").on("click", function () {
    TREE.createFeuille();
 });
 $("#countAbricot").on("click", function () {
-    console.log(TREE.abricotArray.length);
+    console.log(abricotNumber);
 });
 $("#stopAbricot").on("click", function () {
     console.log("Stop Abricot");
@@ -162,6 +162,10 @@ $("#stopAbricot").on("click", function () {
 $("#newAbricot").on("click", function () {
     console.log("New Abricot");
     TREE.createAbricot();
+});
+$("#decrocheAbricot").on("click", function () {
+    console.log("Decroche Abricot");
+TREE.decrocheAbricot();
 });
 $("#wakeAbricot").on("click", function () {
     console.log("Wake Abricot");

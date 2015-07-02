@@ -172,6 +172,7 @@ function Tree(framerate) {
             if(current.fleurs.dureeVie>200){
               
             current.abricot = new ABRICOT;
+            abricotNumber +=1;
             current.abricot.x = current.fleurs.x
             current.abricot.y = current.fleurs.y
             current.abricot.size = current.fleurs.size
@@ -269,6 +270,7 @@ function Tree(framerate) {
 //        this.windMomentum *= 0.997;
 //        console.log(this.wind);
 //    };
+
     this.runFleurs = function () {        
         for (i in this.tronc) {
             if(this.tronc[i].fleurs != null && !this.tronc[i].fleurs.accroche ){
@@ -367,29 +369,33 @@ function Tree(framerate) {
        
     };
     this.runAbricot = function () {        
-        for (i in this.abricotArray) {
-            this.abricotArray[i].momx += -this.wind * 3;
-            this.abricotArray[i].momy += (- 6 / 13) * 40 * Math.abs(this.wind);
-            this.abricotArray[i].x += this.abricotArray[i].momx - this.wind * 30;
-            this.abricotArray[i].y += this.abricotArray[i].momy;
-//            this.abricotArray[i].x += 1;
-//            this.abricotArray[i].y += 0.01;
-            if (this.abricotArray[i].y > widthFull) {
-                this.abricotArray.splice(i, 1);
+        for (i in this.tronc) {
+            if(this.tronc[i].abricot != null && !this.tronc[i].abricot.accroche ){
+            this.tronc[i].abricot.momx += -this.wind * 3;
+            this.tronc[i].abricot.momy += (- 6 / 13) * 40 * Math.abs(this.wind);
+            this.tronc[i].abricot.x += this.tronc[i].abricot.momx - this.wind * 30;
+            this.tronc[i].abricot.y += this.tronc[i].abricot.momy;
+         
+            if (this.tronc[i].abricot.y > widthFull) {
+                this.tronc[i].abricot = null;
             }
         }
+        }
     };
-//    this.runAbricot = function () {
-//        for (i in this.abricotArray) {
-//            this.abricotArray[i].momx += -this.wind * 3 * Math.random();
-//            this.abricotArray[i].momy += (Math.random() - 6 / 13) * 40 * Math.abs(this.wind);
-//            this.abricotArray[i].x += this.abricotArray[i].momx - this.wind * 30 * (Math.random() + 1);
-//            this.abricotArray[i].y += this.abricotArray[i].momy;
-//            if (this.abricotArray[i].y > 600) {
-//                this.abricotArray.splice(i, 1);
-//            }
+    this.decrocheAbricot = function () {        
+        for (i in this.tronc) {
+            if(this.tronc[i].abricot != null){
+                if(Math.random()<proportion ){
+            this.tronc[i].abricot.accroche = false;
+        }
+        //ci-desosus trop symétrique et une fois que c'est fait il ne le fait plus les mêmes
+//                if(i%fraction==0 ){
+//            this.tronc[i].feuille.accroche = false;
 //        }
-//    };
+        }
+        }
+    };
+
 
     this.newAbricot = function () {
         

@@ -93,8 +93,20 @@ button:active {
 	top:1px;
 }
 
-#buttonAll{
+#buttonAll {
    // display:none;
+}
+#boutonsTree button{
+    background-color: brown;
+}
+#boutonsFeuille button{
+    background-color: green;
+}
+#boutonsFleurs button{
+    background-color: pink;
+}
+#boutonsAbricots button{
+    background-color: orange;
 }
 
 
