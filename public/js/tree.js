@@ -162,6 +162,7 @@ function Tree(framerate) {
            }else if (current.feuille == null) {
                 current.feuille = new FEUILLE;
                         current.feuille.size = current.length/2;
+                        console.log(current.feuille.size);
 //                        current.feuille.x =  current.x;
 //                        current.feuille.y =  current.y;
                        
@@ -169,8 +170,9 @@ function Tree(framerate) {
            
                 if(current.fleurs != null){
         if(current.fleurs.accroche){
-            if(current.fleurs.dureeVie>200){
-              
+            if(current.fleurs.dureeVie>200){ //en fonction de la durée de viue (temps de vie)
+            //if(gameTimer<60/2){ //en fonction du chrono problème tout va changer en même temps
+              console.log("In new if           !!!!! ");
             current.abricot = new ABRICOT;
             abricotNumber +=1;
             current.abricot.x = current.fleurs.x
@@ -212,7 +214,7 @@ function Tree(framerate) {
 
         var temp = this.gamma * (current.length - child.length) / current.length;
         angle += isLeft ? temp : -temp;
-        if (Math.abs(angle) > Math.PI / 2) {
+        if (Math.abs(angle) > Math.PI / 2) { //si l'angle est plus grand que 90°
             angle += (Math.PI - Math.abs(angle)) * angle / Math.abs(angle) * this.wind;
         } else {
             angle += angle * this.wind;

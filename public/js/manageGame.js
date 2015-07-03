@@ -1,3 +1,42 @@
+// all the TREE functions 
+
+//        TREE.decrocheFleurs();
+//
+//        TREE.wakeFleurs(); //setInterval
+//
+//        TREE.stopFleurs();
+//
+//        TREE.createFleurs(); //setInterval
+//
+//        TREE.decrocheFeuille();
+//
+//        TREE.wakeFeuille(); //setInterval
+//
+//        TREE.stopFeuille();
+//
+//        TREE.createFeuille(); //setInterval
+//
+//        TREE.stopAbricot();
+//
+//        TREE.createAbricot(); //setInterval
+//
+//        TREE.decrocheAbricot();
+//
+//        TREE.wakeAbricot(); //setInterval
+//
+//        TREE.stopWakeAbricot();
+//
+//        TREE.startWind(); //setInterval
+//
+//        TREE.stopWind();
+//
+//        TREE.startAutoGrow(); //setInterval
+//
+//        TREE.stopAutoGrow();
+//
+//        TREE.startUnGrow(); //setInterval
+
+
 function determineBreath(sumEachL,sumEachR){
 
 
@@ -19,7 +58,7 @@ var tolMoyen = 10;
     if (Math.abs(kmL1 - kmR1) <= toljuste) {
             console.log("souffle harmonieux");
             console.log(Math.abs(kmL1 - kmR1));
-            if(TREE.tronc.length<TREEsizeMax){
+            if(TREE.tronc.length<TREEsizeMax){ // ajouter une variable intermédaire pour les trois taille tailleADo, taille adulte
                harmonicBreath();
             }else{
                //une fois que l'arbre a atteint sa taille adulte des fruits poussent
@@ -57,9 +96,11 @@ var tolMoyen = 10;
 };
 function manageGame() {
     
-   
-   
-    //------ Calcul zone 5s. LEFT -------
+   if(croise){
+       //mode croisé
+   }else{
+       //mode en même temps
+       //------ Calcul zone 5s. LEFT -------
     
     $.each(each5secArrayL,function(){sumEachL+=parseFloat(this) || 0;});
     aveEachL = sumEachL/each5secArrayL.length;
@@ -85,12 +126,23 @@ function manageGame() {
         sumEachR = 0;
         aveEachR = 0;
      }
+   }
+   
+    
     
     
 }
 
 function gameCompletion(){
     console.log("><><><><><><><><><   Game Completion ><><><><><><><><><");
+    
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+/////////                                        //////////////
+/////////         arret des setINterval          //////////////
+/////////                                        //////////////
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
     //connection.close();
     
     //------ Calcul zone FULL LEFT------/
@@ -140,7 +192,13 @@ function gameCompletion(){
 
             });
     
-    
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+/////////                                        //////////////
+/////////            reset des variables         //////////////
+/////////                                        //////////////
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
     //reset du tableau joueur Gauche  // attention: reseter les variables après le post de la partie
     fullArrayL = [];
     sumFullL = 0;

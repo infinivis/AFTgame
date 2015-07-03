@@ -1,5 +1,7 @@
 function harmonicBreath(){
-    growTREEwithtimer();
+    // if something tree < x
+    var count = 3;//count en seconde
+    growTREEwithtimer(count);
     TREE.maxNode += 200;
 }
 function badBreath(){
@@ -7,51 +9,56 @@ function badBreath(){
 }
 
 function veryBadBreath(){
-    unGrowTREEwithtimer();
+    var count = 500; //count en milliséconde
+    TREE.decrocheFeuille; //ajouter des paramètres de combien décrocher
+    TREE.decrocheFleurs;
+    TREE.decrocheAbricot;
+    setTimeout(unGrowTREEwithtimer(count), 500); //count en seconde
+    
 }
 
-function growTREEwithtimer(){
+function growTREEwithtimer(count){
     TREE.startAutoGrow();
     
-     var count = growDuration;
+     var count2 = count;
     var counter = setInterval(timer, 1000); //1000 will  run it every 1 second
     
     function timer()
     {
-        count = count - 1;
-        if (count <= 0)
+        count2 = count2 - 1;
+        if (count2 <= 0)
         {
             clearInterval(counter);
             TREE.stopAutoGrow();
             //counter ended, do something here
             
-            count = growDuration;
+            count2 = count;
           
             return;
         }
 
         //Do code for showing the number of seconds here
-        console.log(""+count);
+        console.log(""+count2);
         
     }
 }
 
-function unGrowTREEwithtimer(){
+function unGrowTREEwithtimer(count){
     TREE.startUnGrow();
     
-     var count = unGrowDuration;
+     var count2 = count;
     var counter = setInterval(timer, 1000); //1000 will  run it every 1 second
     
     function timer()
     {
-        count = count - 1;
-        if (count <= 0)
+        count2 = count2 - 1;
+        if (count2 <= 0)
         {
             clearInterval(counter);
             TREE.stopAutoGrow();
             //counter ended, do something here
             
-            count = unGrowDuration;
+            count2 = count;
           
             return;
         }

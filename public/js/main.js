@@ -176,6 +176,11 @@ $("#stopWake").on("click", function () {
 TREE.stopWakeAbricot();
 });
 
+$("#recalculate").on("click", function () {
+    console.log("recalculate");
+   
+    TREE.recalculate(true);
+});
 $("#length").on("click", function () {
     console.log(TREE.tronc.length);
 });
@@ -206,7 +211,13 @@ $("#unGrow").on("click", function () {
 });
 $("#start").on("click", function () {
     console.log("Start");
-
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+/////////                                        //////////////
+/////////               initialisation           //////////////
+/////////                                        //////////////
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
     //startWS();
     initTree();
     //joueur left
@@ -225,27 +236,39 @@ $("#start").on("click", function () {
     fullArrayR = [];
     sumFullR = 0;
     aveFullR = 0;
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+/////////                                        //////////////
+/////////               fonctions à lancer       //////////////
+/////////                                        //////////////
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+   
     TREE.startWind();
-    growTREEwithtimer();
-    var count = gameDuration;
+    TREE.wakeFeuille();
+    TREE.wakeFleurs();
+    TREE.wakeAbricot(); //ne pas oublier les clearInterval au bons endroits et dans gameCompletion
+    growTREEwithtimer(3);
+    
+    gameTimer = gameDuration;
     var counter = setInterval(timer, 1000); //1000 will  run it every 1 second
     var manageGameTimer = setInterval(manageGame, calculInterval);
     function timer()
     {
-        count = count - 1;
-        if (count <= 0)
+        gameTimer = gameTimer - 1;
+        if (gameTimer <= 0)
         {
             clearInterval(counter);
             clearInterval(manageGameTimer);
             //counter ended, do something here
             console.log("Timer finish");
-            count = gameDuration;
+            gameTimer = gameDuration;
             gameCompletion();
             return;
         }
 
         //Do code for showing the number of seconds here
-        console.log(""+count);
+        console.log(""+gameTimer);
         
     }
     
@@ -307,6 +330,9 @@ $("#testMoveArrowBack").on("click", function () {
 
 });
 
+$("#stopSouffle").on("click", function () {
+   
+});
 $("#j1FAIBLE").on("click", function () {
     console.log("j1 FAIBLE");
 //$( document ).trigger( "WindIncoming", kmh1 );
@@ -424,10 +450,10 @@ function simWindoo(player, force) {
         fullArrayR.push(kmh1);
         
          //if(kmh1>0){
-             kmR = kmh1;
+             kmR = kmh1+4;
              //fluidValueR();
          //}
-         kmR1 = kmh1;
+         kmR1 = kmh1+4;
          
         
     }

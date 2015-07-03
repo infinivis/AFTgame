@@ -10,8 +10,10 @@ var kmh1; // pour les calculs en attendant le windoo
 var howLength;
 
 //manageGame and player stat/////////
+var croise = true; // le mode du jeu, le jeu se déroule en croisé ou en en même temps
 var calculInterval= 5000; //en milliseconde
-var gameDuration= 40;
+var gameDuration= 60;
+var gameTimer;
 
 var pointPartiePrécédente;
 var recordJour;
@@ -47,7 +49,7 @@ var arbrePositionX = 550;
 var arbrePositionY = 800;
 var troncColor = "#6B4226";
 var TREE;
-var growDuration= 3; //en seconde
+var growDuration= 3; //en seconde // plus vraiment utilisé, plutôt des variables internes à paramètrer
 var unGrowDuration = 1; // en seconde
 var TREEsizeMax= 4000;
 
