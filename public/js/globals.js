@@ -12,9 +12,11 @@ var howLength;
 //manageGame and player stat/////////
 var croise = true; // le mode du jeu, le jeu se déroule en croisé ou en en même temps
 var calculInterval= 5000; //en milliseconde
-var gameDuration= 50;
+var gameDuration= 120;
 var gameTimer;
 var fini=false;
+var toljuste = 5;
+var tolMoyen = 10;
 
 var pointPartiePrécédente;
 var recordJour;
@@ -50,7 +52,10 @@ var arbrePositionX = 550;
 var arbrePositionY = 800;
 var troncColor = "#6B4226";
 var TREE;
+var Linterval = null;
+var Rinterval = null;
 var counterUnGrow = 0;
+var counterhowTimeUngrow = 0;
 var counterGrow = 0;
 var counterGame = 0;
 var manageGameTimer = 0;

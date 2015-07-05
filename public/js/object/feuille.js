@@ -7,4 +7,5 @@ var FEUILLE = function (){
 			this.accroche=true;
 			this.color='#175732';
 			this.borderColor='#000000';
+			this.dureeVie=0;
 		}

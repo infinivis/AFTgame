@@ -266,11 +266,6 @@ TREE.stopWind();
 ///////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////
    
-    TREE.startWind();
-    TREE.wakeFeuille();
-    TREE.wakeFleurs();
-    TREE.wakeAbricot(); //ne pas oublier les clearInterval au bons endroits et dans gameCompletion
-    
     clearInterval(counterGrow);
     clearInterval(counterUnGrow);
     clearInterval(counterGame);
@@ -279,6 +274,14 @@ TREE.stopWind();
     gameTimer = gameDuration;
     counterGame = setInterval(timer, 1000); //1000 will  run it every 1 second
     manageGameTimer = setInterval(manageGame, calculInterval);
+    
+    TREE.stopWind();
+    TREE.startWind();
+    
+     //attention seulement si arbre existant
+     //ne pas oublier les clearInterval au bons endroits et dans gameCompletion
+     
+    
     function timer()
     {
         gameTimer = gameTimer - 1;
@@ -361,50 +364,64 @@ $("#stopSouffle").on("click", function () {
 });
 $("#j1FAIBLE").on("click", function () {
     console.log("j1 FAIBLE");
-//$( document ).trigger( "WindIncoming", kmh1 );
-    clearInterval(interval);
-    var interval = setInterval(function () {
+   clearInterval(Linterval);
+    Linterval = setInterval(function () {
         simWindoo("left", "faible")
     }, 1000);
+    
 });
-
-
 $("#j2FAIBLE").on("click", function () {
     console.log("j2 FAIBLE");
-    clearInterval(interval);
-    var interval = setInterval(function () {
+    clearInterval(Rinterval);
+    Rinterval = setInterval(function () {
         simWindoo("right", "faible")
     }, 1000);
-
-
+    
+});
+$("#j1_0").on("click", function () {
+    console.log("j1 FAIBLE");
+   clearInterval(Linterval);
+    Linterval = setInterval(function () {
+        simWindoo("left", 0)
+    }, 1000);
+    
+  
+});
+$("#j2_0").on("click", function () {
+    console.log("j2 FAIBLE");
+    clearInterval(Rinterval);
+    Rinterval = setInterval(function () {
+        simWindoo("right", 0)
+    }, 1000);
+    
 });
 $("#j1JUSTE").on("click", function () {
     console.log("j1 JUSTE");
-    clearInterval(interval);
-    var interval = setInterval(function () {
+    clearInterval(Linterval);
+    Linterval = setInterval(function () {
         simWindoo("left", "juste")
     }, 1000);
 
 });
 $("#j2JUSTE").on("click", function () {
     console.log("j2 JUSTE");
-    clearInterval(interval);
-    var interval = setInterval(function () {
+    clearInterval(Rinterval);
+    Rinterval = setInterval(function () {
         simWindoo("right", "juste")
     }, 1000);
 
 });
 $("#j1FORT").on("click", function () {
     console.log("j1 FORT");
-    clearInterval(interval);
-    var interval = setInterval(function () {
+    clearInterval(Linterval);
+    Linterval = setInterval(function () {
         simWindoo("left", "fort")
     }, 1000);
 });
 $("#j2FORT").on("click", function () {
     console.log("j2 FORT");
-    clearInterval(interval);
-    var interval = setInterval(function () {
+    clearInterval(Rinterval);
+    Rinterval = setInterval(function () {
         simWindoo("right", "fort")
     }, 1000);
 });
@@ -460,11 +477,14 @@ function simWindoo(player, force) {
         kmh1 = 10;
     } else if (force == "fort") {
         kmh1 = Math.floor((Math.random() * 50) + 35);
+        kmh1 = 27;
     } else if (force == "juste") {
         kmh1 = Math.floor((Math.random() * 40) + 30);
+        kmh1 = 17;
+    } else if (force == 0){
+        kmh1 = 0;
     }
-    
-    
+     
     if (player == "left") {
         oldKmL = kmL;
         each5secArrayL.push(kmh1);
@@ -482,14 +502,14 @@ function simWindoo(player, force) {
         fullArrayR.push(kmh1);
         
          //if(kmh1>0){
-             kmR = kmh1+4;
-             //fluidValueR();
+             kmR = kmh1+2;
+            
          //}
-         kmR1 = kmh1+4;
+         kmR1 = kmh1+2;
          
         
     }
-
+     
     convertKMtobar(kmL1, kmR1);
 }
 ;

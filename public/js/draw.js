@@ -38,6 +38,7 @@ dessin.context.translate(0, -60);
           if(TREE.tronc[x].feuille.accroche){
             TREE.tronc[x].feuille.x = TREE.tronc[x].x;
             TREE.tronc[x].feuille.y = TREE.tronc[x].y;
+            //TREE.tronc[x].feuille.size = TREE.tronc[x].length/3.5;
             }
                 
             dessin.context.beginPath();

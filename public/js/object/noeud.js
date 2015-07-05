@@ -10,6 +10,7 @@ var NOEUD = function (){
                         this.feuille = null;
                         this.abricot = null;
                         this.fleurs = null;
+                        this.isGrandFather = null;
                         
 			
 		}

@@ -110,13 +110,17 @@ function Tree(framerate) {
         this.recalculate(true);
     };
     this.unGrow = function () {
+       
         for (i in this.tronc) {
             if (this.tronc[i].left !== null && Math.random() < 0.07) {
+                if(!this.tronc[i].length<10){
                 this.substract(Math.random() * 3, this.tronc[i]);
-                //console.log(this.tronc.length);
+               }
             }
         }
-        this.recalculate(true);
+        this.recalculate(false);
+         
+        
     };
 
 
@@ -131,11 +135,13 @@ function Tree(framerate) {
     };
 
     this.substract = function (x, noeud) {
+       
         while (noeud.parent != null) {
             noeud.length -= x;
             noeud = noeud.parent;
         }       
-        noeud.length -= x;             
+        noeud.length -= x;
+      
     };
 
     this.recalculate = function (grow) {
@@ -168,14 +174,11 @@ function Tree(framerate) {
                 this.recalculateNode(current, current.right, false);
                 stack.push(current.right);
            }else if (current.feuille == null) {
-                current.feuille = new FEUILLE;
-                        current.feuille.size = current.length/2;
-                        
-//                        current.feuille.x =  current.x;
-//                        current.feuille.y =  current.y;
-                       
-            }
-           
+            
+                  current.feuille = new FEUILLE;
+                current.feuille.size = current.length * Math.random()*0.8 ; 
+               
+                }
                 if(current.fleurs != null){
         if(current.fleurs.accroche){
             if(current.fleurs.dureeVie>200){ //en fonction de la durée de viue (temps de vie)
@@ -309,7 +312,7 @@ function Tree(framerate) {
         }
     };
       this.newFleurs = function () {
-          
+         
           if (Math.random() > 0.7) {
             var random = Math.floor(Math.random() * this.tronc.length)
          if(this.tronc[random].fleurs == null){
@@ -320,9 +323,9 @@ function Tree(framerate) {
             temp.fleurs.y = temp.y;
             temp.fleurs.accroche = true;
             this.tronc[random] = temp;
-            
          }
         }
+    
        //this.recalculate(false);
     };
     
@@ -340,16 +343,16 @@ function Tree(framerate) {
         }
         }
     };
-    this.decrocheFeuille = function () {        
+    this.decrocheFeuille = function () {
+        console.log("Décroche Feuille");
         for (i in this.tronc) {
            
             if(this.tronc[i].feuille != null){
                 if(Math.random()<proportion ){
-                
             this.tronc[i].feuille.accroche = false;
             //this.tronc[i].feuille = null;
         }
-        //ci-desosus trop symétrique et une fois que c'est fait il ne le fait plus les mêmes
+        //ci-dessous trop symétrique et une fois que c'est fait il ne le fait plus les mêmes
 //                if(i%fraction==0 ){
 //            this.tronc[i].feuille.accroche = false;
 //        }
@@ -358,9 +361,8 @@ function Tree(framerate) {
     };
       this.newFeuille = function () {
           for (x in this.tronc) {
-             
-        if (this.tronc[x].left == null && this.tronc[x]!=this.tronc[0]){
-                       this.tronc[x].feuille = null;
+        if (this.tronc[x].left == null && this.tronc[x].feuille == null && this.tronc[x]!=this.tronc[0]){
+                       console.log("New Feuille");
                         this.tronc[x].feuille =  new FEUILLE;
                         this.tronc[x].feuille.size = this.tronc[x].length/3
                         this.tronc[x].feuille.x =  this.tronc[x].x;
@@ -374,7 +376,7 @@ function Tree(framerate) {
 //                        this.tronc[x].feuille = feuille;
                     }
                            }
-                           this.recalculate(true);
+                           this.recalculate(false);
 
        
     };

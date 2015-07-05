@@ -9,17 +9,24 @@ function badBreath(){
 }
 
 function veryBadBreath(){
-    var count = 500; //count en milliséconde
-    TREE.decrocheFeuille; //ajouter des paramètres de combien décrocher
-    TREE.decrocheFleurs;
-    TREE.decrocheAbricot;
-    setTimeout(unGrowTREEwithtimer(count), 500); //count en seconde
+    console.log("VeryBadBreath");
+    var count = 1;
+    TREE.stopWakeFeuille();
+    TREE.stopWakeFleurs(); //attention seulement si arbre existant
+    TREE.stopWakeAbricot(); //ne pas oublier les clearInterval au bons endroits et dans gameCompletion
+    TREE.wakeFeuille();
+    TREE.wakeFleurs(); //attention seulement si arbre existant
+    TREE.wakeAbricot(); //ne pas oublier les clearInterval au bons endroits et dans gameCompletion
+    TREE.decrocheFeuille(); //ajouter des paramètres de combien décrocher
+    TREE.decrocheFleurs();
+    TREE.decrocheAbricot();
+    unGrowTREEwithtimer(count); //count en seconde
     
 }
 
 function growTREEwithtimer(count){
+    TREE.stopAutoGrow();
     TREE.startAutoGrow();
-    
      var count2 = count;
     counterGrow = setInterval(timer, 1000); //1000 will  run it every 1 second
     
@@ -44,8 +51,8 @@ function growTREEwithtimer(count){
 }
 
 function unGrowTREEwithtimer(count){
+    TREE.stopAutoGrow();
     TREE.startUnGrow();
-    
      var count2 = count;
     counterUnGrow = setInterval(timer, 1000); //1000 will  run it every 1 second
     

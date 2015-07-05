@@ -39,9 +39,6 @@
 
 function determineBreath(sumEachL,sumEachR){
 
-
-var toljuste = 5;
-var tolMoyen = 10;
     //peut-être à mettre en instantané
     if(kmL1-kmR1>0){
         //vent négatif, l'arbre doit pousser légèrement plus sur la droite
@@ -52,6 +49,7 @@ var tolMoyen = 10;
     }else{
         //souffle parfait il pousse droit
         console.log("souffle parfait différence = 0");
+        //combo
     }
     
     //souffle harmonieux
@@ -80,6 +78,7 @@ var tolMoyen = 10;
             badBreath();
             // une ptite partie des feuilles s'envole
             // une petite partie des fruits s'envole
+            // les feuilles se fane un peu les couleurs perdent leurs clarté
             
             
              //souffle chaotique
@@ -129,10 +128,22 @@ function manageGame() {
         each5secArrayR = [];
         sumEachR = 0;
         aveEachR = 0;
+     }else{
+         //reset all
+         TREE.stopFleurs();
+TREE.stopWakeFleurs();
+TREE.stopAbricot();
+TREE.stopWakeAbricot();
+TREE.stopFeuille();
+TREE.stopWakeFeuille();
+TREE.stopAutoGrow();
+TREE.stopWind();
+clearInterval(counterGrow);
+    
      }
 
    }else{
-       //mode en même temps
+       //mode en même temps en fait c'est faux je developpe le jeu en mode en meme tremps mais pas dans la bonne zone de if
 //       //------ Calcul zone 5s. LEFT -------
 //    
 //    $.each(each5secArrayL,function(){sumEachL+=parseFloat(this) || 0;});
@@ -209,8 +220,12 @@ TREE.stopWind();
         kmLmoy = 30;//Math.round(aveFullL *10)/10,
         kmRmax = 35;//maxR,
         kmRmoy = 30;//Math.round(aveFullR *10)/10,
-        point = 71;//abricotNumber,
+        point = abricotNumber,
         jour = 6;//jour
+
+
+    console.log("Nombre d'abricots: "+abricotNumber);
+    
     
     //post Partie
     
