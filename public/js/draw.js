@@ -10,11 +10,11 @@ function draw() {
    
     dessin.context.strokeStyle = troncColor;
     dessin.context.save();
-    dessin.context.translate(-200, -270);
-    dessin.context.scale(1.5, 1.5);
-    dessin.context.translate(0, -60);
+dessin.context.translate(-200, -270);
+dessin.context.scale(1.5, 1.5);
+dessin.context.translate(0, -60);
     
-  
+   
     
     
    //dessin de l'arbre
@@ -54,7 +54,7 @@ function draw() {
             dessin.context.fill();
         }
         }
-
+}
     
 ///end feuille
 
@@ -62,7 +62,7 @@ function draw() {
     for (i in TREE.tronc) {
          if(TREE.tronc[i].fleurs != null){
         dessin.context.beginPath();
-      
+        
         dessin.context.drawImage(document.getElementById("fleurs"), TREE.tronc[i].fleurs.x, TREE.tronc[i].fleurs.y, TREE.tronc[i].fleurs.size*2, TREE.tronc[i].fleurs.size*2);
    
         dessin.context.closePath();
@@ -88,7 +88,7 @@ function draw() {
     }
     
     //end abricots
-    }
+    
     
 //// abricots
 //    dessin.context.fillStyle = "orange";
@@ -105,9 +105,25 @@ function draw() {
 //    }
 //    //end abricots
     
+     dessin.context.restore();
+    // rideau
     
+        
+        dessin.context.drawImage(document.getElementById("rideau"), 0, posRideauY, dessin.width, dessin.height);
+        if(!fini){
+    if(posRideauY<=0 && posRideauY>1000*(-1)){
+           posRideauY-=4;
+       }
+       }
+        
+        if(fini){
+           
+            if(posRideauY>=1000*(-1) && posRideauY<0){
+                posRideauY+=4;
+            }
+        }
    
+  
+   //////////////////////
    
-   
-    dessin.context.restore();
 }

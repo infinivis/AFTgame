@@ -31,7 +31,7 @@ function Tree(framerate) {
     this.tronc[1].y = arbrePositionY - 10;
 
     this.wakeFleurs = function () {
-        this.timerFleurs = setInterval($.proxy(this.runFleurs, this), 1);
+        this.timerFeuilleWake = setInterval($.proxy(this.runFleurs, this), 1);
     };
     this.createFleurs = function () {
         this.timerFleurs = setInterval($.proxy(this.newFleurs, this), 25);
@@ -41,16 +41,24 @@ function Tree(framerate) {
         clearInterval(this.timerFleurs);
        
     };
+    this.stopWakeFleurs = function () {
+        clearInterval(this.timerFeuilleWake);
+       
+    };
     this.wakeFeuille = function () {
         this.timerFeuilleWake = setInterval($.proxy(this.runFeuille, this), 1);
     };
     this.createFeuille = function () {
-        this.timerFeuille = setInterval($.proxy(this.newFeuille, this), 1);
+        this.timerFeuille = setInterval($.proxy(this.newFeuille, this), 500);
     };
-
+    
+    this.stopWakeFeuille = function () {
+        clearInterval(this.timerFeuilleWake);
+       
+    };
     this.stopFeuille = function () {
         clearInterval(this.timerFeuille);
-        clearInterval(this.timerFeuilleWake);
+        
        
     };
   
@@ -162,7 +170,7 @@ function Tree(framerate) {
            }else if (current.feuille == null) {
                 current.feuille = new FEUILLE;
                         current.feuille.size = current.length/2;
-                        console.log(current.feuille.size);
+                        
 //                        current.feuille.x =  current.x;
 //                        current.feuille.y =  current.y;
                        
@@ -172,7 +180,7 @@ function Tree(framerate) {
         if(current.fleurs.accroche){
             if(current.fleurs.dureeVie>200){ //en fonction de la durée de viue (temps de vie)
             //if(gameTimer<60/2){ //en fonction du chrono problème tout va changer en même temps
-              console.log("In new if           !!!!! ");
+             
             current.abricot = new ABRICOT;
             abricotNumber +=1;
             current.abricot.x = current.fleurs.x

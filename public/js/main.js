@@ -23,8 +23,10 @@ $("#date").on("click", function () {
 
 var d = new Date();
 var jour = d.getDay();
+if(jour==0){
+    jour = 7;
+}
 console.log(jour);
-
 });
 $("#calcul").on("click", function () {
 
@@ -209,7 +211,16 @@ $("#stopGrow").on("click", function () {
 $("#unGrow").on("click", function () {
     TREE.startUnGrow();
 });
-$("#start").on("click", function () {
+$("#mode").on("click", function () {
+    if(croise){
+        croise = false;
+        console.log("MODE : ENSEMBLE");
+    }else{
+        croise = true;
+        console.log("MODE : CROISE");
+    }
+});
+$("canvas").on("click", function () {
     console.log("Start");
 ///////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////
@@ -218,7 +229,18 @@ $("#start").on("click", function () {
 /////////                                        //////////////
 ///////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////
-    //startWS();
+//
+// reset all tree
+TREE.stopFleurs();
+TREE.stopWakeFleurs();
+TREE.stopAbricot();
+TREE.stopWakeAbricot();
+TREE.stopFeuille();
+TREE.stopWakeFeuille();
+TREE.stopAutoGrow();
+TREE.stopWind();
+
+//startWS();
     initTree();
     //joueur left
     each5secArrayL = [];
@@ -248,17 +270,21 @@ $("#start").on("click", function () {
     TREE.wakeFeuille();
     TREE.wakeFleurs();
     TREE.wakeAbricot(); //ne pas oublier les clearInterval au bons endroits et dans gameCompletion
-    growTREEwithtimer(3);
     
+    clearInterval(counterGrow);
+    clearInterval(counterUnGrow);
+    clearInterval(counterGame);
+    clearInterval(manageGameTimer);
+    growTREEwithtimer(3);
     gameTimer = gameDuration;
-    var counter = setInterval(timer, 1000); //1000 will  run it every 1 second
-    var manageGameTimer = setInterval(manageGame, calculInterval);
+    counterGame = setInterval(timer, 1000); //1000 will  run it every 1 second
+    manageGameTimer = setInterval(manageGame, calculInterval);
     function timer()
     {
         gameTimer = gameTimer - 1;
         if (gameTimer <= 0)
         {
-            clearInterval(counter);
+            clearInterval(counterGame);
             clearInterval(manageGameTimer);
             //counter ended, do something here
             console.log("Timer finish");
@@ -336,7 +362,8 @@ $("#stopSouffle").on("click", function () {
 $("#j1FAIBLE").on("click", function () {
     console.log("j1 FAIBLE");
 //$( document ).trigger( "WindIncoming", kmh1 );
-    setInterval(function () {
+    clearInterval(interval);
+    var interval = setInterval(function () {
         simWindoo("left", "faible")
     }, 1000);
 });
@@ -344,7 +371,8 @@ $("#j1FAIBLE").on("click", function () {
 
 $("#j2FAIBLE").on("click", function () {
     console.log("j2 FAIBLE");
-    setInterval(function () {
+    clearInterval(interval);
+    var interval = setInterval(function () {
         simWindoo("right", "faible")
     }, 1000);
 
@@ -352,27 +380,31 @@ $("#j2FAIBLE").on("click", function () {
 });
 $("#j1JUSTE").on("click", function () {
     console.log("j1 JUSTE");
-    setInterval(function () {
+    clearInterval(interval);
+    var interval = setInterval(function () {
         simWindoo("left", "juste")
     }, 1000);
 
 });
 $("#j2JUSTE").on("click", function () {
     console.log("j2 JUSTE");
-    setInterval(function () {
+    clearInterval(interval);
+    var interval = setInterval(function () {
         simWindoo("right", "juste")
     }, 1000);
 
 });
 $("#j1FORT").on("click", function () {
     console.log("j1 FORT");
-    setInterval(function () {
+    clearInterval(interval);
+    var interval = setInterval(function () {
         simWindoo("left", "fort")
     }, 1000);
 });
 $("#j2FORT").on("click", function () {
     console.log("j2 FORT");
-    setInterval(function () {
+    clearInterval(interval);
+    var interval = setInterval(function () {
         simWindoo("right", "fort")
     }, 1000);
 });

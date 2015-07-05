@@ -24,7 +24,7 @@
 //
 //        TREE.wakeAbricot(); //setInterval
 //
-//        TREE.stopWakeAbricot();
+//        TREE.stopWakeAbricot(); TREE.stopAutoGrow();TREE.stopWind();TREE.stopAbricot();TREE.stopFeuille();TREE.stopFleurs();
 //
 //        TREE.startWind(); //setInterval
 //
@@ -57,11 +57,14 @@ var tolMoyen = 10;
     //souffle harmonieux
     if (Math.abs(kmL1 - kmR1) <= toljuste) {
             console.log("souffle harmonieux");
-            console.log(Math.abs(kmL1 - kmR1));
+            
             if(TREE.tronc.length<TREEsizeMax){ // ajouter une variable intermédaire pour les trois taille tailleADo, taille adulte
                harmonicBreath();
             }else{
                //une fois que l'arbre a atteint sa taille adulte des fruits poussent
+               TREE.stopFleurs();
+               TREE.createFleurs();
+               console.log("TREE > TREEsizeMax");
             }
             
             //jouer sur la vitesse de pousse
@@ -98,17 +101,18 @@ function manageGame() {
     
    if(croise){
        //mode croisé
-   }else{
-       //mode en même temps
-       //------ Calcul zone 5s. LEFT -------
+       
+              //------ Calcul zone 5s. LEFT -------
     
-    $.each(each5secArrayL,function(){sumEachL+=parseFloat(this) || 0;});
+    $.each(each5secArrayL,function(){
+    sumEachL+=parseFloat(this) || 0;});
     aveEachL = sumEachL/each5secArrayL.length;
    
     
      //------ Calcul zone 5s. RIGHT --------
     
-    $.each(each5secArrayR,function(){sumEachR+=parseFloat(this) || 0;});
+    $.each(each5secArrayR,function(){
+    sumEachR+=parseFloat(this) || 0;});
     aveEachR = sumEachR/each5secArrayR.length;
     
     
@@ -126,6 +130,36 @@ function manageGame() {
         sumEachR = 0;
         aveEachR = 0;
      }
+
+   }else{
+       //mode en même temps
+//       //------ Calcul zone 5s. LEFT -------
+//    
+//    $.each(each5secArrayL,function(){sumEachL+=parseFloat(this) || 0;});
+//    aveEachL = sumEachL/each5secArrayL.length;
+//   
+//    
+//     //------ Calcul zone 5s. RIGHT --------
+//    
+//    $.each(each5secArrayR,function(){sumEachR+=parseFloat(this) || 0;});
+//    aveEachR = sumEachR/each5secArrayR.length;
+//    
+//    
+//    if(sumEachL!=0 || sumEachR !=0){
+//    //fonction qui impacte l'écart des souffles
+//    determineBreath(sumEachL,sumEachR);
+//    
+//    //reset du tableau joueurs
+//    
+//        each5secArrayL = [];
+//        sumEachL = 0;
+//        aveEachL = 0;
+//
+//        each5secArrayR = [];
+//        sumEachR = 0;
+//        aveEachR = 0;
+//     }
+     
    }
    
     
@@ -143,6 +177,17 @@ function gameCompletion(){
 /////////                                        //////////////
 ///////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////
+//// reset all tree
+TREE.stopFleurs();
+TREE.stopWakeFleurs();
+TREE.stopAbricot();
+TREE.stopWakeAbricot();
+TREE.stopFeuille();
+TREE.stopWakeFeuille();
+TREE.stopAutoGrow();
+TREE.stopWind();
+
+
     //connection.close();
     
     //------ Calcul zone FULL LEFT------/
@@ -160,37 +205,32 @@ function gameCompletion(){
     var d = new Date();
     var jour = d.getDay();
     var img = dessin.toDataURL("image/png", 0.5);
-    var kmLmax = maxL,
-        kmLmoy = Math.round(aveFullL *10)/10,
-        kmRmax = maxR,
-        kmRmoy = Math.round(aveFullR *10)/10,
-        point = TREE.abricotArray.length,
-        jour = jour
+    var kmLmax = 40;//maxL,
+        kmLmoy = 30;//Math.round(aveFullL *10)/10,
+        kmRmax = 35;//maxR,
+        kmRmoy = 30;//Math.round(aveFullR *10)/10,
+        point = 71;//abricotNumber,
+        jour = 6;//jour
+    
     //post Partie
     
-   
-    console.log("L'arrondi");
-    console.log(kmRmoy);
-// à coller dans gameCompletion en assignant les bonnes valeurs
-    
-
-    $.post("http://localhost:3000/api/images", {dataUrl: img})//renvoi l'id
-            .done(function (data) {
-                console.log(data);
-                $.post("http://localhost:3000/api/parties", {
-                    image_id: data,
-                    kmLmax: kmLmax,
-                    kmLmoy: kmLmoy,
-                    kmRmax: kmRmax,
-                    kmRmoy: kmRmoy,
-                    point: point,
-                    jour: jour
-                })
-                        .done(function (data) {
-                            //console.log("Data Loaded: " + data);
-                        });
-
-            });
+//    $.post("http://localhost:3000/api/images", {dataUrl: img})//renvoi l'id
+//            .done(function (data) {
+//                console.log(data);
+//                $.post("http://localhost:3000/api/parties", {
+//                    image_id: data,
+//                    kmLmax: kmLmax,
+//                    kmLmoy: kmLmoy,
+//                    kmRmax: kmRmax,
+//                    kmRmoy: kmRmoy,
+//                    point: point,
+//                    jour: jour
+//                })
+//                        .done(function (data) {
+//                            //console.log("Data Loaded: " + data);
+//                        });
+//
+//            });
     
 ///////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////

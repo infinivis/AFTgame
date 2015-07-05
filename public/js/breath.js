@@ -21,14 +21,14 @@ function growTREEwithtimer(count){
     TREE.startAutoGrow();
     
      var count2 = count;
-    var counter = setInterval(timer, 1000); //1000 will  run it every 1 second
+    counterGrow = setInterval(timer, 1000); //1000 will  run it every 1 second
     
     function timer()
     {
         count2 = count2 - 1;
         if (count2 <= 0)
         {
-            clearInterval(counter);
+            clearInterval(counterGrow);
             TREE.stopAutoGrow();
             //counter ended, do something here
             
@@ -38,7 +38,7 @@ function growTREEwithtimer(count){
         }
 
         //Do code for showing the number of seconds here
-        console.log(""+count2);
+     
         
     }
 }
@@ -47,14 +47,14 @@ function unGrowTREEwithtimer(count){
     TREE.startUnGrow();
     
      var count2 = count;
-    var counter = setInterval(timer, 1000); //1000 will  run it every 1 second
+    counterUnGrow = setInterval(timer, 1000); //1000 will  run it every 1 second
     
     function timer()
     {
         count2 = count2 - 1;
         if (count2 <= 0)
         {
-            clearInterval(counter);
+            clearInterval(counterUnGrow);
             TREE.stopAutoGrow();
             //counter ended, do something here
             

@@ -12,8 +12,9 @@ var howLength;
 //manageGame and player stat/////////
 var croise = true; // le mode du jeu, le jeu se déroule en croisé ou en en même temps
 var calculInterval= 5000; //en milliseconde
-var gameDuration= 60;
+var gameDuration= 50;
 var gameTimer;
+var fini=false;
 
 var pointPartiePrécédente;
 var recordJour;
@@ -49,6 +50,10 @@ var arbrePositionX = 550;
 var arbrePositionY = 800;
 var troncColor = "#6B4226";
 var TREE;
+var counterUnGrow = 0;
+var counterGrow = 0;
+var counterGame = 0;
+var manageGameTimer = 0;
 var growDuration= 3; //en seconde // plus vraiment utilisé, plutôt des variables internes à paramètrer
 var unGrowDuration = 1; // en seconde
 var TREEsizeMax= 4000;
@@ -63,3 +68,6 @@ var proportion = 0.9;// modifie le nombre de feuille qui se décroche
 var myAngle = 0;
 var myWarning = false;
 var myBar = 1.5;
+
+//rideau
+var posRideauY=0;

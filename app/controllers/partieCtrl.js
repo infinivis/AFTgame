@@ -39,25 +39,35 @@ router.route("/")
 
 
 
-router.route("/point")
+router.route("/day")
         .get(function (req, res, next) {
-            var newObject = {};
             var d = new Date();
             var jour = d.getDay();
-            jour=jour-1;
+            if(jour==0){
+                jour = 7;
+            }
+            if(jour==1){
+                jour = 8;
+            }
             
-            Partie.findOne().sort('-point').exec(function (err, partieMaxSemaine) {
-                if (err)return next(err);
-                newObject.partieMaxSemaine = partieMaxSemaine;
-                
+            jour=jour-1;  
+            
+           
                 Partie.findOne({jour: jour}).sort('-point').exec(function (err, partieMaxJour) {
                 if (err)return next(err);
-                newObject.partieMaxJour = partieMaxJour;
+                return res.status(200).json(partieMaxJour);
+            }); 
+        });
+        
+router.route("/week")
+        .get(function (req, res, next) {         
+            Partie.findOne().sort('-point').exec(function (err, partieMaxSemaine) {
+                if (err)return next(err);
                 
-                return res.status(200).json(newObject);
+                return res.status(200).json(partieMaxSemaine);
             });
-                
-            });
+               
+            
             
         });
         
