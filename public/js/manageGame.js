@@ -100,21 +100,13 @@ function manageGame() {
     
    if(croise){
        //mode croisé
-       
-              //------ Calcul zone 5s. LEFT -------
     
-    $.each(each5secArrayL,function(){
-    sumEachL+=parseFloat(this) || 0;});
-    aveEachL = sumEachL/each5secArrayL.length;
+    
+    //------ Calcul zone 5s. LEFT -------
+    sumEachL = each5secArrayL.reduce(function(a, b) { return a + b; });
+    //------ Calcul zone 5s. RIGHT --------
+    sumEachR = each5secArrayR.reduce(function(a, b) { return a + b; });
    
-    
-     //------ Calcul zone 5s. RIGHT --------
-    
-    $.each(each5secArrayR,function(){
-    sumEachR+=parseFloat(this) || 0;});
-    aveEachR = sumEachR/each5secArrayR.length;
-    
-    
     if(sumEachL!=0 || sumEachR !=0){
     //fonction qui impacte l'écart des souffles
     determineBreath(sumEachL,sumEachR);
@@ -123,11 +115,11 @@ function manageGame() {
     
         each5secArrayL = [];
         sumEachL = 0;
-        aveEachL = 0;
+        
 
         each5secArrayR = [];
         sumEachR = 0;
-        aveEachR = 0;
+        
      }else{
          //reset all
          TREE.stopFleurs();
@@ -202,30 +194,41 @@ TREE.stopWind();
     //connection.close();
     
     //------ Calcul zone FULL LEFT------/
-    $.each(fullArrayL,function(){sumFullL+=parseFloat(this) || 0;});
+    //$.each(fullArrayL,function(){sumFullL+=parseFloat(this) || 0;});
+    sumFullL = fullArrayL.reduce(function(a, b) { return a + b; });
     aveFullL = sumFullL/fullArrayL.length;
-    var maxL = Math.max.apply(null, fullArrayL);
+    aveFullL = Math.round(aveFullL*10)/10;
+    picL = Math.max.apply(null, fullArrayL);
+    localStorage.setItem("lkmMoy",aveFullL);
+    localStorage.setItem("lkmPic",picL);
     
     //------- Calcul zone FULL RIGHT--------
-    $.each(fullArrayR,function(){sumFullR+=parseFloat(this) || 0;});
+    sumFullR = fullArrayR.reduce(function(a, b) { return a + b; });
     aveFullR = sumFullR/fullArrayR.length;
-    var maxR = Math.max.apply(null, fullArrayR);
+    aveFullR = Math.round(aveFullR*10)/10;
+    picR= Math.max.apply(null, fullArrayR);
+    localStorage.setItem("rkmPic",picR);
+    localStorage.setItem("rkmMoy",aveFullR);
     
     
     //préparer les valeurs pour le post
     var d = new Date();
     var jour = d.getDay();
     var img = dessin.toDataURL("image/png", 0.5);
-    var kmLmax = 40;//maxL,
-        kmLmoy = 30;//Math.round(aveFullL *10)/10,
-        kmRmax = 35;//maxR,
-        kmRmoy = 30;//Math.round(aveFullR *10)/10,
-        point = abricotNumber,
-        jour = 6;//jour
+    var kmLmax = picL,
+        kmLmoy = Math.round(aveFullL *10)/10,
+        kmRmax = picR,
+        kmRmoy = Math.round(aveFullR *10)/10,
+        point = abricotNumber
 
-
-    console.log("Nombre d'abricots: "+abricotNumber);
     
+    //compteur du nombre de partie
+    var noPartieTemp = localStorage.getItem("noPartie");
+    noPartie = parseInt(noPartieTemp);
+    noPartie += 1;
+    localStorage.setItem("start", false);
+    localStorage.setItem("noPartie",noPartie);
+    localStorage.setItem("nbAbricotsCourant", 0);
     
     //post Partie
     
@@ -239,7 +242,8 @@ TREE.stopWind();
 //                    kmRmax: kmRmax,
 //                    kmRmoy: kmRmoy,
 //                    point: point,
-//                    jour: jour
+//                    jour: jour,
+//                    noPartie: noPartie
 //                })
 //                        .done(function (data) {
 //                            //console.log("Data Loaded: " + data);

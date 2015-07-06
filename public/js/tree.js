@@ -186,6 +186,7 @@ function Tree(framerate) {
              
             current.abricot = new ABRICOT;
             abricotNumber +=1;
+            localStorage.setItem("nbAbricotsCourant",abricotNumber);
             current.abricot.x = current.fleurs.x
             current.abricot.y = current.fleurs.y
             current.abricot.size = current.fleurs.size

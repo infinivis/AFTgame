@@ -28,6 +28,7 @@ router.route("/")
             newPartie.kmRmoy = req.body.kmRmoy;
             newPartie.point = req.body.point;
             newPartie.jour = req.body.jour;
+            newPartie.noPartie = req.body.noPartie;
 
             var callback = function (err, partieSaved) {
                 if (err)return next(err);

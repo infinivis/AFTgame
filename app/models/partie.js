@@ -11,6 +11,7 @@ var ScoreSchema = new Schema({
   kmRmoy: Number,
   point: Number,
   jour: Number,
+  noPartie: Number,
   image_id: { type: Schema.Types.ObjectId, ref: 'Image' }
 });
 

@@ -13,11 +13,11 @@ var nbAbricotsCourantG=0;
 
 var nbPartieG=0;
 
-var timeG=0;
+var timeG = 0;
 
 var warningG=0;
 
-var lkmInstantG=27.5;
+var lkmInstantG=0;
 
 var lkmPicG=0;
 

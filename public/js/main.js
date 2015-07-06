@@ -222,6 +222,8 @@ $("#mode").on("click", function () {
 });
 $("canvas").on("click", function () {
     console.log("Start");
+    
+    localStorage.setItem("start", true);
 ///////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////
 /////////                                        //////////////
@@ -271,8 +273,9 @@ TREE.stopWind();
     clearInterval(counterGame);
     clearInterval(manageGameTimer);
     growTREEwithtimer(3);
-    gameTimer = gameDuration;
-    counterGame = setInterval(timer, 1000); //1000 will  run it every 1 second
+//    gameTimer = gameDuration;
+//    counterGame = setInterval(timer, 1000); //1000 will  run it every 1 second
+    setTimeout(update, 1000);
     manageGameTimer = setInterval(manageGame, calculInterval);
     
     TREE.stopWind();
@@ -282,27 +285,50 @@ TREE.stopWind();
      //ne pas oublier les clearInterval au bons endroits et dans gameCompletion
      
     
-    function timer()
-    {
-        gameTimer = gameTimer - 1;
-        if (gameTimer <= 0)
-        {
-            clearInterval(counterGame);
+//    function timer()
+//    {
+//        gameTimer = gameTimer - 1;
+//        if (gameTimer <= 0)
+//        {
+//            clearInterval(counterGame);
+//            clearInterval(manageGameTimer);
+//            //counter ended, do something here
+//            console.log("Timer finish");
+//            gameTimer = gameDuration;
+//            gameCompletion();
+//            return;
+//        }
+//
+//        //Do code for showing the number of seconds here
+//        console.log(""+gameTimer);
+//        
+//    }
+    function update() {
+        var ss = gameDuration.split(":");
+        var dt = new Date();
+        dt.setHours(0);
+        dt.setMinutes(ss[0]);
+        dt.setSeconds(ss[1]);
+
+        var dt2 = new Date(dt.valueOf() - 1000);
+        var temp = dt2.toTimeString().split(" ");
+        var ts = temp[0].split(":");
+        gameDuration = (ts[1]+":"+ts[2]);
+        console.log(gameDuration);
+        localStorage.setItem("time",gameDuration);
+        if(ts[1]>0||ts[2]>0){
+        setTimeout(update, 1000);
+         }else{
+            gameDuration = "00:30";
             clearInterval(manageGameTimer);
             //counter ended, do something here
             console.log("Timer finish");
-            gameTimer = gameDuration;
             gameCompletion();
-            return;
-        }
-
-        //Do code for showing the number of seconds here
-        console.log(""+gameTimer);
-        
+            return;  
+         }
     }
     
-
-
+   
 
 });
 
@@ -487,29 +513,53 @@ function simWindoo(player, force) {
      
     if (player == "left") {
         oldKmL = kmL;
-        each5secArrayL.push(kmh1);
-         fullArrayL.push(kmh1);
+        
+         
          //if(kmh1>0){
              kmL = kmh1;
              //fluidValueL();
          //}
          kmL1 = kmh1;
+         each5secArrayL.push(kmL1);
+         fullArrayL.push(kmL1);
+         
+         
+          //------ Calcul zone FULL LEFT------/
+    sumFullL = fullArrayL.reduce(function(a, b) { return a + b; });
+    aveFullL = sumFullL/fullArrayL.length;
+    aveFullL = Math.round(aveFullL*10)/10;
+    picL = Math.max.apply(null, fullArrayL);
+    localStorage.setItem("lkmMoy",aveFullL);
+    localStorage.setItem("lkmPic",picL);
+    localStorage.setItem("lkmInstant",kmL1);
       
          
     } else {
         oldKmR = kmR;
-        each5secArrayR.push(kmh1);
-        fullArrayR.push(kmh1);
-        
          //if(kmh1>0){
              kmR = kmh1+2;
             
          //}
          kmR1 = kmh1+2;
+         each5secArrayR.push(kmR1);
+         fullArrayR.push(kmR1);
+         
+           //------- Calcul zone FULL RIGHT--------
+    sumFullR = fullArrayR.reduce(function(a, b) { return a + b; });
+    aveFullR = sumFullR/fullArrayR.length;
+    aveFullR = Math.round(aveFullR*10)/10;
+    picR= Math.max.apply(null, fullArrayR);
+    localStorage.setItem("rkmPic",picR);
+    localStorage.setItem("rkmMoy",aveFullR);
+    localStorage.setItem("rkmInstant",kmR1);
          
         
     }
-     
+  
+    
+    ecart = Math.abs(kmL1 - kmR1);
+    localStorage.setItem("ecartNo",ecart);
+    
     convertKMtobar(kmL1, kmR1);
 }
 ;

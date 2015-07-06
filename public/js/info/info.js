@@ -7,10 +7,13 @@
 
 function initInfo() {
 
-      var canvas = document.getElementById("canvasInfo");
-      var ctx = canvas.getContext("2d");
-
-      fond(ctx);
+      canvas = document.getElementById("canvasInfo");
+      ctx = canvas.getContext("2d");
+      setInterval(drawFrame, (1000 / fps));
+      }
+      
+    function drawFrame(){
+         fond(ctx);
 
       pression(ctx);
 
@@ -50,6 +53,10 @@ function initInfo() {
 
       rMano(ctx);
     }
+
+     
+      
+    
 
     function fond(ctx) {
 
@@ -133,7 +140,7 @@ function initInfo() {
       ctx.save();
       ctx.font = "62.0px 'Digital-7'";
       ctx.fillStyle = "rgb(112, 97, 166)";
-      ctx.fillText("01:59", 1110.1, 117.7); //timeG
+      ctx.fillText(timeG, 1110.1, 117.7); //timeG
       ctx.restore();
     }
 
@@ -3914,4 +3921,3 @@ function initInfo() {
       ctx.restore();
       ctx.restore();
     }
-    initInfo();
