@@ -5,6 +5,7 @@ initTree();
 setInterval(draw, 10);
 console.log(widthFull);
 console.log(heightFull);
+getRecords();
 
 
 
@@ -319,11 +320,14 @@ TREE.stopWind();
         if(ts[1]>0||ts[2]>0){
         setTimeout(update, 1000);
          }else{
-            gameDuration = "00:30";
+            gameCompletion();
+            gameDuration = "00:10";
+            
             clearInterval(manageGameTimer);
             //counter ended, do something here
             console.log("Timer finish");
-            gameCompletion();
+            localStorage.setItem("time",gameDuration);
+            
             return;  
          }
     }
@@ -573,5 +577,26 @@ function convertKMtobar(kmL, kmR) {
         myWarning = true;
     }
 
+};
+
+function getRecords(){
+     //bestWEEK 
+    $.get("http://localhost:3000/api/parties/week")
+            .done(function (semaine) {
+              
+               var semaineTemp = semaine.point;
+                localStorage.setItem("nbAbricotsSemaine", semaineTemp);
+                           });
+                           
+                           //bestDAY
+                   $.get("http://localhost:3000/api/parties/day")
+            .done(function (day) {
+                
+                var dayTemp = day.point;
+              localStorage.setItem("nbAbricotsJour", dayTemp);
+                  
+                }) ;
+                 
+                 
+          
 }
-;

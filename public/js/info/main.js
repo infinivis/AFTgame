@@ -29,8 +29,8 @@ rkmPicG = localStorage.getItem("rkmPic");
 rkmMoyG = localStorage.getItem("rkmMoy");
 ecartNoG = localStorage.getItem("ecartNo");
         
-    }else{
-        
+    }else{//attention à verrouiller lors des changements du localstorage
+      timeG = "00:00";
     }
     
 

@@ -3,7 +3,7 @@ var pressionG =0;
 
 var humiditeG=0;
 
-var tempG=0;
+var tempG = localStorage.getItem("temp");
 
 var nbAbricotsSemaineG=0;
 
@@ -13,7 +13,7 @@ var nbAbricotsCourantG=0;
 
 var nbPartieG=0;
 
-var timeG = 0;
+var timeG = localStorage.getItem("time");
 
 var warningG=0;
 

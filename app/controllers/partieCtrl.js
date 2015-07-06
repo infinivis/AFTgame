@@ -50,13 +50,30 @@ router.route("/day")
             if(jour==1){
                 jour = 8;
             }
-            
-            jour=jour-1;  
+            console.log(jour);
+            jour=jour-1; //enlever cette ligne pour choper le jour courrant et checker les assignations dans les if si dessus pour etre sur
+             console.log(jour);
             
            
                 Partie.findOne({jour: jour}).sort('-point').exec(function (err, partieMaxJour) {
                 if (err)return next(err);
+                if(partieMaxJour){
                 return res.status(200).json(partieMaxJour);
+                }else{
+                  jour -= 1;
+                  
+                   Partie.findOne({jour: jour}).sort('-point').exec(function (err, partieMaxJour) {
+                if (err)return next(err);
+                if(partieMaxJour){
+                return res.status(200).json(partieMaxJour);
+                }else{
+                  return;
+                  
+                  
+                }
+            }); 
+                  
+                }
             }); 
         });
         
