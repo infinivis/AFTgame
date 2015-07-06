@@ -42,6 +42,20 @@ $(document).ready(function () {
     
 });/////end DOM ready
 
+$("#testMoveArrowFor").on("click", function(){
+    //if(Math.random()<0.5){
+          jaugeLeft += Math.random()*10;
+    jaugeRight += Math.random()*10;
+   // jaugeMiddle -= Math.random()*10;
+   // }else{
+        jaugeMiddle += Math.random()*10;
+     //   jaugeLeft -= Math.random()*10;
+  //  jaugeRight -= Math.random()*10;
+   // }
+    
+    
+})
+
 
     
    

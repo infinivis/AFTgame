@@ -31,5 +31,9 @@ var rkmMoyG=0;
 
 var ecartNoG=0;
 
+var jaugeLeft = 0; 
+var jaugeRight = 0; 
+var jaugeMiddle = 0; 
+
 
 
