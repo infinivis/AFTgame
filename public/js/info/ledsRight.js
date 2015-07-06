@@ -562,7 +562,7 @@
       ctx.closePath();
       ctx.fill();
 }
- var Rled152 = function(ctx){
+ var Rled52 = function(ctx){
       // rMano/Groupe/Groupe/Trac
       ctx.beginPath();
       ctx.moveTo(1111.7, 483.9);
@@ -1079,7 +1079,7 @@
       ctx.closePath();
       ctx.fill();
 }
- var Rled199 = function(ctx){
+ var Rled99 = function(ctx){
       // rMano/Groupe/Groupe/Trac
       ctx.beginPath();
       ctx.moveTo(958.6, 333.1);
@@ -1442,6 +1442,6 @@ Rled116	,
 Rled117	,
 Rled118	,
 Rled119	,
-Rled120	,
+Rled120	
 
         ];

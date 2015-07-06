@@ -225,6 +225,7 @@ $("canvas").on("click", function () {
     console.log("Start");
     
     localStorage.setItem("start", true);
+    localStorage.setItem("time", gameDurationFather);
 ///////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////
 /////////                                        //////////////
@@ -321,12 +322,12 @@ TREE.stopWind();
         setTimeout(update, 1000);
          }else{
             gameCompletion();
-            gameDuration = "00:10";
+            gameDuration = gameDurationFather;
             
             clearInterval(manageGameTimer);
             //counter ended, do something here
             console.log("Timer finish");
-            localStorage.setItem("time",gameDuration);
+            //localStorage.setItem("time",gameDuration);
             
             return;  
          }
