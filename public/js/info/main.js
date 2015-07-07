@@ -23,7 +23,7 @@ rkmMoyG = localStorage.getItem("rkmMoy");
 ecartNoG = localStorage.getItem("ecartNo");
 ecartNoGTemp = ecartNoG;
 jaugeMiddle =  parseFloat(ecartNoGTemp)*2.4;
-ecartFloat =  parseFloat(ecartNoGTemp);
+ecartFloat =  Math.round(parseFloat(ecartNoGTemp));
 
     
         pressionG = localStorage.getItem("pression");

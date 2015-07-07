@@ -8,7 +8,7 @@ function startWS(){
     connection = new WebSocket('ws://localhost:8100');
 
     connection.onopen = function () {
-        console.log("Browser: Connection open");
+      
          connection.send('{"id":"browser", "type":"text", "content":"Browser ready."}' );
     };
 
@@ -19,86 +19,69 @@ function startWS(){
     connection.onmessage = function (message) {
         
         
-        console.log("incoming message");
-        console.log(message);
-        $("h1").text(message.data+" km/h");
+      var object = JSON.parse(message.data);
         
-        // 
-//       	  var message = JSON.parse(message.data);
-//  	switch(message.type) {
-//			case "text":
-//				//dispMessage(message.content);
-//                                console.log("Un message est arrivé du serveur");
-//                                console.log(message.windSpeed);
-//                                $("body").append("<h1>"+message.windSpeed+"</h1>");
-//				break;
-//			case "image":
-//				var iname = message.path;
-//        dispMessage("Received " + iname);
-//        console.log(iname);
-//        $("body").add("<h1>" + iname + "</h1>")
-//        image.src= iname
-//  	    image.onload = function () { context.drawImage(image, 0, 0); }
-//				break;	
-//	  }
-  
+        if(object.windSpeed){
+            
+            var wind = Math.round(parseFloat(object.windSpeed)*10)/10;
+            
+            if(object.id=="joueur1"){
+                 kmL = wind;
+            kmL1 = wind;
+            each5secArrayL.push(kmL1);
+            fullArrayL.push(kmL1);
+             //------ Calcul zone FULL LEFT------/
+    sumFullL = fullArrayL.reduce(function(a, b) { return a + b; });
+    aveFullL = sumFullL/fullArrayL.length;
+    aveFullL = Math.round(aveFullL*10)/10;
+    picL = Math.max.apply(null, fullArrayL);
+    localStorage.setItem("lkmMoy",aveFullL);
+    localStorage.setItem("lkmPic",picL);
+            localStorage.setItem("lkmInstant",kmL1);
+            }else if (object.id=="joueur2"){
+                 kmR = wind;
+            kmR1 = wind;
+            each5secArrayR.push(kmR1);
+            fullArrayR.push(kmR1);
+             //------- Calcul zone FULL RIGHT--------
+    sumFullR = fullArrayR.reduce(function(a, b) { return a + b; });
+    aveFullR = sumFullR/fullArrayR.length;
+    aveFullR = Math.round(aveFullR*10)/10;
+    picR= Math.max.apply(null, fullArrayR);
+    localStorage.setItem("rkmPic",picR);
+    localStorage.setItem("rkmMoy",aveFullR);
+            localStorage.setItem("rkmInstant",kmR1);
+            }
+             if(kmL1 - kmR1!=0){
         
-//        try {
-//            var json = JSON.parse(message.data);
-//        } catch (e) {
-//            console.log('This doesn\'t look like a valid JSON: ', message.data);
-//            return;
-//        }
-        // handle incoming message
+    
+    ecart = Math.abs(kmL1 - kmR1);
+    
+    }else{
+        ecart=0;
+    }
+    localStorage.setItem("ecartNo",ecart);
+        }
+   
+        if(object.temperature){
+            
+            var temperature = Math.round(parseFloat(object.temperature)*10)/10;
+           localStorage.setItem("temp",temperature);
+           
+            
+        }
+        if(object.pressure){
+            
+            var pression = Math.round(parseFloat(object.pressure)*10)/10;
+            localStorage.setItem("pression",pression);
+        }
+        if(object.humidity){
+           var humidite = Math.round(parseFloat(object.humidity)*10)/10;
+           localStorage.setItem("humidite",humidite);
+        }
+        
+       
     };
     }
 
-//
-//
-//
-////var WebSocket = require("../lib/ws");
-//var ws = new WebSocket("ws://localhost:8100");
-//
-// 
-//ws.on('open', function open() {
-//    
-//    ws.send('{"id":"browser", "type":"text", "content":"Browser ready."}' );
-// });
-// 
-//ws.on('close', function close() {
-//  console.log('disconnected');
-//});
-// 
-//ws.on('message', function message(data, flags) {
-////  console.log('Roundtrip time: ' + (Date.now() - parseInt(data)) + 'ms', flags);
-//// 
-////  setTimeout(function timeout() {
-////    ws.send(Date.now().toString(), {mask: true});
-////  }, 500);
-//
-//console.log(data);
-//});
-//
-//  window.onload=function() {
-//    console.log(".. windows.onload function");
-//  };
-//
-//
-////	  var message = JSON.parse(event.data);
-////  	switch(message.type) {
-////			case "text":
-////				//dispMessage(message.content);
-////                                console.log("Un message est arrivé du serveur");
-////                                console.log(message.windSpeed);
-////                                $("body").append("<h1>"+message.windSpeed+"</h1>");
-////				break;
-////			case "image":
-////				var iname = message.path;
-////        dispMessage("Received " + iname);
-////        console.log(iname);
-////        $("body").add("<h1>" + iname + "</h1>")
-////        image.src= iname
-////  	    image.onload = function () { context.drawImage(image, 0, 0); }
-////				break;	
-////	  }
-  
+

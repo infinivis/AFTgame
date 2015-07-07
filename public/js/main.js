@@ -316,8 +316,9 @@ TREE.stopWind();
         var temp = dt2.toTimeString().split(" ");
         var ts = temp[0].split(":");
         gameDuration = (ts[1]+":"+ts[2]);
-        console.log(gameDuration);
+       
         localStorage.setItem("time",gameDuration);
+        
         if(ts[1]>0||ts[2]>0){
         setTimeout(update, 1000);
          }else{
@@ -536,7 +537,7 @@ function simWindoo(player, force) {
     picL = Math.max.apply(null, fullArrayL);
     localStorage.setItem("lkmMoy",aveFullL);
     localStorage.setItem("lkmPic",picL);
-    localStorage.setItem("lkmInstant",kmL1);
+    
       
          
     } else {
@@ -561,8 +562,14 @@ function simWindoo(player, force) {
         
     }
   
+    if(kmL1 - kmR1!=0){
+        
     
     ecart = Math.abs(kmL1 - kmR1);
+    
+    }else{
+        ecart=0;
+    }
     localStorage.setItem("ecartNo",ecart);
     
     convertKMtobar(kmL1, kmR1);

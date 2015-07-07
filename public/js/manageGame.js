@@ -98,8 +98,7 @@ function determineBreath(sumEachL,sumEachR){
 };
 function manageGame() {
     
-   if(croise){
-       //mode croisé
+  
     
     
     //------ Calcul zone 5s. LEFT -------
@@ -133,40 +132,7 @@ TREE.stopWind();
 clearInterval(counterGrow);
     
      }
-
-   }else{
-       //mode en même temps en fait c'est faux je developpe le jeu en mode en meme tremps mais pas dans la bonne zone de if
-//       //------ Calcul zone 5s. LEFT -------
-//    
-//    $.each(each5secArrayL,function(){sumEachL+=parseFloat(this) || 0;});
-//    aveEachL = sumEachL/each5secArrayL.length;
-//   
-//    
-//     //------ Calcul zone 5s. RIGHT --------
-//    
-//    $.each(each5secArrayR,function(){sumEachR+=parseFloat(this) || 0;});
-//    aveEachR = sumEachR/each5secArrayR.length;
-//    
-//    
-//    if(sumEachL!=0 || sumEachR !=0){
-//    //fonction qui impacte l'écart des souffles
-//    determineBreath(sumEachL,sumEachR);
-//    
-//    //reset du tableau joueurs
-//    
-//        each5secArrayL = [];
-//        sumEachL = 0;
-//        aveEachL = 0;
-//
-//        each5secArrayR = [];
-//        sumEachR = 0;
-//        aveEachR = 0;
-//     }
-     
-   }
-   
-    
-    
+  
     
 }
 
@@ -202,6 +168,7 @@ TREE.stopWind();
     localStorage.setItem("lkmMoy",aveFullL);
     localStorage.setItem("lkmPic",picL);
     
+    
     //------- Calcul zone FULL RIGHT--------
     sumFullR = fullArrayR.reduce(function(a, b) { return a + b; });
     aveFullR = sumFullR/fullArrayR.length;
@@ -209,6 +176,7 @@ TREE.stopWind();
     picR= Math.max.apply(null, fullArrayR);
     localStorage.setItem("rkmPic",picR);
     localStorage.setItem("rkmMoy",aveFullR);
+    
     
     
     //préparer les valeurs pour le post

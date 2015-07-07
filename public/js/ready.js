@@ -26,3 +26,5 @@ $("#setParams").on("click", function(){
     temperature +=1;
    
 });
+
+startWS();

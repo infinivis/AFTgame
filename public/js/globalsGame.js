@@ -10,9 +10,9 @@ var kmh1; // pour les calculs en attendant le windoo
 var howLength;
 
 //windoo value
-var pression=972.6;
-var humidite=30.6;
-var temperature=30.6;
+var pression=0;
+var humidite=0;
+var temperature=0;
 
 //manageGame and player stat/////////
 var croise = true; // le mode du jeu, le jeu se déroule en croisé ou en en même temps
@@ -29,7 +29,7 @@ var tolMoyen = 10;
 localStorage.setItem("tolJuste", toljuste);
 localStorage.setItem("tolMoyen", tolMoyen);
 var tolMoyen = 10;
-var noPartie = 0;
+var noPartie = 0; //localStorage.getItem("noPartie");
 localStorage.setItem("noPartie", noPartie);
 localStorage.setItem("start", false);
 var pointPartiePrécédente;
