@@ -1,6 +1,6 @@
 //$("#canvas").attr("width", widthFull);
 //$("#canvas").attr("height", heightFull);
-initManometer();
+
 initTree();
 setInterval(draw, 10);
 console.log(widthFull);
