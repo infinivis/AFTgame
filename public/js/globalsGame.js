@@ -17,7 +17,7 @@ var temperature=30.6;
 //manageGame and player stat/////////
 var croise = true; // le mode du jeu, le jeu se déroule en croisé ou en en même temps
 var calculInterval= 5000; //en milliseconde
-var gameDurationFather = "00:05";
+var gameDurationFather = "02:00";
 var gameDuration = gameDurationFather;
 localStorage.setItem("time", gameDuration);
 
@@ -25,6 +25,9 @@ var gameTimer;
 var fini=false;
 var ecart = 0;
 var toljuste = 5;
+var tolMoyen = 10;
+localStorage.setItem("tolJuste", toljuste);
+localStorage.setItem("tolMoyen", tolMoyen);
 var tolMoyen = 10;
 var noPartie = 0;
 localStorage.setItem("noPartie", noPartie);

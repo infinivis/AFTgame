@@ -14,8 +14,44 @@ function initInfo() {
       
     function drawFrame(){
          fond(ctx);
-
-      pression(ctx);
+         
+         
+if(delay===true){
+    
+    if(estCasse){
+        effetCasse();
+    }else{  
+    }
+    
+    if(ecartFloat<=2){
+       ecartColor =  "rgb(111, 183, 100)";
+       warningG = false;
+    }else if (ecartFloat>tolMoyen){
+        ecartColor = "rgb(202, 100, 101)";
+        warningG = true;
+    }else{
+        ecartColor = "rgb(112, 97, 166)";
+      
+    }
+    
+    if(lkmInstantG>=limiteMaxRouge){
+        leftColor = "rgb(202, 100, 101)";
+        warningG = true;
+    }else if (lkmInstantG>=limiteMinVert && lkmInstantG<= limiteMaxVert){
+        leftColor = "rgb(111, 183, 100)";
+    }else{
+        leftColor = "rgb(112, 97, 166)";
+    }
+    if(rkmInstantG>=limiteMaxRouge){
+        rightColor = "rgb(202, 100, 101)";
+        warningG = true;
+    }else if (rkmInstantG>=limiteMinVert && rkmInstantG<= limiteMaxVert){
+        rightColor = "rgb(111, 183, 100)";
+    }else{
+        rightColor = "rgb(112, 97, 166)";
+    }
+   
+        pression(ctx);
 
       humidite(ctx);
 
@@ -30,8 +66,12 @@ function initInfo() {
       nbPartie(ctx);
 
       time(ctx);
+      
+      if(warningG){
+         warning(ctx); 
+      }
 
-      warning(ctx);
+      
 
       lkmInstant(ctx);
 
@@ -52,6 +92,7 @@ function initInfo() {
      lMano(ctx);
 
       rMano(ctx);
+      }
     }
 
      
@@ -63,6 +104,8 @@ function initInfo() {
       // fond
       ctx.drawImage(document.getElementById("image1"), 0.0, 0.0);
     }
+
+
 
     function pression(ctx) {
 
@@ -155,7 +198,7 @@ function initInfo() {
       // lkmInstant/kmh
       ctx.save();
       ctx.font = "109.9px 'Digital-7'";
-      ctx.fillStyle = "rgb(112, 97, 166)";
+      ctx.fillStyle = leftColor;
       ctx.fillText(lkmInstantG, 134.3, 408.2);
       ctx.restore();
     }
@@ -185,7 +228,7 @@ function initInfo() {
       // rkmInstant/kmh
       ctx.save();
       ctx.font = "109.9px 'Digital-7'";
-      ctx.fillStyle = "rgb(112, 97, 166)";
+      ctx.fillStyle = rightColor;
       ctx.fillText(rkmInstantG, 977.5, 407.9);
       ctx.restore();
     }
@@ -215,7 +258,7 @@ function initInfo() {
       // ecartNo/kmh
       ctx.save();
       ctx.font = "109.9px 'Digital-7'";
-      ctx.fillStyle = "rgb(112, 97, 166)";
+      ctx.fillStyle = ecartColor;
       ctx.fillText(ecartNoG, 612.5, 408.3);
       ctx.restore();
     }
@@ -244,15 +287,19 @@ function initInfo() {
       ctx.bezierCurveTo(723.1, 230.4, 790.7, 298.0, 790.7, 381.4);
       ctx.bezierCurveTo(790.7, 464.8, 723.1, 532.4, 639.7, 532.4);
       ctx.closePath();
-      ctx.fillStyle = "rgb(112, 97, 166)";
+      ctx.fillStyle = ecartColor;
       ctx.fill();
 
       // ecartMano/Groupe/Groupe
 ctx.save();
 //  middleLedArray
- for(i=0; i<jaugeMiddle;i++){
-           middleLedArray[i](ctx);
+if(ecartFloat<50){
+   for(i=0; i<ecartFloat;i++){
+         middleLedArray[i](ctx);
+     
        }
+}
+ 
       ctx.restore();
       ctx.restore();
       ctx.restore();
@@ -282,7 +329,7 @@ ctx.save();
       ctx.bezierCurveTo(300.5, 230.7, 368.1, 298.3, 368.1, 381.7);
       ctx.bezierCurveTo(368.1, 465.1, 300.5, 532.7, 217.1, 532.7);
       ctx.closePath();
-      ctx.fillStyle = "rgb(112, 97, 166)";
+      ctx.fillStyle = leftColor;
       ctx.fill();
 
       // lMano/Groupe/Groupe
@@ -325,7 +372,7 @@ ctx.save();
       ctx.bezierCurveTo(1143.7, 230.4, 1211.3, 298.0, 1211.3, 381.4);
       ctx.bezierCurveTo(1211.3, 464.8, 1143.7, 532.4, 1060.3, 532.4);
       ctx.closePath();
-      ctx.fillStyle = "rgb(112, 97, 166)";
+      ctx.fillStyle = rightColor;
       ctx.fill();
 
       // rMano/Groupe/Groupe
@@ -343,3 +390,48 @@ ctx.save();
       ctx.restore();
       ctx.restore();
     }
+    
+    
+    
+    
+    
+    
+    var effetCasse = setTimeout(function(){
+        pression(ctx);
+
+      humidite(ctx);
+
+      temp(ctx);
+
+      nbAbricotsSemaine(ctx);
+
+      nbAbricotsJour(ctx);
+
+      nbAbricotsCourant(ctx);
+
+      nbPartie(ctx);
+
+      time(ctx);
+
+      warning(ctx);
+
+      lkmInstant(ctx);
+
+      lkmPic(ctx);
+
+      lkmMoy(ctx);
+
+      rkmInstant(ctx);
+
+      rkmPic(ctx);
+
+      rkmMoy(ctx);
+
+      ecartNo(ctx);
+
+      ecartMano(ctx);
+
+     lMano(ctx);
+
+      rMano(ctx);
+    },500);

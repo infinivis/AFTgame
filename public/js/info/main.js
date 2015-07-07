@@ -1,11 +1,8 @@
 window.addEventListener('storage', function(e) {
-    
-    console.log(e);
-    
-    var isStarted = localStorage.getItem("start");
+        isStarted = localStorage.getItem("start");
     
     if(isStarted==="true"){
-       
+       delay = true;
        timeG = localStorage.getItem("time");
        
 
@@ -24,7 +21,10 @@ jaugeRight = Math.pow(rkmInstantGTemp,1.2);
 rkmPicG = localStorage.getItem("rkmPic");
 rkmMoyG = localStorage.getItem("rkmMoy");
 ecartNoG = localStorage.getItem("ecartNo");
-jaugeMiddle;
+ecartNoGTemp = ecartNoG;
+jaugeMiddle =  parseFloat(ecartNoGTemp)*2.4;
+ecartFloat =  parseFloat(ecartNoGTemp);
+
     
         pressionG = localStorage.getItem("pression");
 humiditeG = localStorage.getItem("humidite");
@@ -40,7 +40,9 @@ nbAbricotsCourantG = localStorage.getItem("nbAbricotsCourant");
 nbPartieG = parseInt(localStorage.getItem("noPartie"))+1;
         
     }else{//attention à verrouiller lors des changements du localstorage
-      //timeG = "00:00";
+      setTimeout(function(){
+          delay = false;
+      }, 15000);
     }
     
 
