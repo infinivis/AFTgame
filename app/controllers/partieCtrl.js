@@ -51,7 +51,8 @@ router.route("/day")
                 jour = 8;
             }
             console.log(jour);
-            jour=jour-1; //enlever cette ligne pour choper le jour courrant et checker les assignations dans les if si dessus pour etre sur
+            jour=jour-1;
+            jour= 5;//enlever cette ligne pour choper le jour courrant et checker les assignations dans les if si dessus pour etre sur
              console.log(jour);
             
            

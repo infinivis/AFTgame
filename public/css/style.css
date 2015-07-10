@@ -77,6 +77,7 @@ button{
 	
 	background-color:#768d87;
 	display:inline-block;
+	//display:none;
 	cursor:pointer;
 	color:#ffffff;
 	font-family:Courier New;

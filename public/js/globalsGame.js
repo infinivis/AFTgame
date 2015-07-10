@@ -17,15 +17,15 @@ var temperature=0;
 //manageGame and player stat/////////
 var croise = true; // le mode du jeu, le jeu se déroule en croisé ou en en même temps
 var calculInterval= 5000; //en milliseconde
-var gameDurationFather = "02:00";
+var gameDurationFather = "03:00";
 var gameDuration = gameDurationFather;
 localStorage.setItem("time", gameDuration);
 
 var gameTimer;
 var fini=false;
 var ecart = 0;
-var toljuste = 5;
-var tolMoyen = 10;
+var toljuste = 20;
+var tolMoyen = 28;
 localStorage.setItem("tolJuste", toljuste);
 localStorage.setItem("tolMoyen", tolMoyen);
 var tolMoyen = 10;
@@ -58,6 +58,7 @@ var aveFullR;
 
 
 //wind
+
 var myWind = 0;
 
 //tree
@@ -77,13 +78,21 @@ var counterGame = 0;
 var manageGameTimer = 0;
 var growDuration= 3; //en seconde // plus vraiment utilisé, plutôt des variables internes à paramètrer
 var unGrowDuration = 1; // en seconde
-var TREEsizeMax= 4000;
+
+var testAngle = 0;
+var exposant = 1;
 
 //abricots
 var abricotNumber =0;
+localStorage.setItem("nbAbricotsCourant", abricotNumber);
+
 //feuille
-var fraction = 2;// modifie le nombre de feuille qui se décroche
-var proportion = 0.9;// modifie le nombre de feuille qui se décroche
+var proportion = 0.5;// modifie le nombre de feuille qui se décroche
+var dureeVieprop = 300;
+var feuillepartout = false;
+var rotationVent = 1;
+var ratioSize = 0.3;
+var compteFeuille = 0;
 
 //mano
 var myAngle = 0;

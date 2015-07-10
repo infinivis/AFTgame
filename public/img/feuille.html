@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<!-- Created with Ai->Canvas Export Plug-In Version 1.2 (PC/64) -->
+<!-- By Mike Swanson (http://blog.mikeswanson.com/)             -->
+
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <title>feuille</title>
+  <script src="Ai2CanvasAnimation.js"></script>
+  <script>
+
+    // Main canvas and context references
+    var canvas;
+    var ctx;
+
+    // Frames per second
+    var fps = 60.0;
+
+    function init() {
+
+      // Set main canvas and context references
+      canvas = document.getElementById("canvas");
+      ctx = canvas.getContext("2d");
+
+      // Initialize animations
+      feuille.scaleClock = new clock(5.00, 0.00, 1, false, 0, linear, 1.0, 1.00, 0.0001);
+
+      // Start animation clocks
+      feuille.scaleClock.start();
+
+      // Set animation timer
+      setInterval(drawFrame, (1000 / fps));
+    }
+
+    function updateAnimations() {
+
+      // Update animation clocks
+      updateAllClocks();
+    }
+
+    function drawFrame() {
+
+      // Update animations
+      updateAnimations();
+
+      // Clear canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      ctx.save();
+      ctx.scale(feuille.scaleClock.value, feuille.scaleClock.value);
+      feuille(ctx);
+      ctx.restore();
+    }
+
+    function feuille(ctx) {
+
+      // feuille/Trac
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(0.0, 4.7);
+      ctx.bezierCurveTo(2.9, 4.7, 5.2, 2.6, 5.2, 0.0);
+      ctx.bezierCurveTo(2.3, 0.0, 0.0, 2.1, 0.0, 4.7);
+      ctx.closePath();
+      ctx.fillStyle = "rgb(0, 101, 0)";
+      ctx.fill();
+      ctx.restore();
+    }
+  </script>
+ </head>
+ <body onload="init()">
+   <canvas id="canvas" width="6" height="5"></canvas>
+ </body>
+</html>

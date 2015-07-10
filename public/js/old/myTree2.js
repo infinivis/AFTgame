@@ -16,7 +16,7 @@ function initTree(){
    
     dessin= document.getElementById("canvas");
     dessin.context=dessin.getContext('2d');
-    TREE = new Tree(60);
+    
 }
 
 

@@ -3,13 +3,13 @@
     var ctx;
 
     // Frames per second
-    var fps = 60.0;
+    
 
 function initInfo() {
 
       canvas = document.getElementById("canvasInfo");
       ctx = canvas.getContext("2d");
-      setInterval(drawFrame, (1000 / fps));
+      setInterval(drawFrame, 16);
       }
       
     function drawFrame(){
@@ -61,7 +61,13 @@ if(delay===true){
 
       nbAbricotsJour(ctx);
 
-      nbAbricotsCourant(ctx);
+      nbAbricot1(ctx);
+      nbAbricot2(ctx);
+      nbAbricot3(ctx);
+      nbAbricot4(ctx);
+      nbAbricot5(ctx);
+      nbAbricot6(ctx);
+      nbAbricot7(ctx);
 
       nbPartie(ctx);
 
@@ -148,7 +154,7 @@ if(delay===true){
     }
 
     function nbAbricotsJour(ctx) {
-
+   
       // nbAbricotsJour/kmh
       ctx.save();
       ctx.font = "62.4px 'Digital-7'";
@@ -156,17 +162,112 @@ if(delay===true){
       ctx.fillText(nbAbricotsJourG, 62.0, 831.0);
       ctx.restore();
     }
+// gros chiffre
 
-    function nbAbricotsCourant(ctx) {
+    function nbAbricot1(ctx) {
+        if(nbAbricotsArray[0]==1){
+       numberPositionif5 = 46.4;
+   }else{
+       numberPositionif5 = 0;
+   }
 
-      // nbAbricotsCourant/kmh
+      // nbAbricot5/kmh
       ctx.save();
       ctx.font = "150.0px 'Digital-7'";
       ctx.fillStyle = "rgb(112, 97, 166)";
-      ctx.fillText(nbAbricotsCourantG, 818.0, 858.9);
+      ctx.fillText(nbAbricotsArray[0], 393+numberPositionif5, 858.9);
+      ctx.restore();
+    }
+    function nbAbricot2(ctx) {
+        if(nbAbricotsArray[1]==1){
+       numberPositionif5 = 46.4;
+   }else{
+       numberPositionif5 = 0;
+   }
+
+      // nbAbricot5/kmh
+      ctx.save();
+      ctx.font = "150.0px 'Digital-7'";
+      ctx.fillStyle = "rgb(112, 97, 166)";
+      ctx.fillText(nbAbricotsArray[1], 464+numberPositionif5, 858.9);
+      ctx.restore();
+    }
+    function nbAbricot3(ctx) {
+        if(nbAbricotsArray[2]==1){
+       numberPositionif5 = 46.4;
+   }else{
+       numberPositionif5 = 0;
+   }
+
+      // nbAbricot5/kmh
+      ctx.save();
+      ctx.font = "150.0px 'Digital-7'";
+      ctx.fillStyle = "rgb(112, 97, 166)";
+      ctx.fillText(nbAbricotsArray[2], 534.8+numberPositionif5, 858.9);
       ctx.restore();
     }
 
+    function nbAbricot4(ctx) {
+        if(nbAbricotsArray[3]==1){
+       numberPositionif4 = 46.4;
+   }else{
+       numberPositionif4 = 0;
+   }
+
+      // nbAbricot4/kmh
+      ctx.save();
+      ctx.font = "150.0px 'Digital-7'";
+      ctx.fillStyle = "rgb(112, 97, 166)";
+      ctx.fillText(nbAbricotsArray[3], 605.5+numberPositionif4, 858.9);
+      ctx.restore();
+    }
+
+    function nbAbricot5(ctx) {
+        if(nbAbricotsArray[4]==1){
+       numberPositionif3 = 46.4;
+   }else{
+       numberPositionif3 = 0;
+   }
+
+      // nbAbricot3/kmh
+      ctx.save();
+      ctx.font = "150.0px 'Digital-7'";
+      ctx.fillStyle = "rgb(112, 97, 166)";
+      ctx.fillText(nbAbricotsArray[4], 676.0+numberPositionif3, 858.9);
+      ctx.restore();
+    }
+
+    function nbAbricot6(ctx) {
+        if(nbAbricotsArray[5]==1){
+       numberPositionif2 = 46.4;
+   }else{
+       numberPositionif2 = 0;
+   }
+
+      // nbAbricot2/kmh
+      ctx.save();
+      ctx.font = "150.0px 'Digital-7'";
+      ctx.fillStyle = "rgb(112, 97, 166)";
+      ctx.fillText(nbAbricotsArray[5], 747.0+numberPositionif2, 858.9);
+      ctx.restore();
+    }
+     function nbAbricot7(ctx) {
+if(nbAbricotsArray[6]==1){
+       numberPositionif1 = 46.4;
+   }else{
+       numberPositionif1 = 0;
+   }
+      // nbAbricot1/kmh
+      ctx.save();
+      ctx.font = "150.0px 'Digital-7'";
+      ctx.fillStyle = "rgb(112, 97, 166)";
+      ctx.fillText(nbAbricotsArray[6], 818.0+numberPositionif1, 858.9);
+      ctx.restore();
+    }
+   
+    
+    
+    
     function nbPartie(ctx) {
 
       // nbPartie/kmh
@@ -259,7 +360,7 @@ if(delay===true){
       ctx.save();
       ctx.font = "109.9px 'Digital-7'";
       ctx.fillStyle = ecartColor;
-      ctx.fillText(ecartNoG, 612.5, 408.3);
+      ctx.fillText(ecartFloat, 612.5, 408.3);
       ctx.restore();
     }
 
@@ -294,8 +395,10 @@ if(delay===true){
 ctx.save();
 //  middleLedArray
 if(ecartFloat<50){
-   for(i=0; i<ecartFloat;i++){
-         middleLedArray[i](ctx);
+    console.log(middleLedArray.length);
+   for(i=middleLedArray.length; i>ecartFloat;i--){
+       
+         middleLedArray[i-1](ctx);
      
        }
 }
@@ -407,7 +510,11 @@ if(ecartFloat<50){
 
       nbAbricotsJour(ctx);
 
-      nbAbricotsCourant(ctx);
+     nbAbricot1(ctx);
+      nbAbricot2(ctx);
+      nbAbricot3(ctx);
+      nbAbricot4(ctx);
+      nbAbricot5(ctx);
 
       nbPartie(ctx);
 

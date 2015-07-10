@@ -15,6 +15,17 @@ var nbAbricotsJourG=0;
 
 var nbAbricotsCourantG=0;
 
+var nbAbricotsArray = [0,0,0,0,0,0,0];
+var numberPositionif1 = 0;
+var numberPositionif2 = 0;
+var numberPositionif3 = 0;
+var numberPositionif4 = 0;
+var numberPositionif5 = 0;
+var numberPositionif6 = 0;
+var numberPositionif7 = 0;
+var sumArrayAb = 0;
+
+
 var nbPartieG=0;
 
 var timeG = localStorage.getItem("time");

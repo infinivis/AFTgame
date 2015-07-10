@@ -8,4 +8,5 @@ var FEUILLE = function (){
 			this.color='#175732';
 			this.borderColor='#000000';
 			this.dureeVie=0;
+			this.rotation=0;
 		}

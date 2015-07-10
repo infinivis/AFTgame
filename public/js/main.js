@@ -1,7 +1,8 @@
 //$("#canvas").attr("width", widthFull);
 //$("#canvas").attr("height", heightFull);
 
-initTree();
+dessin = document.getElementById("canvas");
+dessin.context = dessin.getContext('2d');
 setInterval(draw, 10);
 console.log(widthFull);
 console.log(heightFull);
@@ -16,23 +17,23 @@ getRecords();
 
 $("#testReso").on("click", function () {
 
-$("#canvas").attr("width", widthFull);
-$("#canvas").attr("height", heightFull);
+    $("#canvas").attr("width", widthFull);
+    $("#canvas").attr("height", heightFull);
 
 });
 $("#date").on("click", function () {
 
-var d = new Date();
-var jour = d.getDay();
-if(jour==0){
-    jour = 7;
-}
-console.log(jour);
+    var d = new Date();
+    var jour = d.getDay();
+    if (jour == 0) {
+        jour = 7;
+    }
+    console.log(jour);
 });
 $("#calcul").on("click", function () {
 
 
-   console.log("------- Calcul zone ---------");
+    console.log("------- Calcul zone ---------");
 //    
 //    console.log("------- test get max in array ---------");
 //var arr = [20.4,40.1,80.2,-400.3];
@@ -52,13 +53,14 @@ $("#calcul").on("click", function () {
 //console.log(Math.random()*10);
 //console.log(Math.floor(Math.random()*10));
 
- console.log("------- test Fleurs ---------");
- 
- for(i in TREE.tronc){
-     if(TREE.tronc[i].fleurs != null){
-         console.log(TREE.tronc[i].fleurs);
-     }
- };
+    console.log("------- test Fleurs ---------");
+
+    for (i in TREE.tronc) {
+        if (TREE.tronc[i].fleurs != null) {
+            console.log(TREE.tronc[i].fleurs);
+        }
+    }
+    ;
 
 });
 
@@ -68,19 +70,19 @@ $("#webS").on("click", function () {
             .done(function (data) {
                 console.log(data);
                 $.each(data, function (key, value) {
-                   
+
                     $.get("http://localhost:3000/api/images/" + value.image_id) //fonctionne pas, il renvoit toutes les mimages et pas seulement celle dont l'id corrspond
                             .done(function (data) {
-                        
+
                                 var img = new Image();
                                 img.src = data.dataUrl;
-                               console.log(data.dataUrl.length);
+                                console.log(data.dataUrl.length);
                                 $("#screenshot").append(img);
 //intéresant pour la sécurité
 //var u32 = new Uint32Array([data.dataUrl]);
 //var b64encoded = btoa(String.fromCharCode.apply(null, u32));
 //img.src="data:image/png;base64,"+b64encoded;
-                                
+
 
 
 
@@ -94,21 +96,21 @@ $("#webS").on("click", function () {
 
 $("#capture").on("click", function () {
 
-    
+
 
 //    img = dessin.toDataURL();
     //img = dessin.toDataURL("image/jpeg", 0.5);
     //img = dessin.toDataURL("image/jpeg", 1.0);
     img = dessin.toDataURL("image/png", 0.5);
-   
+
     console.log(img.length);
 // à coller dans gameCompletion en assignant les bonnes valeurs
     var kmLmax = 1,
-        kmLmoy = 1,
-        kmRmax = 1,
-        kmRmoy = 1,
-        point = 1,
-        jour = 1
+            kmLmoy = 1,
+            kmRmax = 1,
+            kmRmoy = 1,
+            point = 1,
+            jour = 1
 
     $.post("http://localhost:3000/api/images", {dataUrl: img})//renvoi l'id
             .done(function (data) {
@@ -131,29 +133,29 @@ $("#capture").on("click", function () {
 });
 
 $("#decrocheFleurs").on("click", function () {
-   TREE.decrocheFleurs();
+    TREE.decrocheFleurs();
 });
 $("#wakeFleurs").on("click", function () {
-   TREE.wakeFleurs();
+    TREE.wakeFleurs();
 });
 $("#stopFleurs").on("click", function () {
-   TREE.stopFleurs();
+    TREE.stopFleurs();
 });
 $("#newFleurs").on("click", function () {
-   TREE.createFleurs();
+    TREE.createFleurs();
 });
 $("#decrocheFeuille").on("click", function () {
-   TREE.decrocheFeuille();
+    TREE.decrocheFeuille();
 });
 $("#wakeFeuille").on("click", function () {
-    
-   TREE.wakeFeuille();
+
+    TREE.wakeFeuille();
 });
 $("#stopFeuille").on("click", function () {
-   TREE.stopFeuille();
+    TREE.stopFeuille();
 });
 $("#newFeuille").on("click", function () {
-   TREE.createFeuille();
+    TREE.createFeuille();
 });
 $("#countAbricot").on("click", function () {
     console.log(abricotNumber);
@@ -168,20 +170,20 @@ $("#newAbricot").on("click", function () {
 });
 $("#decrocheAbricot").on("click", function () {
     console.log("Decroche Abricot");
-TREE.decrocheAbricot();
+    TREE.decrocheAbricot();
 });
 $("#wakeAbricot").on("click", function () {
     console.log("Wake Abricot");
-TREE.wakeAbricot();
+    TREE.wakeAbricot();
 });
 $("#stopWake").on("click", function () {
     console.log("Stop Wake");
-TREE.stopWakeAbricot();
+    TREE.stopWakeAbricot();
 });
 
 $("#recalculate").on("click", function () {
     console.log("recalculate");
-   
+
     TREE.recalculate(true);
 });
 $("#length").on("click", function () {
@@ -194,12 +196,13 @@ $("#stopWind").on("click", function () {
     TREE.stopWind();
 });
 $("#changeWind").on("click", function () {
-    myWind += 0.01;
-    console.log("Mon vent                     " + myWind);
+    myWind += 1;
+    console.log("Mon vent " + myWind);
 
 });
 
 $("#grow").on("click", function () {
+    TREE = new Tree(60);
     TREE.startAutoGrow()
 });
 $("#stopGrow").on("click", function () {
@@ -213,17 +216,18 @@ $("#unGrow").on("click", function () {
     TREE.startUnGrow();
 });
 $("#mode").on("click", function () {
-    if(croise){
+    if (croise) {
         croise = false;
         console.log("MODE : ENSEMBLE");
-    }else{
+    } else {
         croise = true;
         console.log("MODE : CROISE");
     }
 });
 $("canvas").on("click", function () {
     console.log("Start");
-    
+    TREE = new Tree(60);
+
     localStorage.setItem("start", true);
     localStorage.setItem("time", gameDurationFather);
 ///////////////////////////////////////////////////////////////
@@ -235,26 +239,26 @@ $("canvas").on("click", function () {
 ///////////////////////////////////////////////////////////////
 //
 // reset all tree
-TREE.stopFleurs();
-TREE.stopWakeFleurs();
-TREE.stopAbricot();
-TREE.stopWakeAbricot();
-TREE.stopFeuille();
-TREE.stopWakeFeuille();
-TREE.stopAutoGrow();
-TREE.stopWind();
+    TREE.stopFleurs();
+    TREE.stopWakeFleurs();
+    TREE.stopAbricot();
+    TREE.stopWakeAbricot();
+    TREE.stopFeuille();
+    TREE.stopWakeFeuille();
+    TREE.stopAutoGrow();
+    TREE.stopWind();
 
-//startWS();
-    initTree();
+
+
     //joueur left
     each5secArrayL = [];
     sumEachL = 0;
     aveEachL = 0;
-    
+
     fullArrayL = [];
     sumFullL = 0;
     aveFullL = 0;
-    
+
     //joueur right
     each5secArrayR = [];
     sumEachR = 0;
@@ -269,7 +273,7 @@ TREE.stopWind();
 /////////                                        //////////////
 ///////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////
-   
+
     clearInterval(counterGrow);
     clearInterval(counterUnGrow);
     clearInterval(counterGame);
@@ -279,14 +283,14 @@ TREE.stopWind();
 //    counterGame = setInterval(timer, 1000); //1000 will  run it every 1 second
     setTimeout(update, 1000);
     manageGameTimer = setInterval(manageGame, calculInterval);
-    
+
     TREE.stopWind();
     TREE.startWind();
-    
-     //attention seulement si arbre existant
-     //ne pas oublier les clearInterval au bons endroits et dans gameCompletion
-     
-    
+
+    //attention seulement si arbre existant
+    //ne pas oublier les clearInterval au bons endroits et dans gameCompletion
+
+
 //    function timer()
 //    {
 //        gameTimer = gameTimer - 1;
@@ -315,26 +319,29 @@ TREE.stopWind();
         var dt2 = new Date(dt.valueOf() - 1000);
         var temp = dt2.toTimeString().split(" ");
         var ts = temp[0].split(":");
-        gameDuration = (ts[1]+":"+ts[2]);
-       
-        localStorage.setItem("time",gameDuration);
-        
-        if(ts[1]>0||ts[2]>0){
-        setTimeout(update, 1000);
-         }else{
+        gameDuration = (ts[1] + ":" + ts[2]);
+
+        localStorage.setItem("time", gameDuration);
+
+        differenceSouffle();
+
+
+        if (ts[1] > 0 || ts[2] > 0) {
+            setTimeout(update, 1000);
+        } else {
             gameCompletion();
             gameDuration = gameDurationFather;
-            
+
             clearInterval(manageGameTimer);
             //counter ended, do something here
             console.log("Timer finish");
             //localStorage.setItem("time",gameDuration);
-            
-            return;  
-         }
+
+            return;
+        }
     }
-    
-   
+
+
 
 });
 
@@ -392,15 +399,28 @@ $("#testMoveArrowBack").on("click", function () {
 });
 
 $("#stopSouffle").on("click", function () {
-   
+
+});
+$("#angle6").on("click", function () {
+    testAngle = 6;
+    console.log(testAngle);
+});
+$("#testAnglePlus").on("click", function () {
+    testAngle += 0.1;
+    console.log(testAngle);
+});
+$("#testAngleMinus").on("click", function () {
+    testAngle -= 0.1;
+    console.log(testAngle);
+
 });
 $("#j1FAIBLE").on("click", function () {
     console.log("j1 FAIBLE");
-   clearInterval(Linterval);
+    clearInterval(Linterval);
     Linterval = setInterval(function () {
         simWindoo("left", "faible")
     }, 1000);
-    
+
 });
 $("#j2FAIBLE").on("click", function () {
     console.log("j2 FAIBLE");
@@ -408,16 +428,16 @@ $("#j2FAIBLE").on("click", function () {
     Rinterval = setInterval(function () {
         simWindoo("right", "faible")
     }, 1000);
-    
+
 });
 $("#j1_0").on("click", function () {
     console.log("j1 FAIBLE");
-   clearInterval(Linterval);
+    clearInterval(Linterval);
     Linterval = setInterval(function () {
         simWindoo("left", 0)
     }, 1000);
-    
-  
+
+
 });
 $("#j2_0").on("click", function () {
     console.log("j2 FAIBLE");
@@ -425,7 +445,7 @@ $("#j2_0").on("click", function () {
     Rinterval = setInterval(function () {
         simWindoo("right", 0)
     }, 1000);
-    
+
 });
 $("#j1JUSTE").on("click", function () {
     console.log("j1 JUSTE");
@@ -482,96 +502,101 @@ $(document).on("WindIncoming", function (event, arg1) {
 
 function fluidValueL() {
 
-var fluid = setInterval(function(){
-           
-        kmL-=0.5
-        kmL = Math.round(kmL *10)/10;
-      
-}, 60);
+    var fluid = setInterval(function () {
+
+        kmL -= 0.5
+        kmL = Math.round(kmL * 10) / 10;
+
+    }, 60);
 
 }
 function fluidValueR() {
 
-var fluid = setInterval(function(){
-   
-         
-        kmR-=0.5
-        kmR = Math.round(kmR *10)/10;
-        
-}, 60);
+    var fluid = setInterval(function () {
+
+
+        kmR -= 0.5
+        kmR = Math.round(kmR * 10) / 10;
+
+    }, 60);
 
 }
 
 
 function simWindoo(player, force) {
     if (force == "faible") {
-        kmh1 = Math.floor((Math.random() * 15) + 1);
-        kmh1 = 10;
+        kmh1 = Math.floor(Math.random() * (15 - 10 + 1) + 10);
+
     } else if (force == "fort") {
-        kmh1 = Math.floor((Math.random() * 50) + 35);
-        kmh1 = 27;
+        kmh1 = Math.floor(Math.random() * (50 - 39 + 1) + 39);
     } else if (force == "juste") {
-        kmh1 = Math.floor((Math.random() * 40) + 30);
-        kmh1 = 17;
-    } else if (force == 0){
+        kmh1 = Math.floor(Math.random() * (32 - 28 + 1) + 28);
+
+    } else if (force == 0) {
+        kmh1 = Math.floor(Math.random() * (5 - 0 + 1) + 0);
         kmh1 = 0;
     }
-     
+
     if (player == "left") {
         oldKmL = kmL;
+
+
+        //if(kmh1>0){
+        kmL = kmh1;
+        //fluidValueL();
+        //}
+        kmL1 = kmh1;
+        each5secArrayL.push(kmL1);
+        fullArrayL.push(kmL1);
         
-         
-         //if(kmh1>0){
-             kmL = kmh1;
-             //fluidValueL();
-         //}
-         kmL1 = kmh1;
-         each5secArrayL.push(kmL1);
-         fullArrayL.push(kmL1);
-         
-         
-          //------ Calcul zone FULL LEFT------/
-    sumFullL = fullArrayL.reduce(function(a, b) { return a + b; });
-    aveFullL = sumFullL/fullArrayL.length;
-    aveFullL = Math.round(aveFullL*10)/10;
-    picL = Math.max.apply(null, fullArrayL);
-    localStorage.setItem("lkmMoy",aveFullL);
-    localStorage.setItem("lkmPic",picL);
-    
-      
-         
+
+
+        //------ Calcul zone FULL LEFT------/
+        sumFullL = fullArrayL.reduce(function (a, b) {
+            return a + b;
+        });
+        aveFullL = sumFullL / fullArrayL.length;
+        aveFullL = Math.round(aveFullL * 10) / 10;
+        picL = Math.max.apply(null, fullArrayL);
+        localStorage.setItem("lkmMoy", aveFullL);
+        localStorage.setItem("lkmPic", picL);
+        localStorage.setItem("lkmInstant", kmL1);
+
+
     } else {
         oldKmR = kmR;
-         //if(kmh1>0){
-             kmR = kmh1+2;
-            
-         //}
-         kmR1 = kmh1+2;
-         each5secArrayR.push(kmR1);
-         fullArrayR.push(kmR1);
-         
-           //------- Calcul zone FULL RIGHT--------
-    sumFullR = fullArrayR.reduce(function(a, b) { return a + b; });
-    aveFullR = sumFullR/fullArrayR.length;
-    aveFullR = Math.round(aveFullR*10)/10;
-    picR= Math.max.apply(null, fullArrayR);
-    localStorage.setItem("rkmPic",picR);
-    localStorage.setItem("rkmMoy",aveFullR);
-    localStorage.setItem("rkmInstant",kmR1);
-         
-        
+        //if(kmh1>0){
+        kmR = kmh1;
+
+        //}
+        kmR1 = kmh1;
+        each5secArrayR.push(kmR1);
+        fullArrayR.push(kmR1);
+
+        //------- Calcul zone FULL RIGHT--------
+        sumFullR = fullArrayR.reduce(function (a, b) {
+            return a + b;
+        });
+        aveFullR = sumFullR / fullArrayR.length;
+        aveFullR = Math.round(aveFullR * 10) / 10;
+        picR = Math.max.apply(null, fullArrayR);
+        localStorage.setItem("rkmPic", picR);
+        localStorage.setItem("rkmMoy", aveFullR);
+        localStorage.setItem("rkmInstant", kmR1);
+
+
     }
-  
-    if(kmL1 - kmR1!=0){
-        
-    
-    ecart = Math.abs(kmL1 - kmR1);
-    
-    }else{
-        ecart=0;
+
+    if (kmL1 - kmR1 != 0) {
+
+
+        ecart = Math.abs(kmL1 - kmR1);
+
+    } else {
+        ecart = 0;
     }
-    localStorage.setItem("ecartNo",ecart);
-    
+    localStorage.setItem("ecartNo", ecart);
+
     convertKMtobar(kmL1, kmR1);
 }
 ;
@@ -585,26 +610,47 @@ function convertKMtobar(kmL, kmR) {
         myWarning = true;
     }
 
-};
+}
+;
 
-function getRecords(){
-     //bestWEEK 
+function getRecords() {
+    //bestWEEK 
     $.get("http://localhost:3000/api/parties/week")
             .done(function (semaine) {
-              
-               var semaineTemp = semaine.point;
+
+                var semaineTemp = semaine.point;
                 localStorage.setItem("nbAbricotsSemaine", semaineTemp);
-                           });
-                           
-                           //bestDAY
-                   $.get("http://localhost:3000/api/parties/day")
+            });
+
+    //bestDAY
+    $.get("http://localhost:3000/api/parties/day")
             .done(function (day) {
-                
+
                 var dayTemp = day.point;
-              localStorage.setItem("nbAbricotsJour", dayTemp);
-                  
-                }) ;
-                 
-                 
-          
+                localStorage.setItem("nbAbricotsJour", dayTemp);
+
+            });
+
+
+
 }
+
+function differenceSouffle() {
+    //peut-être à mettre en instantané
+    if (kmL1 - kmR1 > 0) {
+        //vent négatif, l'arbre doit pousser légèrement plus sur la droite
+        console.log("joueur LEFT souffle plus fort");
+        testAngle -= 0.0004;
+    } else if (kmL1 - kmR1 < 0) {
+        //vent positif, l'arbre doit pousser légèrement plus sur la gauche
+        console.log("joueur RIGHT souffle plus fort");
+
+        testAngle += 0.0004;
+    } else if(kmL1!=0 && kmR1 !=0){
+    
+        //souffle parfait il pousse droit
+        console.log("souffle parfait différence = 0");
+        //combo
+    }
+}
+;

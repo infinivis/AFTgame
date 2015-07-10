@@ -1,21 +1,26 @@
 function draw() {
     
-    var img = document.getElementById("fondImg");
+    
+    var img = document.getElementById("fondImg2");
     var pat = dessin.context.createPattern(img, "repeat");
+    
+    
     dessin.context.fillStyle = pat;
-    //widthFull
-    //heightFull
-    dessin.context.fill();
+       dessin.context.fill();
     dessin.context.fillRect(0, 0, 1920 , 1080);
+    
+   
+    if(TREE!=null){
+        
+     
    
     dessin.context.strokeStyle = troncColor;
     dessin.context.save();
 dessin.context.translate(-200, -270);
 dessin.context.scale(1.5, 1.5);
 dessin.context.translate(0, -60);
-    
+        
    
-    
     
    //dessin de l'arbre
       for (x = 2; x < TREE.tronc.length; x++) {
@@ -31,7 +36,8 @@ dessin.context.translate(0, -60);
     
    
      // feuille test draw object = fonctionnel!!!
-     if(TREE.tronc.length > 2){ // protection bug
+     
+     if(TREE.tronc.length >= 2){ // protection bug
     for (x in TREE.tronc) {
       if(TREE.tronc[x].feuille != null){
           dessin.context.fillStyle = TREE.tronc[x].feuille.color;
@@ -41,15 +47,48 @@ dessin.context.translate(0, -60);
             //TREE.tronc[x].feuille.size = TREE.tronc[x].length/3.5;
             }
                 
-            dessin.context.beginPath();
-            
-            //                    OU                                      Quelle taille
-            dessin.context.arc(TREE.tronc[x].feuille.x, TREE.tronc[x].feuille.y, TREE.tronc[x].feuille.size, 0, Math.PI, true); //juste
-            //dessin.context.arc(TREE.tronc[x].x, TREE.tronc[x].y, TREE.tronc[x].length/100, 0, Math.PI, true);
-            //dessin.context.arc(TREE.tronc[x].x,TREE.tronc[x].y, TREE.tronc[x].length/5, 0, Math.PI*2, true);
+            var xTemp = TREE.tronc[x].feuille.x;
+      var yTemp = TREE.tronc[x].feuille.y;
+      var sizeTemp = TREE.tronc[x].feuille.size*ratioSize;
+      var rotation = TREE.tronc[x].feuille.rotation;
+      
+      // feuille/Trac
+    dessin.context.save();
+   
+      dessin.context.beginPath();
+      var z=2
+       dessin.context.translate(xTemp,yTemp);
+       
+    dessin.context.rotate( -rotation*rotationVent );
+    dessin.context.scale(sizeTemp,sizeTemp );
+ 
+   dessin.context.translate(-xTemp,-yTemp);
+   
+      dessin.context.moveTo(xTemp, yTemp);
+                        
+      dessin.context.bezierCurveTo(xTemp+0.4, yTemp-0.1, xTemp+0.7, yTemp+0.1, xTemp+1.1, yTemp+0.2);
+      dessin.context.bezierCurveTo(xTemp+1.4, yTemp+0.3, xTemp+1.7, yTemp+0.3, xTemp+2, yTemp+0.3);
+      dessin.context.bezierCurveTo(xTemp+2.5, yTemp+0.4, xTemp+3, yTemp+0.3, xTemp+3.4, yTemp+0.1);
+      dessin.context.bezierCurveTo(xTemp+4.2, yTemp-0.2, xTemp+4.7, yTemp-0.8, xTemp+4.9, yTemp-1.7);
+      dessin.context.bezierCurveTo(xTemp+5.1, yTemp-2.7, xTemp+5.2, yTemp-3.7, xTemp+5.2, yTemp-4.8);
+      dessin.context.bezierCurveTo(xTemp+5.2, yTemp-4.8, xTemp+3.3, yTemp-4.8, xTemp+3.2, yTemp-4.8);
+      dessin.context.bezierCurveTo(xTemp+2.5, yTemp-4.8, xTemp+1.7, yTemp-4.7, xTemp+1.1, yTemp-4.5);
+      dessin.context.bezierCurveTo(xTemp+0.1, yTemp-4.1, xTemp-0.3, yTemp-3.2, xTemp-0.3, yTemp-2.2);
+      dessin.context.bezierCurveTo(xTemp-0.3, yTemp-1.8, xTemp-0.3, yTemp-1.5, xTemp-0.2, yTemp-1.2);
+      dessin.context.bezierCurveTo(xTemp-0.2, yTemp-1.1, xTemp, yTemp, xTemp, yTemp);
+      
+      dessin.context.closePath();
+      dessin.context.fillStyle = "rgb(0, 101, 0)";
+      dessin.context.fill();
+      dessin.context.strokeStyle = "rgb(0, 50, 0)";//TREE.tronc[x].feuille.borderColor;
+            dessin.context.stroke();
+      dessin.context.lineWidth = 1;
+     
+       dessin.context.restore();
+        
 //            dessin.context.lineWidth = 1;
             // line color
-            dessin.context.strokeStyle = TREE.tronc[x].feuille.borderColor;
+            dessin.context.strokeStyle = "rgb(0, 101, 0)";//TREE.tronc[x].feuille.borderColor;
             dessin.context.stroke();
             dessin.context.closePath();
             dessin.context.fill();
@@ -110,7 +149,11 @@ dessin.context.translate(0, -60);
     // rideau
     
         
-        dessin.context.drawImage(document.getElementById("rideau"), 0, posRideauY, dessin.width, dessin.height);
+      
+   
+   }//end if TREE!=null
+   
+     dessin.context.drawImage(document.getElementById("rideau"), 0, posRideauY, dessin.width, dessin.height);
         if(!fini){
     if(posRideauY<=0 && posRideauY>1000*(-1)){
            posRideauY-=4;
@@ -123,8 +166,6 @@ dessin.context.translate(0, -60);
                 posRideauY+=4;
             }
         }
-   
   
-   //////////////////////
    
 }
