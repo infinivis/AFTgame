@@ -9,7 +9,7 @@ var config = {
       name: 'gameaft'
     },
     port: 3000,
-    db: 'mongodb://localhost/gameaft-development'
+    db: 'mongodb://localhost/aftgame-development'
   },
 
   test: {
@@ -18,7 +18,7 @@ var config = {
       name: 'gameaft'
     },
     port: 3000,
-    db: 'mongodb://localhost/gameaft-test'
+    db: 'mongodb://localhost/aftgame-test'
   },
 
   production: {
@@ -27,7 +27,7 @@ var config = {
       name: 'gameaft'
     },
     port: 3000,
-    db: 'mongodb://localhost/gameaft-production'
+    db: 'mongodb://localhost/aftgame-production'
   }
 };
 
