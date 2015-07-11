@@ -25,9 +25,18 @@ jaugeMiddle =  parseFloat(ecartNoG)*2.4;
 ecartFloat =  Math.round(parseFloat(ecartNoG));
 
     
-        pressionG = localStorage.getItem("pression");
+pressionG = localStorage.getItem("pression");
+if(pressionG==null){
+    pressionG = "000.0"
+}
 humiditeG = localStorage.getItem("humidite");
+if(humiditeG==null){
+    humiditeG = "00.0"
+}
 tempG = localStorage.getItem("temp");
+if(tempG==null){
+    tempG = "00.0"
+}
 
     
 
@@ -77,11 +86,6 @@ nbAbricotsCourantG = localStorage.getItem("nbAbricotsCourant");
     }else{
     }
     
-//        nbAbricotsArray[0] = parseInt(nbAbricotsCourantG.substr(i,1));
-//    
-//        nbAbricotsArray[i] = parseInt(nbAbricotsCourantG.substr(i,i));
-                        
-
 
 
 

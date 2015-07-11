@@ -80,7 +80,7 @@ dessin.context.translate(0, -60);
       dessin.context.closePath();
       dessin.context.fillStyle = "rgb(0, 101, 0)";
       dessin.context.fill();
-      dessin.context.strokeStyle = "rgb(0, 50, 0)";//TREE.tronc[x].feuille.borderColor;
+      dessin.context.strokeStyle = TREE.tronc[x].feuille.borderColor;//"rgb(0, 50, 0)";//TREE.tronc[x].feuille.borderColor;
             dessin.context.stroke();
       dessin.context.lineWidth = 1;
      

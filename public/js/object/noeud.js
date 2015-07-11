@@ -11,6 +11,7 @@ var NOEUD = function (){
                         this.abricot = null;
                         this.fleurs = null;
                         this.isGrandFather = null;
+                        this.isTronc = false;
                         
 			
 		}

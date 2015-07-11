@@ -187,15 +187,16 @@ function manageGame() {
 
     } else { ////// A checker les restet
         //reset all
-//         TREE.stopFleurs();
-////TREE.stopWakeFleurs();
-//TREE.stopAbricot();
-//TREE.stopWakeAbricot();
-//TREE.stopFeuille();
-//TREE.stopWakeFeuille();
-//TREE.stopAutoGrow();
-//TREE.stopWind();
-//clearInterval(counterGrow);
+ TREE.stopFleurs();
+
+TREE.stopAbricot();
+
+TREE.stopFeuille();
+clearInterval(counterGrow);
+
+TREE.stopAutoGrow();
+
+
 
     }
 

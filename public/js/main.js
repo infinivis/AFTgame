@@ -226,10 +226,14 @@ $("#mode").on("click", function () {
 });
 $("canvas").on("click", function () {
     console.log("Start");
-    TREE = new Tree(60);
-
+    localStorage.setItem("start", false);
     localStorage.setItem("start", true);
     localStorage.setItem("time", gameDurationFather);
+    abricotNumber = 0;
+    localStorage.setItem("nbAbricotsCourant", abricotNumber);
+    TREE = new Tree(60);
+
+    
 ///////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////
 /////////                                        //////////////
@@ -247,6 +251,7 @@ $("canvas").on("click", function () {
     TREE.stopWakeFeuille();
     TREE.stopAutoGrow();
     TREE.stopWind();
+    TREE.startWind();
 
 
 
@@ -284,8 +289,6 @@ $("canvas").on("click", function () {
     setTimeout(update, 1000);
     manageGameTimer = setInterval(manageGame, calculInterval);
 
-    TREE.stopWind();
-    TREE.startWind();
 
     //attention seulement si arbre existant
     //ne pas oublier les clearInterval au bons endroits et dans gameCompletion

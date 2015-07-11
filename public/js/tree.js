@@ -4,7 +4,8 @@ function Tree(framerate) {
     this.feuilleArray = new Array;
     this.maxNode = 1500;
     this.TREEsizeFleurs = 2000; //attention dépendance avec les conditions
-    this.TREEsizeMax= 3000; //attention dépendance avec les conditions
+    this.TREEsizeMax= 2500; //attention dépendance avec les conditions
+    this.TREEsizeBaby= 500; //attention dépendance avec les conditions
     this.wind = 0;
     this.windMomentum = 0;
     this.timer = null;
@@ -166,33 +167,37 @@ function Tree(framerate) {
         stack.push(this.tronc[1]);
         while (stack.length > 0) {
             var current = stack.pop();
-
+           if(current.left !=null && this.tronc.length<this.TREEsizeBaby){
+               current.isTronc = true;
+           }
             if (current.left != null) {
-                current.feuille = null;
+                if(current.isTronc){
+                   current.feuille = null; 
+                }
+               
                 this.recalculateNode(current, current.left, true);
                 stack.push(current.left);
                 this.recalculateNode(current, current.right, false);
                 stack.push(current.right);
-            } else if (current.feuille == null) {
-
-
-                if (this.tronc.length < this.TREEsizeMax) {
-                    current.feuille = new FEUILLE;
-                    compteFeuille += 1;
-//                current.feuille.size = 1/current.length*20 * Math.random()*(0.5)+0.6  ; //*0.8
-                    current.feuille.size = Math.pow(1 - current.length, -current.length);
-                    current.feuille.rotation = (Math.random() * Math.PI / 2);
-                } else if (current.feuille != null) {
-                    current.feuille.size = Math.pow(1 - current.length, -current.length);
-//                if(Math.random() > 0.7){
+            } else if (current.feuille == null && !current.isTronc) {
+                //if (this.tronc.length < this.TREEsizeBaby) {
 //                    current.feuille = new FEUILLE;
-//                  compteFeuille +=1;
+//                    compteFeuille += 1;
 ////                current.feuille.size = 1/current.length*20 * Math.random()*(0.5)+0.6  ; //*0.8
-//                current.feuille.size = Math.pow(1-current.length, -current.length);
-//                current.feuille.rotation = (Math.random()*Math.PI/2); 
-//                }          
-                }
-
+//                    current.feuille.size = Math.pow(1 - current.length, -current.length/2);
+//                    current.feuille.rotation = (Math.random() * Math.PI / 2);
+//                } else if (current.feuille != null) {
+//                    current.feuille.size = Math.pow(1 - current.length, -current.length/2);
+//                    this.newFeuille();
+////                if(Math.random() > 0.7){
+////                    current.feuille = new FEUILLE;
+////                  compteFeuille +=1;
+//////                current.feuille.size = 1/current.length*20 * Math.random()*(0.5)+0.6  ; //*0.8
+////                current.feuille.size = Math.pow(1-current.length, -current.length);
+////                current.feuille.rotation = (Math.random()*Math.PI/2); 
+////                }          
+//                }
+this.newFeuille();
 
             }
             if (current.fleurs != null) {
@@ -366,7 +371,7 @@ function Tree(framerate) {
         var random = Math.floor(Math.random() * this.tronc.length)
         if (this.tronc[random].left == null && this.tronc[random].feuille == null && this.tronc[random] != this.tronc[0]) {
             this.tronc[random].feuille = new FEUILLE;
-            this.tronc[random].feuille.size = Math.pow(1 - this.tronc[random].length, -this.tronc[random].length);
+            this.tronc[random].feuille.size = Math.pow(1 - this.tronc[random].length, -this.tronc[random].length/2);
             this.tronc[random].feuille.rotation = (Math.random() * Math.PI / 2);
             this.tronc[random].feuille.x = this.tronc[random].x;
             this.tronc[random].feuille.y = this.tronc[random].y;
@@ -376,7 +381,7 @@ function Tree(framerate) {
         }
 
 
-        this.recalculate(false);
+        //this.recalculate(false);
 
 
     };
