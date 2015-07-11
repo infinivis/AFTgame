@@ -1,8 +1,8 @@
 //instant stat
 var kmR = 2; //pour le vent
 var kmL = 2; //pour le vent
-var oldKmR = 2; 
-var oldKmL = 2;
+var oldKmR = 2; //pour le vent
+var oldKmL = 2; //pour le vent
 var kmR1=2; // pour l'affichage dans le manomètre et calcul
 var kmL1=2; // pour l'affichage dans le manomètre et calcul
 var kmh1; // pour les calculs en attendant le windoo
@@ -22,7 +22,7 @@ var gameDuration = gameDurationFather;
 localStorage.setItem("time", gameDuration);
 
 var gameTimer;
-var fini=false;
+var Rideauferme=true;
 var ecart = 0;
 var toljuste = 20;
 var tolMoyen = 28;
@@ -31,7 +31,8 @@ localStorage.setItem("tolMoyen", tolMoyen);
 var tolMoyen = 10;
 var noPartie = 0; //localStorage.getItem("noPartie");
 localStorage.setItem("noPartie", noPartie);
-localStorage.setItem("start", false);
+var start = false;
+localStorage.setItem("start", start);
 var pointPartiePrécédente;
 var recordJour;
 var recordSemaine;
@@ -87,6 +88,9 @@ var abricotNumber =0;
 localStorage.setItem("nbAbricotsCourant", abricotNumber);
 
 //feuille
+var compteSouffleParfait = 0;// modifie le nombre d'abricots créés
+var randomAbricot = 0.3;// modifie le nombre d'abricots créés
+var randomFleurs = 0.3;// modifie le nombre de fleurs créés
 var proportion = 0.5;// modifie le nombre de feuille qui se décroche
 var dureeVieprop = 300;
 var feuillepartout = false;
@@ -101,18 +105,7 @@ var myBar = 1.5;
 
 //rideau
 var posRideauY=0;
-
-
-//    localStorage.setItem("nbAbricotsJour",recordJour); //webservice
-//    localStorage.setItem("nbAbricotsSemaine",recordSemaine); //webservice
-
-//    localStorage.setItem("time","rouge");
-//    localStorage.setItem("warning","rouge");
-//    
-//    
-//    localStorage.setItem("lkmPic",picL);
-//    localStorage.setItem("lkmMoy",aveEachL);
-;
-//    localStorage.setItem("rkmPic",picR);
-//    localStorage.setItem("rkmMoy",aveEachR);
-//    localStorage.setItem("ecartNo","rouge");
+var audio = {};
+        audio["alarme"] = new Audio();
+        audio["alarme"].src = "mp3/alarme.mp3";
+       

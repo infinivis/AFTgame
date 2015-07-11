@@ -52,6 +52,7 @@ var jaugeRight = 0;
 var jaugeMiddle = 0;
         
         
+var souffleDifferent0 = true;   //violet "rgb(112, 97, 166)"
 var ecartColor;    //violet "rgb(112, 97, 166)"
 var leftColor;     //rouge "rgb(202, 100, 101)"
 var rightColor;    //vert "rgb(111, 183, 100)"

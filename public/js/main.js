@@ -3,7 +3,7 @@
 
 dessin = document.getElementById("canvas");
 dessin.context = dessin.getContext('2d');
-setInterval(draw, 10);
+setInterval(draw, 1);
 console.log(widthFull);
 console.log(heightFull);
 getRecords();
@@ -15,12 +15,28 @@ getRecords();
 ////    events  ///////////////////////////////// 
 /////////////////////////////////////////////////
 
-$("#testReso").on("click", function () {
+$("#testSong").on("click", function (e) {
 
-    $("#canvas").attr("width", widthFull);
-    $("#canvas").attr("height", heightFull);
-
+audio["alarme"].play();
+   
+    
 });
+$("#closeRideau").on("click", function (e) {
+
+   if(Rideauferme && !start){
+       Rideauferme = false;
+   }else if (!start){
+       Rideauferme = true;
+   }
+   
+    
+});
+$("#reload").on("click", function () {
+
+    console.log("reload");
+    location.reload(true);
+});
+
 $("#date").on("click", function () {
 
     var d = new Date();
@@ -224,13 +240,30 @@ $("#mode").on("click", function () {
         console.log("MODE : CROISE");
     }
 });
-$("canvas").on("click", function () {
+
+$("#canvas").on( "click", function(e){
+   
+    location.reload(true);
+
+    
+});
+$("#canvasStart").on("click", function (e) {
+    
+    
+        
+    
+    if(!Rideauferme){
+        
+    
     console.log("Start");
-    localStorage.setItem("start", false);
-    localStorage.setItem("start", true);
+    start = false;
+    localStorage.setItem("start", start);
+    start = true;
+    localStorage.setItem("start", start);
     localStorage.setItem("time", gameDurationFather);
     abricotNumber = 0;
     localStorage.setItem("nbAbricotsCourant", abricotNumber);
+    
     TREE = new Tree(60);
 
     
@@ -338,12 +371,14 @@ $("canvas").on("click", function () {
             clearInterval(manageGameTimer);
             //counter ended, do something here
             console.log("Timer finish");
+            
             //localStorage.setItem("time",gameDuration);
 
             return;
         }
     }
 
+}//end if rideau fermé
 
 
 });
@@ -395,8 +430,8 @@ $("#testMoveArrowBack").on("click", function () {
     if (myAngle > 0) {
         myAngle = myAngle - 0.15;
 
-    } else {
-
+    } else if(e.witch==1){
+     
     }
 
 });

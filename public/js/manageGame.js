@@ -95,7 +95,7 @@ function determineBreath(sumEachL, sumEachR) {
 ///////////////////////        //souffle chaotique
     } else if (Math.abs(kmL1 - kmR1) > tolMoyen) {
 
-       
+       audio["alarme"].play();
         console.log("souffle faux graves conséquences");
         console.log(Math.abs(kmL1 - kmR1));
         if (kmL1 > kmR1) {
@@ -248,7 +248,11 @@ function gameCompletion() {
     localStorage.setItem("rkmPic", picR);
     localStorage.setItem("rkmMoy", aveFullR);
 
-
+    if(abricotNumber>0){
+        
+    }else{
+        
+    }
 
     //préparer les valeurs pour le post
     var d = new Date();
@@ -265,7 +269,8 @@ function gameCompletion() {
     var noPartieTemp = localStorage.getItem("noPartie");
     noPartie = parseInt(noPartieTemp);
     noPartie += 1;
-    localStorage.setItem("start", false);
+    start = false;
+    localStorage.setItem("start", start);
     localStorage.setItem("noPartie", noPartie);
     localStorage.setItem("nbAbricotsCourant", 0);
 
@@ -297,8 +302,9 @@ function gameCompletion() {
 /////////                                        //////////////
 ///////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////
-//
-
+   abricotNumber = 0;
+   compteSouffleParfait = 0;
+   randomFleurs = 0.3;
     testAngle = 0;
     //reset du tableau joueur Gauche  // attention: reseter les variables après le post de la partie
     fullArrayL = [];

@@ -28,6 +28,10 @@ function startWS(){
             if(object.id=="joueur1"){
                  kmL = wind;
             kmL1 = wind;
+            if(kmL1<souffleParfaitMax && kmL1>souffleParfaitMin ){
+                compteSouffleParfait+=1;
+                randomFleurs +=0.05;
+            }
             each5secArrayL.push(kmL1);
             fullArrayL.push(kmL1);
              //------ Calcul zone FULL LEFT------/
@@ -41,6 +45,12 @@ function startWS(){
             }else if (object.id=="joueur2"){
                  kmR = wind;
             kmR1 = wind;
+            if(kmR1<souffleParfaitMax && kmR1>souffleParfaitMin && compteSouffleParfait<10){
+                compteSouffleParfait+=1;
+                randomFleurs +=0.05;
+            }else if (kmR1<0){
+                
+            }
             each5secArrayR.push(kmR1);
             fullArrayR.push(kmR1);
              //------- Calcul zone FULL RIGHT--------

@@ -23,15 +23,23 @@ if(delay===true){
     }else{  
     }
     
-    if(ecartFloat<=2){
-       ecartColor =  "rgb(111, 183, 100)";
+    if(ecartFloat<=2 && ecartFloat<tolMoyen && rkmInstantG<limiteMaxRouge &&  rkmInstantG!=0 &&lkmInstantG != 0){
+        souffleDifferent0 = true;
+       ecartColor =  "rgb(111, 183, 100)"; //vert
        warningG = false;
-    }else if (ecartFloat>tolMoyen){
+    }else if (ecartFloat>tolMoyen || lkmInstantG>=limiteMaxRouge && rkmInstantG>=limiteMaxRouge){
+        souffleDifferent0 = true;
+        if(lkmInstantG>=limiteMaxRouge && rkmInstantG>=limiteMaxRouge){
+            ecartFloat = " ";
+        }
         ecartColor = "rgb(202, 100, 101)";
         warningG = true;
-    }else{
-        ecartColor = "rgb(112, 97, 166)";
+    }else if (rkmInstantG==0 && lkmInstantG==0 ){
+        souffleDifferent0 = false;
       
+    }else{
+        souffleDifferent0 = true;
+        ecartColor = "rgb(112, 97, 166)";
     }
     
     if(lkmInstantG>=limiteMaxRouge){
@@ -355,17 +363,19 @@ if(nbAbricotsArray[6]==1){
     }
 
     function ecartNo(ctx) {
-
-      // ecartNo/kmh
+if(souffleDifferent0){
+     // ecartNo/kmh
       ctx.save();
       ctx.font = "109.9px 'Digital-7'";
       ctx.fillStyle = ecartColor;
       ctx.fillText(ecartFloat, 612.5, 408.3);
       ctx.restore();
+}
+     
     }
 
     function ecartMano(ctx) {
-
+if(souffleDifferent0){
       // ecartMano/Groupe
       ctx.save();
 
@@ -395,7 +405,7 @@ if(nbAbricotsArray[6]==1){
 ctx.save();
 //  middleLedArray
 if(ecartFloat<50){
-    console.log(middleLedArray.length);
+   
    for(i=middleLedArray.length; i>ecartFloat;i--){
        
          middleLedArray[i-1](ctx);
@@ -406,6 +416,7 @@ if(ecartFloat<50){
       ctx.restore();
       ctx.restore();
       ctx.restore();
+    }
     }
 
     function lMano(ctx) {

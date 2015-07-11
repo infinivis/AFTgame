@@ -45,11 +45,27 @@ margin: 0;
   
      
 }
-#canvasManometer{
+#closeRideau{
     position:fixed;
-    top:600px;
-    left:1400px;
+top:0px;
+    left:0px;
     z-index:2;
+   
+   
+margin: 0;
+     
+      display:inline-block;
+  vertical-align:middle;
+  line-height:normal;
+     
+}
+#canvasStart{
+    position:fixed;
+    background-color: rgba(255,255,255,0.9);
+   
+top:980px;
+    left:0px;
+    z-index:3;
    
    
 margin: 0;

@@ -154,18 +154,18 @@ dessin.context.translate(0, -60);
    }//end if TREE!=null
    
      dessin.context.drawImage(document.getElementById("rideau"), 0, posRideauY, dessin.width, dessin.height);
-        if(!fini){
-    if(posRideauY<=0 && posRideauY>1000*(-1)){
-           posRideauY-=4;
-       }
-       }
-        
-        if(fini){
-           
-            if(posRideauY>=1000*(-1) && posRideauY<0){
-                posRideauY+=4;
-            }
+    if (!Rideauferme) {
+        if (posRideauY <= 0 && posRideauY > 1000 * (-1)) {
+            posRideauY -= 4;
         }
+    }
+
+    if (Rideauferme) {
+
+        if (posRideauY >= 1000 * (-1) && posRideauY < 0) {
+            posRideauY += 4;
+        }
+    }
   
    
-}
+}//end Draw

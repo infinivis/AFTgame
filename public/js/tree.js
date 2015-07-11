@@ -445,12 +445,12 @@ this.newFeuille();
     };
     this.newFleurs = function () {
 
-        if (Math.random()<0.7 && this.tronc.length>this.TREEsizeFleurs) {
+        if (Math.random()<randomFleurs && this.tronc.length>this.TREEsizeFleurs) {
             var random = Math.floor(Math.random() * this.tronc.length)
             if (this.tronc[random].fleurs == null) {
                 var temp = this.tronc[random];
                 temp.fleurs = new FLEURS;
-                temp.fleurs.size = Math.random() * (6 - 3 + 1) + 3;
+                temp.fleurs.size = Math.random() * (4 - 3 + 1) + 3;
                 temp.fleurs.x = temp.x;
                 temp.fleurs.y = temp.y;
                 temp.fleurs.accroche = true;
@@ -496,7 +496,7 @@ this.newFeuille();
 
     this.newAbricot = function () {
 
-        if (Math.random() > 0.5) {
+        if (Math.random() > randomAbricot) {
             var random = Math.floor(Math.random() * this.tronc.length)
             //if (this.tronc[random].length > 10 && this.tronc[random].length < 30) {
             //if (this.tronc[random].length > 10) {
