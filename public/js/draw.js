@@ -1,13 +1,15 @@
 function draw() {
     
     
-    var img = document.getElementById("fondImg2");
-    var pat = dessin.context.createPattern(img, "repeat");
     
+     dessin.context.drawImage(imgFond,0,0,1920,1080);
     
-    dessin.context.fillStyle = pat;
-       dessin.context.fill();
-    dessin.context.fillRect(0, 0, 1920 , 1080);
+//    var pat = dessin.context.createPattern(img, "repeat");
+//    
+//    
+//    dessin.context.fillStyle = pat;
+//       dessin.context.fill();
+//    dessin.context.fillRect(0, 0, 1920 , 1080);
     
    
     if(TREE!=null){
@@ -29,7 +31,8 @@ dessin.context.translate(0, -60);
         dessin.context.quadraticCurveTo(TREE.tronc[x].parent.x, TREE.tronc[x].parent.y, TREE.tronc[x].parent.parent.x, TREE.tronc[x].parent.parent.y);
         dessin.context.moveTo(TREE.tronc[x].parent.parent.x, TREE.tronc[x].parent.parent.y);
         dessin.context.closePath();
-        dessin.context.lineWidth = Math.sqrt(TREE.tronc[x].length) * 0.12;
+        //dessin.context.lineWidth = Math.sqrt(TREE.tronc[x].length) * 0.12;
+        dessin.context.lineWidth = Math.sqrt(TREE.tronc[x].length) * 0.17;
         dessin.context.lineCap = "square";
         dessin.context.stroke();
     }  
@@ -156,14 +159,14 @@ dessin.context.translate(0, -60);
      dessin.context.drawImage(document.getElementById("rideau"), 0, posRideauY, dessin.width, dessin.height);
     if (!Rideauferme) {
         if (posRideauY <= 0 && posRideauY > 1000 * (-1)) {
-            posRideauY -= 4;
+            posRideauY -= 100;
         }
     }
 
     if (Rideauferme) {
 
         if (posRideauY >= 1000 * (-1) && posRideauY < 0) {
-            posRideauY += 4;
+            posRideauY += 100;
         }
     }
   

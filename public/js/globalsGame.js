@@ -22,7 +22,12 @@ var gameDuration = gameDurationFather;
 localStorage.setItem("time", gameDuration);
 
 var gameTimer;
+
+var finish = false;
+var lockGameCompletion = 0; //0 = verrouillé et 1 = déverrouillé
+var refresh=false;
 var Rideauferme=true;
+localStorage.setItem("rideauFerme", Rideauferme);
 var ecart = 0;
 var toljuste = 20;
 var tolMoyen = 28;
@@ -31,8 +36,13 @@ localStorage.setItem("tolMoyen", tolMoyen);
 var tolMoyen = 10;
 var noPartie = 0; //localStorage.getItem("noPartie");
 localStorage.setItem("noPartie", noPartie);
-var start = false;
-localStorage.setItem("start", start);
+var start = localStorage.getItem("start");
+  if(start==="true"){
+       start = true;
+   }else if (start==="false"){
+        start = false;
+   }
+
 var pointPartiePrécédente;
 var recordJour;
 var recordSemaine;
@@ -66,8 +76,8 @@ var myWind = 0;
 var widthFull = $(window).width();
 var heightFull = $(window).height();
 var dessin;
-var arbrePositionX = 550;
-var arbrePositionY = 800;
+var arbrePositionX = 723;
+var arbrePositionY = 836;
 var troncColor = "#6B4226";
 var TREE;
 var Linterval = null;
@@ -92,7 +102,7 @@ var compteSouffleParfait = 0;// modifie le nombre d'abricots créés
 var randomAbricot = 0.3;// modifie le nombre d'abricots créés
 var randomFleurs = 0.3;// modifie le nombre de fleurs créés
 var proportion = 0.5;// modifie le nombre de feuille qui se décroche
-var dureeVieprop = 300;
+var dureeVieprop = 200;
 var feuillepartout = false;
 var rotationVent = 1;
 var ratioSize = 0.3;
@@ -105,6 +115,9 @@ var myBar = 1.5;
 
 //rideau
 var posRideauY=0;
+
+
+//audio
 var audio = {};
         audio["alarme"] = new Audio();
         audio["alarme"].src = "mp3/alarme.mp3";

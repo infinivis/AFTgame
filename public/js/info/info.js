@@ -15,6 +15,10 @@ function initInfo() {
     function drawFrame(){
          fond(ctx);
          
+          boutonON(ctx);
+
+      boutonRefresh(ctx);
+         
          
 if(delay===true){
     
@@ -106,6 +110,8 @@ if(delay===true){
      lMano(ctx);
 
       rMano(ctx);
+      
+     
       }
     }
 
@@ -501,6 +507,70 @@ if(ecartFloat<50){
       // rightLedArray
       
       ctx.restore();
+      ctx.restore();
+      ctx.restore();
+    }
+     function boutonON(ctx) {
+
+      // boutonON/Groupe
+      ctx.save();
+
+      // boutonON/Groupe/Trac
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(341.9, 954.6);
+      ctx.bezierCurveTo(347.6, 957.7, 351.5, 963.7, 351.5, 970.7);
+      ctx.bezierCurveTo(351.5, 980.7, 343.4, 988.9, 333.3, 988.9);
+      ctx.bezierCurveTo(323.2, 988.9, 315.0, 980.7, 315.0, 970.7);
+      ctx.bezierCurveTo(315.0, 963.9, 318.7, 958.0, 324.2, 954.8);
+      ctx.lineWidth = 4.0;
+      ctx.strokeStyle = onButtonColor;
+      ctx.stroke();
+
+      // boutonON/Groupe/Trac
+      ctx.beginPath();
+      ctx.moveTo(333.3, 947.8);
+      ctx.lineTo(333.3, 967.6);
+      ctx.stroke();
+      ctx.restore();
+      ctx.restore();
+    }
+
+    function boutonRefresh(ctx) {
+
+      // boutonRefresh/Groupe
+      ctx.save();
+
+      // boutonRefresh/Groupe/Groupe
+      ctx.save();
+
+      // boutonRefresh/Groupe/Groupe/Trac
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(419.4, 986.4);
+      ctx.bezierCurveTo(414.0, 990.0, 406.9, 990.6, 400.7, 987.4);
+      ctx.bezierCurveTo(391.8, 982.7, 388.4, 971.6, 393.1, 962.7);
+      ctx.bezierCurveTo(397.8, 953.8, 408.8, 950.4, 417.8, 955.1);
+      ctx.bezierCurveTo(423.8, 958.3, 427.3, 964.3, 427.5, 970.6);
+      ctx.lineWidth = 4.0;
+      ctx.strokeStyle = refreshButtonColor;
+      ctx.stroke();
+
+      // boutonRefresh/Groupe/Trac
+      ctx.restore();
+      ctx.beginPath();
+      ctx.moveTo(427.7, 966.6);
+      ctx.lineTo(433.7, 967.1);
+      ctx.lineTo(430.3, 972.0);
+      ctx.lineTo(426.9, 977.0);
+      ctx.lineTo(424.3, 971.6);
+      ctx.lineTo(421.7, 966.2);
+      ctx.lineTo(427.7, 966.6);
+      ctx.closePath();
+      ctx.fillStyle = refreshButtonColor;
+      ctx.fill();
+      ctx.strokeStyle = refreshButtonColor;
+      ctx.stroke();
       ctx.restore();
       ctx.restore();
     }

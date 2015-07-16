@@ -39,8 +39,8 @@ function startWS(){
     aveFullL = sumFullL/fullArrayL.length;
     aveFullL = Math.round(aveFullL*10)/10;
     picL = Math.max.apply(null, fullArrayL);
-    localStorage.setItem("lkmMoy",aveFullL);
-    localStorage.setItem("lkmPic",picL);
+    //localStorage.setItem("lkmMoy",aveFullL);
+    //localStorage.setItem("lkmPic",picL);
             localStorage.setItem("lkmInstant",kmL1);
             }else if (object.id=="joueur2"){
                  kmR = wind;

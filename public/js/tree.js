@@ -3,8 +3,8 @@ function Tree(framerate) {
     this.abricotArray = new Array;
     this.feuilleArray = new Array;
     this.maxNode = 1500;
-    this.TREEsizeFleurs = 2000; //attention dépendance avec les conditions
-    this.TREEsizeMax= 2500; //attention dépendance avec les conditions
+    this.TREEsizeFleurs = 1000; //attention dépendance avec les conditions
+    this.TREEsizeMax= 1500; //attention dépendance avec les conditions
     this.TREEsizeBaby= 500; //attention dépendance avec les conditions
     this.wind = 0;
     this.windMomentum = 0;
@@ -28,10 +28,10 @@ function Tree(framerate) {
     this.tronc[1].y = arbrePositionY - 10;
 
     this.wakeFleurs = function () {
-        this.timerFeuilleWake = setInterval($.proxy(this.runFleurs, this), 1);
+        this.timerFeuilleWake = setInterval($.proxy(this.runFleurs, this), 100);
     };
     this.createFleurs = function () {
-        this.timerFleurs = setInterval($.proxy(this.newFleurs, this), 25);
+        this.timerFleurs = setInterval($.proxy(this.newFleurs, this), 100);
     };
 
     this.stopFleurs = function () {
@@ -43,10 +43,10 @@ function Tree(framerate) {
 
     };
     this.wakeFeuille = function () {
-        this.timerFeuilleWake = setInterval($.proxy(this.runFeuille, this), 1);
+        this.timerFeuilleWake = setInterval($.proxy(this.runFeuille, this), 100);
     };
     this.createFeuille = function () {
-        this.timerFeuille = setInterval($.proxy(this.newFeuille, this), 1);
+        this.timerFeuille = setInterval($.proxy(this.newFeuille, this), 100);
     };
 
     this.stopWakeFeuille = function () {
@@ -60,7 +60,7 @@ function Tree(framerate) {
     };
 
     this.createAbricot = function () {
-        this.timerAbricot = setInterval($.proxy(this.newAbricot, this), 1);
+        this.timerAbricot = setInterval($.proxy(this.newAbricot, this), 100);
     };
 
     this.stopAbricot = function () {
@@ -68,7 +68,7 @@ function Tree(framerate) {
 
     };
     this.wakeAbricot = function () {
-        this.timerAbricotWake = setInterval($.proxy(this.runAbricot, this), 1);
+        this.timerAbricotWake = setInterval($.proxy(this.runAbricot, this), 100);
     };
     this.stopWakeAbricot = function () {
         clearInterval(this.timerAbricotWake);
@@ -77,20 +77,20 @@ function Tree(framerate) {
 
     this.startWind = function () {
         console.log("Start Wind");
-        this.timerWind = setInterval($.proxy(this.armonicWind, this), 1);
+        this.timerWind = setInterval($.proxy(this.armonicWind, this), 100);
     };
     this.stopWind = function () {
         clearInterval(this.timerWind);
     };
     this.startAutoGrow = function () {
-        this.timer = setInterval($.proxy(this.grow, this), 1);
+        this.timer = setInterval($.proxy(this.grow, this), 25);
     };
 
     this.stopAutoGrow = function () {
         clearInterval(this.timer);
     };
     this.startUnGrow = function () {
-        this.timer = setInterval($.proxy(this.unGrow, this), 1);
+        this.timer = setInterval($.proxy(this.unGrow, this), 100);
     };
 
 
@@ -111,7 +111,7 @@ function Tree(framerate) {
         for (i in this.tronc) {
             if (this.tronc[i].left !== null && Math.random() < 0.07) {
                 if (!this.tronc[i].length < 10) {
-                    this.substract(Math.random() * 3, this.tronc[i]);
+                    this.substract(Math.random() * 3.5, this.tronc[i]);
                 }
             }
         }
@@ -125,7 +125,7 @@ function Tree(framerate) {
     this.add = function (x, noeud) {
 
         while (noeud.parent != null) {
-            noeud.length += x; //
+            noeud.length += x;
 
             noeud = noeud.parent;
         }
@@ -300,7 +300,11 @@ this.newFeuille();
         //this.windMomentum *= 0.997;
 
         this.wind = myWind;
-        this.recalculate(false);
+       // this.wind = myWind*Math.random();
+        //this.recalculate(false);
+    
+    
+    
 //        this.windMomentum -= (this.wind - (Math.random() - 1 / 2)) * 0.0008 * Math.random();
 //        this.wind += this.windMomentum;                
     };

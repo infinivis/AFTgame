@@ -1,6 +1,7 @@
 $(document).ready(function () {
     
     console.log("ready!");
+     imgFond = document.getElementById("fondImg2");
     
 });/////end DOM ready
 

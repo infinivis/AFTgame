@@ -1,16 +1,12 @@
 //$("#canvas").attr("width", widthFull);
 //$("#canvas").attr("height", heightFull);
-
+var imgFond;
 dessin = document.getElementById("canvas");
 dessin.context = dessin.getContext('2d');
-setInterval(draw, 1);
+setInterval(draw, 60);
 console.log(widthFull);
 console.log(heightFull);
 getRecords();
-
-
-
-
 ///////////////////////////////////////////////// 
 ////    events  ///////////////////////////////// 
 /////////////////////////////////////////////////
@@ -21,16 +17,7 @@ audio["alarme"].play();
    
     
 });
-$("#closeRideau").on("click", function (e) {
 
-   if(Rideauferme && !start){
-       Rideauferme = false;
-   }else if (!start){
-       Rideauferme = true;
-   }
-   
-    
-});
 $("#reload").on("click", function () {
 
     console.log("reload");
@@ -241,26 +228,31 @@ $("#mode").on("click", function () {
     }
 });
 
-$("#canvas").on( "click", function(e){
+$("#canvasReload").on( "click", function(e){
    
-    location.reload(true);
+    location.reload(true);  
+});
 
+$("#closeRideau").on("click", function (e) {
+
+   if(Rideauferme && !start){
+       console.log("Rideau Ouvert");
+       Rideauferme = false;
+       localStorage.setItem("rideauFerme", Rideauferme);
+
+   }else if (!start){
+       Rideauferme = true;
+       console.log("Rideau Fermé");
+       localStorage.setItem("rideauFerme", Rideauferme);
+
+   }
+   
     
 });
-$("#canvasStart").on("click", function (e) {
-    
-    
-        
-    
-    if(!Rideauferme){
-        
-    
-    console.log("Start");
-    start = false;
-    localStorage.setItem("start", start);
-    start = true;
-    localStorage.setItem("start", start);
-    localStorage.setItem("time", gameDurationFather);
+
+function startFunction(){
+        if(!Rideauferme){
+            lockGameCompletion = 1;
     abricotNumber = 0;
     localStorage.setItem("nbAbricotsCourant", abricotNumber);
     
@@ -317,73 +309,60 @@ $("#canvasStart").on("click", function (e) {
     clearInterval(counterGame);
     clearInterval(manageGameTimer);
     growTREEwithtimer(3);
-//    gameTimer = gameDuration;
-//    counterGame = setInterval(timer, 1000); //1000 will  run it every 1 second
-    setTimeout(update, 1000);
+
     manageGameTimer = setInterval(manageGame, calculInterval);
 
-
-    //attention seulement si arbre existant
-    //ne pas oublier les clearInterval au bons endroits et dans gameCompletion
-
-
-//    function timer()
-//    {
-//        gameTimer = gameTimer - 1;
-//        if (gameTimer <= 0)
-//        {
-//            clearInterval(counterGame);
-//            clearInterval(manageGameTimer);
-//            //counter ended, do something here
-//            console.log("Timer finish");
-//            gameTimer = gameDuration;
-//            gameCompletion();
-//            return;
-//        }
-//
-//        //Do code for showing the number of seconds here
-//        console.log(""+gameTimer);
-//        
-//    }
-    function update() {
-        var ss = gameDuration.split(":");
-        var dt = new Date();
-        dt.setHours(0);
-        dt.setMinutes(ss[0]);
-        dt.setSeconds(ss[1]);
-
-        var dt2 = new Date(dt.valueOf() - 1000);
-        var temp = dt2.toTimeString().split(" ");
-        var ts = temp[0].split(":");
-        gameDuration = (ts[1] + ":" + ts[2]);
-
-        localStorage.setItem("time", gameDuration);
-
-        differenceSouffle();
-
-
-        if (ts[1] > 0 || ts[2] > 0) {
-            setTimeout(update, 1000);
-        } else {
-            gameCompletion();
-            gameDuration = gameDurationFather;
-
-            clearInterval(manageGameTimer);
-            //counter ended, do something here
-            console.log("Timer finish");
-            
-            //localStorage.setItem("time",gameDuration);
-
-            return;
-        }
+}//end if rideau fermé 
     }
 
-}//end if rideau fermé
 
-
+//localStorage
+window.addEventListener('storage', function(e) {
+    
+    if(e.key==="start"){
+        console.log(e.newValue);
+      start = e.newValue;
+   if(start==="true"){
+       start = true;
+   }else if (start==="false"){
+        start = false; 
+   }
+    if(start){
+       // console.log("start");
+       startFunction();
+    }  
+    }else if(e.key==="finish"){
+       finish = e.newValue;
+       if(finish==="true"){
+       finish = true;
+   }else if (finish==="false"){
+        finish = false;
+   }
+   if(finish){
+       gameCompletion();
+          clearInterval(manageGameTimer);
+          console.log("Timer finish");
+   }
+    }
+  
+ if(e.key==="refresh"){
+      refresh = e.newValue;
+      if(refresh==="true"){
+       location.reload(true);
+   }else if (refresh==="false"){
+        refresh = false;
+   }
+    }
+  
+   //lockGameCompletion!=0
+      
+          
+    
+   
+    
+    
 });
-
-
+ 
 
 $("#end").on("click", function () {
     console.log("end button");

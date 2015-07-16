@@ -6,7 +6,7 @@ var config = {
   development: {
     root: rootPath,
     app: {
-      name: 'gameaft'
+      name: 'aftgame'
     },
     port: 3000,
     db: 'mongodb://localhost/aftgame-development'
@@ -15,7 +15,7 @@ var config = {
   test: {
     root: rootPath,
     app: {
-      name: 'gameaft'
+      name: 'aftgame'
     },
     port: 3000,
     db: 'mongodb://localhost/aftgame-test'
@@ -24,7 +24,7 @@ var config = {
   production: {
     root: rootPath,
     app: {
-      name: 'gameaft'
+      name: 'aftgame'
     },
     port: 3000,
     db: 'mongodb://localhost/aftgame-production'

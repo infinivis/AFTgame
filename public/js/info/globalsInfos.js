@@ -2,7 +2,12 @@
 
 var estCasse = false;
 var isStarted = false;
+localStorage.setItem("start", isStarted );
+
+var isGaming = false;
 var delay = false;
+var lockTimer = false;
+var rideauFerme = localStorage.getItem("rideauFerme");
 var pressionG =0;
 
 var humiditeG=0;
@@ -28,7 +33,8 @@ var sumArrayAb = 0;
 
 var nbPartieG=0;
 
-var timeG = localStorage.getItem("time");
+var gameDuration = "00:10";
+var timeG = gameDuration;// = localStorage.getItem("time");
 
 
 
@@ -53,6 +59,8 @@ var jaugeMiddle = 0;
         
         
 var souffleDifferent0 = true;   //violet "rgb(112, 97, 166)"
+ var refreshButtonColor = "rgb(112, 97, 166)";   //violet "rgb(112, 97, 166)"
+var onButtonColor = "rgb(32, 32, 32)";    //violet "rgb(112, 97, 166)"
 var ecartColor;    //violet "rgb(112, 97, 166)"
 var leftColor;     //rouge "rgb(202, 100, 101)"
 var rightColor;    //vert "rgb(111, 183, 100)"

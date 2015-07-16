@@ -53,6 +53,7 @@ function determineBreath(sumEachL, sumEachR) {
 
 
         } else{
+            //TREE.stopAutoGrow();
             TREE.stopFleurs();
             TREE.createFleurs();
             console.log("TREE > TREEsizeMax");
@@ -117,6 +118,9 @@ function determineBreath(sumEachL, sumEachR) {
         TREE.stopFeuille();
         TREE.stopFleurs();
         TREE.stopAbricot();
+        TREE.stopWakeFeuille();
+        TREE.stopWakeFleurs();
+        TREE.stopWakeAbricot();
         TREE.wakeFeuille();
         TREE.wakeFleurs();
         TREE.wakeAbricot();
@@ -205,7 +209,7 @@ TREE.stopAutoGrow();
 
 function gameCompletion() {
     console.log("><><><><><><><><><   Game Completion ><><><><><><><><><");
-
+    
 ///////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////
 /////////                                        //////////////
@@ -248,6 +252,8 @@ function gameCompletion() {
     localStorage.setItem("rkmPic", picR);
     localStorage.setItem("rkmMoy", aveFullR);
 
+
+    //féliciter le festivalier!!
     if(abricotNumber>0){
         
     }else{
@@ -269,8 +275,8 @@ function gameCompletion() {
     var noPartieTemp = localStorage.getItem("noPartie");
     noPartie = parseInt(noPartieTemp);
     noPartie += 1;
-    start = false;
-    localStorage.setItem("start", start);
+//    start = false;
+//    localStorage.setItem("start", start);
     localStorage.setItem("noPartie", noPartie);
     localStorage.setItem("nbAbricotsCourant", 0);
 
@@ -321,27 +327,29 @@ function gameCompletion() {
 function growTREEwithtimer(count, interval, minus) {
     TREE.stopAutoGrow();
     TREE.startAutoGrow();
-    var count2 = count;
-    counterGrow = setInterval(timer, interval); //1000 will  run it every 1 second
-
-    function timer()
-    {
-        count2 = count2 - minus;
-        if (count2 <= 0)
-        {
-            clearInterval(counterGrow);
-            TREE.stopAutoGrow();
-            //counter ended, do something here
-
-            count2 = count;
-
-            return;
-        }
+    setTimeout(TREE.stopAutoGrow, 3000);
+    
+//    var count2 = count;
+//    counterGrow = setInterval(timer, interval); //1000 will  run it every 1 second
+//
+//    function timer()
+//    {
+//        count2 = count2 - minus;
+//        if (count2 <= 0)
+//        {
+//            clearInterval(counterGrow);
+//            TREE.stopAutoGrow();
+//            //counter ended, do something here
+//
+//            count2 = count;
+//
+//            return;
+//        }
 
         //Do code for showing the number of seconds here
 
 
-    }
+   // }
 }
 
 function unGrowTREEwithtimer(count) {
